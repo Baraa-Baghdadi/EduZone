@@ -1,0 +1,21 @@
+import type { FullAuditedEntityDto } from '@abp/ng.core';
+
+export interface LessonDto extends FullAuditedEntityDto<string> {
+  name?: string;
+  title?: string;
+  content?: string;
+  duration?: string;
+  fileSize: number;
+  videoOrder: number;
+  url?: string;
+}
+
+export interface LessonDtoForAddCourse {
+  name?: string;
+  title?: string;
+  content?: string;
+  duration?: string;
+  fileSize: number;
+  videoOrder: number;
+  url?: string;
+}

@@ -1,0 +1,50 @@
+<div class="row">
+  <!-- Bell -->
+   <div *abpPermission="'DawaaNeo.Dashboard.Tenant'" class="col-2 position-relative" (click)="showMsgList()">
+    <div class="notificationIcon">
+      <i class="fa fa-bell-o bell mt-1 cpointer" ></i>
+      <span style="top:5px !important;font-size:10px;" 
+        class="position-absolute start-100 translate-middle  badge rounded-pill bg-danger"
+        *ngIf="(notificationListener.unreadNotificationCount$ | async) as count">
+        {{count}}
+      </span>
+    </div>
+    <!-- Scroll Pagination -->
+    <div *ngIf="isShowListOfNotification" class="list">
+      <!-- Notifications List -->
+      <div *ngIf="(notificationListener.NotificationList$ | async) as List">
+        <h5 class="text-center text-danger" *ngIf="List.totalCount === 0">{{"::noNotifications" | abpLocalization}}</h5>    
+        <h4 class="text-center text-dark p-2 border-bottom" *ngIf="List.totalCount !== 0">{{"::Notofications" | abpLocalization}}</h4>   
+        <div infiniteScroll  
+        class="list2"
+        (scrolled)="onScroll()"
+        [scrollWindow]="false">
+          <div class="row border-bottom p-2 notification" *ngFor="let item of List.items">
+              <div class="col-1">
+                <i class="fa fa-bell-o fs-3 ms-2 innerBell" aria-hidden="true"></i>
+              </div>
+              <div class="notification-content col-8">
+                  <h6 class="ms-3">{{"::" + item.content | abpLocalization}}</h6>
+              </div>
+              <p class="col-3">{{item.createdOn}}</p>
+          </div>
+        </div> 
+      </div>
+    </div>
+   </div>
+  <!-- Chose language -->
+  <div class="col-8">
+    <div ngbDropdown  class="btn-group ms-auto dropdown w-100">
+      <button class="dropdown-toggle btn btn-sm languageBtnBg"
+      data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
+      <i class="bi bi-translate me-1"></i>{{labelOfSelectedLang}}
+    </button>
+    <div ngbDropdownMenu>
+      <button ngbDropdownItem *ngFor="let lang of availableLangs" (click)="selectLang(lang.value)">
+        {{lang.name}}
+      </button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Notification List -->

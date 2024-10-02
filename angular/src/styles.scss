@@ -1,0 +1,142 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@keyframes donut-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+:root {
+  // when display is mini
+  --lpx-logo: url('assets/Asset\ 1@4x.png');
+  // when display large
+  --lpx-logo-icon: url('assets/x.png');
+  --lpx-brand: #008b99 !important;
+}
+.lpx-brand-logo{
+  background-size: auto 48px;
+  height: 49px;
+}
+.donut {
+  display: inline-block;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #008b99;;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: donut-spin 1.2s linear infinite;
+
+  &.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.abp-logo {
+  background-repeat: no-repeat;
+}
+
+.abp-support {
+  width: 178px;
+  height: 30px;
+  background-image: url('/assets/images/getting-started/abp-support.svg');
+}
+
+.abp-community {
+  width: 215px;
+  height: 30px;
+  background-image: url('/assets/images/getting-started/abp-community.svg');
+}
+
+.abp-blog {
+  width: 142px;
+  height: 30px;
+  background-image: url('/assets/images/getting-started/abp-blog.svg');
+}
+
+.logo-x {
+  width: 20px;
+  height: 20px;
+  background-image: url('/assets/images/getting-started/x.svg');
+}
+
+
+// Custom:
+.mainBackground{
+  background-color: #008b99 !important ;
+  color: #fff !important;
+}
+.dropdown-menu{
+  --bs-dropdown-link-active-bg : #008b99;;
+}
+.nav-pills .nav-link.active{
+  background-color: #008b99;;
+  color: black;
+}
+.cpointer{
+  cursor:  pointer !important;
+}
+.lpx-sidebar-container .lpx-sidebar .lpx-nav .lpx-nav-menu{
+  background-color: #fff !important;
+}
+#lpx-wrapper > div.lpx-sidebar-container.ng-star-inserted > div > lpx-navbar > nav > lpx-navbar-routes > ul > li:nth-child(1) > lpx-sub-navbar > a{
+  background-color: #fff !important;
+}
+#lpx-wrapper > div.lpx-sidebar-container.ng-star-inserted > div > lpx-navbar > nav > div{
+  background-color: #fff !important;
+}
+#lpx-wrapper > div.lpx-sidebar-container.ng-star-inserted > div > lpx-navbar > nav{
+  background-color: #fff !important;
+}
+.lpx-topbar-container{
+  background-color: #fff !important;
+}
+.lpx-nav-menu .lpx-menu-item-link.selected{
+  color: #124163 !important;
+}
+.lpx-nav-menu .lpx-menu-item-link{
+  color: #124163 !important;
+}
+.lpx-nav-menu .lpx-inner-menu-item .lpx-menu-item-link.selected, .lpx-nav-menu .lpx-inner-menu-item .lpx-menu-item-link:hover{
+  background-color: #fff !important;
+}
+.lpx-nav-menu .lpx-menu-item-link.selected{
+  background-color: #fff !important;
+}
+.lpx-nav-menu .lpx-menu-item-link{
+  background-color: #fff !important;
+}
+.lpx-nav-menu .lpx-menu-item-link:hover{
+  color: #124163 !important;
+}
+#lpx-wrapper > div.lpx-sidebar-container.ng-star-inserted > div > lpx-navbar > nav > lpx-navbar-routes > ul > li:nth-child(2) > lpx-sub-navbar > ul > li > lpx-sub-navbar > a > lpx-icon.dd-icon.hidden-in-hover-trigger.ng-tns-c4125907324-15.ng-star-inserted{
+  color: #008b99 !important;
+  opacity: 1 !important;
+}
+.lpx-nav-menu .lpx-menu-item-link:hover .dd-icon{
+  color: #008b99 !important;
+}
+
+.btn-primary{
+  background-color: #008b99 !important;
+}
+.btn-secondary{
+  background-color: rgba(0, 53, 94, 1) !important;
+}
+.btn {
+  border: none !important;
+}
+#lpx-wrapper > div.lpx-sidebar-container.ng-star-inserted > div > lpx-navbar > nav > lpx-navbar-routes > ul{
+  margin-top: 10px;
+}
+.hover-trigger .lpx-sidebar-container:not(:hover) .lpx-brand-logo{
+  background-size: auto 19px !important;
+  height: 27px !important;
+}
+.mainColor{
+  color: #008b99 !important;
+}

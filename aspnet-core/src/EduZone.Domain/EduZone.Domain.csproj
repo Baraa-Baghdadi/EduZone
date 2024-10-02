@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>EduZone</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EduZone.Domain.Shared\EduZone.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="8.0.4" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+	  <PackageReference Include="QRCoder" Version="1.4.3" />
+	  <PackageReference Include="QuestPDF" Version="2023.12.6" />
+	  <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+	  <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain" Version="8.3.0" />
+	  <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Emailing" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Domain" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="8.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Notifications\" />
+  </ItemGroup>
+
+</Project>

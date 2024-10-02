@@ -1,0 +1,153 @@
+<div class="lpx-wizard d-flex w-100" @fade>
+    <ul class="lpx-wizard-list d-lg-flex p-0 w-100">
+      <li class="lpx-wizard-item mx-2" [ngClass]="{active:active === 1}"  data-wizard-item="">
+        <span class="lpx-wizard-number flex-center rounded-3 mb-2 mx-auto">
+            <strong>1</strong>
+        </span>
+        <h5 class="mb-0 text-dark"><strong>Course Details</strong></h5>
+        <small class="text-muted">Setup your course details</small>
+      </li>
+      <li class="lpx-wizard-item mx-2" [ngClass]="{active:active === 2}"  data-wizard-item="">
+        <span class="lpx-wizard-number flex-center rounded-3 mb-2 mx-auto"> 
+            <strong>2</strong>
+        </span>
+        <h5 class="mb-0 text-dark"><strong>Add Lessons</strong></h5>
+        <small class="text-muted">Setup your lessons details</small>
+      </li>
+    </ul>
+  </div>
+  <div class="card mt-2" *ngIf="active === 1" @fade>
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="row">
+              <div class="mt-2 col-6">
+                <input [placeholder]= "'::Title' | abpLocalization" type="text" id="title" class="form-control mt-1" formControlName="title" autofocus>
+              </div>
+    
+              <div class="mt-2 col-6 form-group">
+                <ng-select id="category" [placeholder]= "'::Category' | abpLocalization" class="form-control mt-2" formControlName="categoryId">
+                    <ng-option *ngFor="let item of allCategories" [value]="item.id">
+                      {{item.name}}
+                    </ng-option>
+                </ng-select>
+              </div>
+      
+              <div class="mt-2 col-6">
+                  <input [placeholder]= "'::Price' | abpLocalization" type="text" id="price" class="form-control mt-1" formControlName="price" >
+                </div>
+      
+                <div class="mt-2 col-6">
+                  <input [placeholder]= "'::NewPrice' | abpLocalization" type="text" id="newPrice" class="form-control mt-1" formControlName="newPrice" >
+                </div>
+    
+                <div class="mt-2 col-12">
+                  <textarea rows="2" [placeholder]= "'::Description' | abpLocalization" type="text" id="description" class="form-control mt-1" formControlName="description" ></textarea>
+                </div>
+                
+              <div class="form-group col-12 col-md-12 mt-2 ">
+                <div class="input-group mb-1 pointer" (click)="imageError='';uploadProfile.click()">
+                  <span class="input-group-text" id="basic-addon1" for="uploadFile">{{'::UploadImage' | abpLocalization}}</span>
+                  <input type="text" class="form-control" [readOnly]="true" [placeholder]="fileName.value ||'::UpldoadImageAcceptedTypes' | abpLocalization">
+                </div>
+                <input #uploadProfile type="file" accept=".png, .jpeg, .jpg" class="form-control d-none" id="uploadProfile" (change)="fileChangeListener($event)">
+                <div [style]="imageError ? 'visibility:visable' : 'visibility:hidden'">
+                  <span class="text-danger">
+                    {{'::'+imageError | abpLocalization}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="d-flex justify-content-end mt-2">
+            <button type="button" class="btn btn-secondary cancel-btn" [routerLink]="'/my-courses'">
+                {{ '::Close' | abpLocalization }}
+              </button>
+          
+              <button class="btn btn-primary ms-1" [disabled]="!form.valid" (click)="active = active+1">
+                {{ '::Next' | abpLocalization }}
+              </button>
+          </div>
+    </div>
+  </div>
+
+  <!-- Second step: -->
+  <div class="card mt-2" *ngIf="active === 2" @fade>
+    <div class="card-body">
+        <form [formGroup]="form2" (ngSubmit)="save()">
+            <div class="row">
+              <div class="mt-2 col-6">
+                <input [placeholder]= "'::lessonTitle' | abpLocalization" type="text" id="title" class="form-control mt-1" formControlName="lessonTitle">
+              </div>
+
+              <div class="mt-2 col-6">
+                <input [placeholder]= "'::lessonOrder' | abpLocalization" type="text" id="lessonOrder" class="form-control mt-1" formControlName="videoOrder" >
+              </div>
+      
+              <div class="mt-2 col-12">
+                  <textarea rows="2" [placeholder]= "'::Content' | abpLocalization" type="text" id="Content" class="form-control mt-1" formControlName="lessonContent" ></textarea>
+                </div>
+
+                <div class="form-group col-12 col-md-12 mt-2 ">
+                  <div class="input-group mb-1 pointer" (click)="imageError='';uploadVideo.click()">
+                    <span class="input-group-text" id="basic-addon1" for="uploadFile">{{'::UploadVideo' | abpLocalization}}</span>
+                    <input type="text" class="form-control" [readOnly]="true" [placeholder]="videoName ||'::videoFormat' | abpLocalization">
+                  </div>
+                  <input #uploadVideo type="file" accept="video/*" class="form-control d-none" id="uploadProfile" (change)="fileChangeListenerForVideo($event)">
+                </div>
+                <video class="text-center d-none" #videoPlayer controls *ngIf="videoUrl" (loadedmetadata)="getVideoDuration(videoPlayer)" >
+                  <source [src]="videoUrl" class="w-50 rounded text-center d-block" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div class="d-flex justify-content-end mt-3">
+                  <button type="button" class="btn btn-secondary cancel-btn" (click)="active = active-1">
+                    {{ '::Back' | abpLocalization }}
+                </button>
+                <button type="button" class="btn btn-danger cancel-btn ms-1" (click)="clear()" [disabled]="!form2.valid || videoUrl === null || progress !== 0 || disableAddNewLesson">
+                  {{ '::remove' | abpLocalization }}
+              </button>
+                  <button class="btn btn-primary ms-1" (click)="addNewLesson()" [disabled]="!form2.valid || videoUrl === null || progress !== 0 || disableAddNewLesson">
+                    <i *ngIf="progress === 0" class="fa fa-check mr-1"></i>
+                    <span *ngIf="progress === 0"> {{ '::Upload' | abpLocalization}}</span>
+                    <span *ngIf="progress !== 0">{{progress}}%</span>
+                  </button>
+                </div>
+            </div>
+          </form>
+    </div>
+  </div>
+
+  <!-- videos table -->
+  <div class="card mt-2" *ngIf="active === 2 && allLessons.length !== 0">
+    <div class="card-body">
+      <ngx-datatable [rows]="allLessons" [count]="allLessons.length" [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
+        <ngx-datatable-column [name]="'::Actions' | abpLocalization" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div ngbDropdown container="body" class="d-inline-block">
+            <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
+              <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+            </button>
+            <div ngbDropdownMenu>
+              <button ngbDropdownItem (click)="removeFromLessons(row.order,row.name)">
+                {{ '::remove' | abpLocalization }}
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+        <ngx-datatable-column  [name]="'::order' | abpLocalization" prop="videoOrder"></ngx-datatable-column>
+        <ngx-datatable-column  [name]="'::lessonTitle' | abpLocalization" prop="title"></ngx-datatable-column>
+        <ngx-datatable-column  [name]="'::lessonDuration' | abpLocalization" prop="duration"></ngx-datatable-column>
+      </ngx-datatable>
+
+      <!-- action: -->
+      <div class="d-flex justify-content-end mt-3">
+        <button type="button" class="btn btn-secondary cancel-btn">
+          {{ '::Cancel' | abpLocalization }}
+      </button>
+        <button class="btn btn-primary ms-1" (click)="SaveCourse()" [disabled]="allLessons.length === 0">
+          <i class="fa fa-check mr-1"></i>
+          {{ '::Save' | abpLocalization }}
+        </button>
+      </div>
+    </div>
+  </div>

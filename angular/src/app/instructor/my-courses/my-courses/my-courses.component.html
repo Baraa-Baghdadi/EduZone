@@ -1,0 +1,149 @@
+<div class="container" @fade>
+  <div class="row" style="align-items: center">
+    <div class="col col-md-6">
+      <h5 class="card-title">
+        {{ '::Menu:MyCourses' | abpLocalization }}
+      </h5>
+    </div>
+    <div class="text-end col col-md-6">
+      <div class="text-lg-end pt-2" [routerLink]="'./createCourse'">
+        <button  id="create" class="btn btn-primary" type="button" >
+          <i class="fa fa-plus me-1"></i>
+          <span>{{ '::NewCourse' | abpLocalization }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-2">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control bg-white"
+        [placeholder]="'::Search' | abpLocalization"
+        [(ngModel)]="coursesFilter.filterText"
+        #search
+      />
+      <div class="input-group-append mainBackground">
+        <button class="btn" type="button">
+          <i class="fa fa-search text-white"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-2">
+    <div class="card-body">
+      <ngx-datatable [rows]="courses.items" [count]="courses.totalCount" [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
+        <ngx-datatable-column
+          [name]="'::Actions' | abpLocalization"
+          
+          [sortable]="false"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div ngbDropdown container="body" class="d-inline-block">
+              <button
+                class="btn btn-primary btn-sm dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                ngbDropdownToggle
+              >
+                <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+              </button>
+              <div ngbDropdownMenu>
+                <button ngbDropdownItem [routerLink]="'./lessons-list/'+row.id">
+                  {{ '::ViewLessons' | abpLocalization }}
+                </button>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="200"  [name]="'::title' | abpLocalization" prop="title"></ngx-datatable-column>
+        <ngx-datatable-column  [name]="'::categoryName' | abpLocalization" prop="categoryName"></ngx-datatable-column>
+        <ngx-datatable-column [width]="70"  [name]="'::price' | abpLocalization" prop="price">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.price | currency }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="100"  [name]="'::newPrice' | abpLocalization" prop="newPrice">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.newPrice | currency }}
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+  
+  <!-- End Table -->
+  
+
+  <!-- Modal -->
+  <!-- <abp-modal [(visible)]="isModalOpen" [options]="{ size: 'lg' }">
+    <ng-template #abpHeader>
+      <h3>{{ (selected ? '::Edit' : '::NewService') | abpLocalization }}</h3>
+    </ng-template>
+  
+    <ng-template #abpBody>
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="row">
+          <div class="mt-2 col-6">
+            <label for="title">{{'::Title' | abpLocalization}}</label><span>*</span>
+            <input [placeholder]= "'::Title' | abpLocalization" type="text" id="title" class="form-control mt-1" formControlName="title" autofocus>
+          </div>
+
+          <div class="mt-2 col-6">
+            <label for="category">{{'::Category' | abpLocalization}}</label><span>*</span>
+            <ng-select id="category" [placeholder]= "'::Category' | abpLocalization" class="form-control mt-1" formControlName="categoryId">
+                <ng-option *ngFor="let item of allCategories" [value]="item.id">
+                  {{item.name}}
+                </ng-option>
+            </ng-select>
+          </div>
+  
+          <div class="mt-2 col-6">
+              <label for="price">{{'::Price' | abpLocalization}}</label><span>*</span>
+              <input [placeholder]= "'::Price' | abpLocalization" type="text" id="price" class="form-control mt-1" formControlName="price" >
+            </div>
+  
+            <div class="mt-2 col-6">
+              <label for="description">{{'::NewPrice' | abpLocalization}}</label><span>*</span>
+              <input [placeholder]= "'::NewPrice' | abpLocalization" type="text" id="newPrice" class="form-control mt-1" formControlName="newPrice" >
+            </div>
+
+            <div class="mt-2 col-12">
+              <label for="description">{{'::Description' | abpLocalization}}</label><span>*</span>
+              <textarea [placeholder]= "'::Description' | abpLocalization" type="text" id="description" class="form-control mt-1" formControlName="description" ></textarea>
+            </div>
+
+          
+          <div class="form-group col-12 col-md-12 mt-2 ">
+            <div class="input-group mb-3 pointer" (click)="imageError='';uploadProfile.click()">
+              <span class="input-group-text" id="basic-addon1" for="uploadFile">{{'::UploadImage' | abpLocalization}}</span>
+              <input type="text" class="form-control" [readOnly]="true" [placeholder]="'::UpldoadImageAcceptedTypes' | abpLocalization">
+            </div>
+            <input #uploadProfile type="file" accept=".png, .jpeg, .jpg" class="form-control d-none" id="uploadProfile" (change)="fileChangeListener($event)">
+            <div [style]="imageError ? 'visibility:visable' : 'visibility:hidden'">
+              <span class="text-danger">
+                {{'::'+imageError | abpLocalization}}
+              </span>
+            </div>
+            <div class="col-12 mt-2 mb-2" style="display: block;text-align: center;">
+              <div class="image-preview" *ngIf="blop?.value">
+                <img [src]="'data:image/' + fileType.value+';base64,'+blop?.value" height="auto" width="50%">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  
+    <ng-template #abpFooter>
+      <button type="button" class="btn btn-secondary cancel-btn" abpClose>
+        {{ '::Close' | abpLocalization }}
+      </button>
+  
+      <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
+        <i class="fa fa-check mr-1"></i>
+        {{ '::Save' | abpLocalization }}
+      </button>
+    </ng-template>
+  </abp-modal> -->
+</div>

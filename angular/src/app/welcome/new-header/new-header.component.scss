@@ -1,0 +1,77 @@
+.bell{
+    font-size: 20px;
+}
+.count{
+    font-size: 10px !important;
+    top:5px !important;
+}
+
+.list{
+  background-color: white !important;
+}
+
+.dropdown-item.active, .dropdown-item:active{
+  background-color: #f9f9f9 !important ;
+}
+.dropdown-item:hover, .dropdown-item:focus{
+  background-color: #f9f9f9 !important ;
+}
+.dropdown-item.active, .dropdown-item:active{
+  color: inherit !important;
+}
+// End Main Style........
+.list{
+  position: absolute;
+  top: 36px;
+  inset-inline-end: 0;
+}
+.list2{
+  width: 380px;
+  max-width: 380px !important;
+  max-height: 420px !important;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.innerBell{
+  color: #0087a1;
+}
+
+.notification:hover{
+  background-color: #f9f9f9 ;
+  cursor: pointer;
+}
+
+
+.notification:last-child {
+  border-bottom: none;
+}
+
+.messages{
+  margin-top: -10px;
+}
+
+// Scroll Design:
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white; 
+  border-radius: 8px;
+  width: 2px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray; 
+  border-radius: 8px;
+  width: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: gray; 
+}

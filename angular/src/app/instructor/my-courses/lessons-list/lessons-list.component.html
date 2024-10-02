@@ -1,0 +1,24 @@
+<div class="d-flex" @fade>
+    <i class="fa fa-arrow-circle-left d-block fs-4 pointer mt-2" aria-hidden="true" routerLink="/my-courses"></i>
+</div>
+<div class="card mt-2" @fade>
+    <div class="container">
+        <div>
+            <div (click)="showVideo(item.url)" class="row video p-2 pointer" *ngFor="let item of lessons">
+                <div class="col-3">
+                    <div class="video-container position-relative">
+                        <img class="text-center"style="max-width: 100%;" [src]="'data:image/'+png+';base64,'+mainInfo.orginalImage"  alt="Video Thumbnail" class="thumbnail rounded" (click)="playVideo()" />
+                        <div class="duration">{{item.duration}}</div>
+                    </div>
+                </div>  
+                <div class="col-9 mt-2">
+                    <div class="row">
+                        <h5 class="mb-4 col-7 bold">{{item.title}}</h5>
+                        <p class="mb-4 col-5 text-end">{{item.creationTime | relativeTime}}</p>
+                    </div>
+                    <p>{{item.content}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
