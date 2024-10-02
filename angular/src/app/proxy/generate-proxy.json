@@ -1193,6 +1193,14 @@
                     "type": "EduZone.Instructors.InstructorDto",
                     "typeSimple": "EduZone.Instructors.InstructorDto"
                   }
+                },
+                {
+                  "name": "GetInstructorInfo",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "EduZone.Instructors.InstructorDto",
+                    "typeSimple": "EduZone.Instructors.InstructorDto"
+                  }
                 }
               ]
             }
@@ -1313,6 +1321,21 @@
                   "descriptorName": ""
                 }
               ],
+              "returnValue": {
+                "type": "EduZone.Instructors.InstructorDto",
+                "typeSimple": "EduZone.Instructors.InstructorDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Instructors.IInstructorsAppService"
+            },
+            "GetInstructorInfo": {
+              "uniqueName": "GetInstructorInfo",
+              "name": "GetInstructorInfo",
+              "httpMethod": "GET",
+              "url": "api/app/Teacher/GetInstructorInfo",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
               "returnValue": {
                 "type": "EduZone.Instructors.InstructorDto",
                 "typeSimple": "EduZone.Instructors.InstructorDto"

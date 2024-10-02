@@ -13,5 +13,6 @@ namespace EduZone.Instructors
     {
         Task<PagedResultDto<InstructorDto>> GetAllInstructor(GetInstructorInput input);
         Task<InstructorDto> GetInstructorById(Guid id);
+        Task<InstructorDto> GetInstructorInfo();
     }
 }

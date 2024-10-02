@@ -1,0 +1,40 @@
+<div class="card"  @fade>
+    <h5 class="card-title mt-3 ms-3">
+        {{ '::Menu:instructorInfo' | abpLocalization }}:
+      </h5>
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="row">
+              <div class="mt-2 col-4">
+                <input [placeholder]= "'::firstName' | abpLocalization" type="text" id="firstName" class="form-control mt-1" formControlName="firstName" autofocus>
+              </div>
+    
+      
+              <div class="mt-2 col-4">
+                  <input [placeholder]= "'::lastName' | abpLocalization" type="text" id="lastName" class="form-control mt-1" formControlName="lastName" >
+                </div>
+      
+                <div class="mt-1 col-4 form-group">
+                    <ng-select id="gender" [placeholder]= "'::gender' | abpLocalization" class="form-control mt-2" formControlName="gender">
+                        <ng-option *ngFor="let item of genders" [value]="item.value" >
+                          {{item.key}}
+                        </ng-option>
+                    </ng-select>
+                  </div>
+    
+                <div class="mt-2 col-12">
+                  <textarea rows="2" [placeholder]= "'::aboutIns' | abpLocalization" type="text" id="about" class="form-control mt-1" formControlName="about" ></textarea>
+                </div>
+            </div>
+          </form>
+          <div class="d-flex justify-content-end mt-4">
+            <button type="button" class="btn btn-secondary cancel-btn" routerLink="/">
+                {{ '::Cancel' | abpLocalization }}
+              </button>
+          
+              <button class="btn btn-primary ms-1" [disabled]="!form.valid">
+                {{ '::Save' | abpLocalization }}
+              </button>
+          </div>
+    </div>
+  </div>

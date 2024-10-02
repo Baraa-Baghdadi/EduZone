@@ -38,5 +38,11 @@ namespace EduZone.Controllers.Instructors
         {
             return await _instructorsAppService.GetInstructorById(id);
         }
+
+        [HttpGet("GetInstructorInfo")]
+        public async Task<InstructorDto> GetInstructorInfo()
+        {
+            return await _instructorsAppService.GetInstructorInfo();
+        }
     }
 }

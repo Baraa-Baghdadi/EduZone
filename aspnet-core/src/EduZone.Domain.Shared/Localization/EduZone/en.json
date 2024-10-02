@@ -62,6 +62,7 @@
     "courseTitle": "Course Title",
     "myStudentDesc": "Click here to check your current course enrollments, track your progress, and stay updated on your academic journey. Keep everything in one place!",
     "myCoursesDesc": "Click here to view and manage the courses you’ve created. Access course details, edit content, and keep track of your progress all in one place!",
-    "instructorInfoDesc": "Click here to access your personal information, update your details, and manage your profile.ensure your information is always up to date!"
+    "instructorInfoDesc": "Click here to access your personal information, update your details, and manage your profile.ensure your information is always up to date!",
+    "aboutIns": "About Instructor"
   }
 }

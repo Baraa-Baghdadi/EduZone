@@ -1,4 +1,5 @@
 ﻿using EduZone.Permissions;
+using EduZone.UserNameFromToken;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Data;
+using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 
@@ -17,12 +19,15 @@ namespace EduZone.Instructors
 
         private readonly IInstructorRepository _instructorRepository;
         private readonly IDataFilter _dataFilter;
+        private readonly GetUserNameFromToken _getUserNameFromToken;
 
         public InstructorsAppService(
-            IInstructorRepository instructorRepository, IDataFilter dataFilter)
+            IInstructorRepository instructorRepository, IDataFilter dataFilter,
+            GetUserNameFromToken getUserNameFromToken)
         {
             _instructorRepository = instructorRepository;
             _dataFilter = dataFilter;
+            _getUserNameFromToken = getUserNameFromToken;
         }
 
         [Authorize(EduZonePermissions.Dashboard.Host)]
@@ -50,9 +55,17 @@ namespace EduZone.Instructors
             }
         }
 
+        public async Task<InstructorDto> GetInstructorInfo()
+        {
+            var userEmail = _getUserNameFromToken.GetEmailFromToken();
+            var instructor = await _instructorRepository.FirstOrDefaultAsync(r => r.Email == userEmail)
+                ?? throw new UserFriendlyException(L[EduZoneDomainErrorCodes.UserNotFound]);
+            return ObjectMapper.Map<Instructor, InstructorDto>(instructor);
+        }
+
         #region methods
 
-     
+
 
         #endregion
     }

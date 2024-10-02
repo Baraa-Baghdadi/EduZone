@@ -26,6 +26,14 @@ export class InstructorService {
       params: { id },
     },
     { apiName: this.apiName,...config });
+  
+
+  getInstructorInfo = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, InstructorDto>({
+      method: 'GET',
+      url: '/api/app/Teacher/GetInstructorInfo',
+    },
+    { apiName: this.apiName,...config });
 
   constructor(private restService: RestService) {}
 }
