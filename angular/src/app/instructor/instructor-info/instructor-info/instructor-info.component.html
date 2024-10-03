@@ -23,7 +23,7 @@
                   </div>
     
                 <div class="mt-2 col-12">
-                  <textarea rows="2" [placeholder]= "'::aboutIns' | abpLocalization" type="text" id="about" class="form-control mt-1" formControlName="about" ></textarea>
+                  <textarea rows="6" [placeholder]= "'::aboutIns' | abpLocalization" type="text" id="about" class="form-control mt-1" formControlName="about" ></textarea>
                 </div>
             </div>
           </form>
@@ -32,7 +32,7 @@
                 {{ '::Cancel' | abpLocalization }}
               </button>
           
-              <button class="btn btn-primary ms-1" [disabled]="!form.valid">
+              <button class="btn btn-primary ms-1" [disabled]="!form.valid" (click)="save()">
                 {{ '::Save' | abpLocalization }}
               </button>
           </div>

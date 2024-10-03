@@ -44,5 +44,11 @@ namespace EduZone.Controllers.Instructors
         {
             return await _instructorsAppService.GetInstructorInfo();
         }
+
+        [HttpPut("UpdateInstructorInfo")]
+        public async Task<bool> UpdateInstructorInfo(UpdateInstructorInfoInput input)
+        {
+            return await _instructorsAppService.UpdateInstructorInfo(input);
+        }
     }
 }

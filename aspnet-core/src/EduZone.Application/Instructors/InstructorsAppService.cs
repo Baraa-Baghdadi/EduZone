@@ -55,6 +55,7 @@ namespace EduZone.Instructors
             }
         }
 
+        [Authorize(EduZonePermissions.Dashboard.Tenant)]
         public async Task<InstructorDto> GetInstructorInfo()
         {
             var userEmail = _getUserNameFromToken.GetEmailFromToken();
@@ -62,6 +63,24 @@ namespace EduZone.Instructors
                 ?? throw new UserFriendlyException(L[EduZoneDomainErrorCodes.UserNotFound]);
             return ObjectMapper.Map<Instructor, InstructorDto>(instructor);
         }
+
+        [Authorize(EduZonePermissions.Dashboard.Tenant)]
+        public async Task<bool> UpdateInstructorInfo(UpdateInstructorInfoInput input)
+        {
+            var userEmail = _getUserNameFromToken.GetEmailFromToken();
+            var instructor = await _instructorRepository.FirstOrDefaultAsync(r => r.Email == userEmail)
+                ?? throw new UserFriendlyException(L[EduZoneDomainErrorCodes.UserNotFound]);
+
+            // update Info:
+            instructor.FirstName = input.FirstName;
+            instructor.LastName = input.LastName;
+            instructor.Gender = input.Gender;
+            instructor.About = input.About;
+
+            return true;
+        }
+
+
 
         #region methods
 

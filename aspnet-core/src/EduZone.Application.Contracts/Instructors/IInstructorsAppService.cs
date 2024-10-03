@@ -11,8 +11,9 @@ namespace EduZone.Instructors
 {
     public interface IInstructorsAppService : IApplicationService
     {
-        Task<PagedResultDto<InstructorDto>> GetAllInstructor(GetInstructorInput input);
-        Task<InstructorDto> GetInstructorById(Guid id);
-        Task<InstructorDto> GetInstructorInfo();
+        Task<PagedResultDto<InstructorDto>> GetAllInstructor(GetInstructorInput input); // get all for admin
+        Task<InstructorDto> GetInstructorById(Guid id); // get by Id
+        Task<InstructorDto> GetInstructorInfo(); // get by token
+        Task<bool> UpdateInstructorInfo(UpdateInstructorInfoInput input);
     }
 }

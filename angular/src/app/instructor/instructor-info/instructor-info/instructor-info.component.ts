@@ -1,3 +1,4 @@
+import { ToasterService } from '@abp/ng.theme.shared';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -18,12 +19,11 @@ export class InstructorInfoComponent implements OnInit {
   form:FormGroup;
   selected?: any;
   genders = genderOptions;
-  constructor( private service : InstructorService,private fb:FormBuilder,) {
+  constructor( private service : InstructorService,private fb:FormBuilder,private toaster:ToasterService) {
   }
   ngOnInit() {
     this.buildForm();
-    console.log(this.genders);
-    
+    this.getProviderInfo(); 
   }
 
   buildForm(){
@@ -42,5 +42,18 @@ export class InstructorInfoComponent implements OnInit {
     });
   }
 
-  save(){}
+  save(){
+    if(this.form.valid){
+      this.service.updateInstructorInfoByInput(this.form.value).subscribe(data =>{
+        this.toaster.info("::successfullyUpdated");
+      });
+    }
+  }
+
+  getProviderInfo(){
+    this.service.getInstructorInfo().subscribe((data:any) => {
+      this.selected = data;
+      this.buildForm();
+    });
+  }
 }
