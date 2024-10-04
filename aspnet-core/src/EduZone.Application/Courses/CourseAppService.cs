@@ -179,5 +179,6 @@ namespace EduZone.Courses
             var result = await _courseRepository.UpdateAsync(courseDb, true);
             return ObjectMapper.Map<Course, CourseDto>(result);
         }
+
     }
 }

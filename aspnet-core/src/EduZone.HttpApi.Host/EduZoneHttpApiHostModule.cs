@@ -31,6 +31,7 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.PermissionManagement;
 using EduZone.StartupTasks;
+using EduZone.Hub;
 
 namespace EduZone;
 
@@ -78,6 +79,8 @@ public class EduZoneHttpApiHostModule : AbpModule
         {
             options.IsDynamicPermissionStoreEnabled = true;
         });
+        // add signalR:
+        context.Services.AddSignalR();
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
@@ -204,6 +207,27 @@ public class EduZoneHttpApiHostModule : AbpModule
         app.UseStaticFiles();
         app.UseRouting();
         app.UseCors();
+
+        // For signalR:
+        app.Use(async (httpContext, next) =>
+        {
+            var accessToken = httpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                accessToken = httpContext.Request.Query["access_token"];
+            }
+
+            var path = httpContext.Request.Path;
+
+            if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/notify"))
+            {
+                httpContext.Request.Headers["Authorization"] = "Bearer " + accessToken;
+            }
+
+            await next();
+        });
+
+
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
 
@@ -214,6 +238,12 @@ public class EduZoneHttpApiHostModule : AbpModule
         app.UseUnitOfWork();
         app.UseDynamicClaims();
         app.UseAuthorization();
+
+        // add signalR:
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapHub<BroadcastHub>("/notify");
+        });
 
         app.UseSwagger();
         app.UseAbpSwaggerUI(c =>

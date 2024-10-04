@@ -69,6 +69,13 @@
     "instructorInfoDesc": "اضغط هنا للوصول إلى معلوماتك الشخصية، وتحديث تفاصيلك، وإدارة ملفك الشخصي. وتأكد من أن معلوماتك دائماً محدثة!,",
     "aboutIns": "حول المدرس",
     "successfullyUpdated": "تم التحديث بنجاح",
-    "updateCourse": "تعديل الكورس"
+    "updateCourse": "تعديل الكورس",
+    "justNow": "الأن",
+    "oneMinuteAgo": "منذ دقيقة",
+    "minutesAgo": "منذ {0} دقائق",
+    "oneHourAgo": "منذ ساعة",
+    "hoursAgo": "منذ {0} ساعات",
+    "today": "اليوم",
+    "yesterday": "أمس"
   }
 }

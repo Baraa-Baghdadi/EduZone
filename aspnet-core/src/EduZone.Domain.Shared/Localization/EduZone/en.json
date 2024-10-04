@@ -66,6 +66,13 @@
     "aboutIns": "About Instructor",
     "successfullyUpdated": "Successfully Updated",
     "updateCourse": "Update Course",
-    "CourseShouldContainLesson": "Course Should Contain Lessons"
+    "CourseShouldContainLesson": "Course Should Contain Lessons",
+    "justNow": "Just Now",
+    "oneMinuteAgo": "Minute ago",
+    "minutesAgo": "{0} Minute",
+    "oneHourAgo": "Hour ago",
+    "hoursAgo": "{0} Hours",
+    "today": "Today",
+    "yesterday": "Yesterday"
   }
 }
