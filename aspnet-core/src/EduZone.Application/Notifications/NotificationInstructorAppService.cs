@@ -40,18 +40,16 @@ namespace EduZone.Notifications
             _dataFilter = dataFilter;
         }
 
-        public async Task CreateNewEnrollmentNotification(Guid id, string content, NotificationTypeEnum type, Dictionary<string, string> extraproperties)
+        public async Task CreateNewEnrollmentNotification(Guid studentId,Guid instructorId,Guid enrollId,string courseName, 
+            string content, NotificationTypeEnum type, Dictionary<string, string> extraproperties)
         {
-            // Get enrollment:
-            var enrollment = await _enrollmentRepo.GetByIdWithDetails(id)
-                ?? throw new UserFriendlyException(L[EduZoneDomainErrorCodes.NotFound]);
 
-            var student = await _studentRepo.FirstOrDefaultAsync(row => row.Id == enrollment.StudentId);
+            var student = await _studentRepo.FirstOrDefaultAsync(row => row.Id == studentId);
 
             using (_dataFilter.Disable<IMultiTenant>())
             {
                 // Get Provider:
-                var instructor = await _instructorRepository.FirstOrDefaultAsync(row => row.Id == enrollment.Course.InstructorId)
+                var instructor = await _instructorRepository.FirstOrDefaultAsync(row => row.Id == instructorId)
                     ?? throw new UserFriendlyException(L[EduZoneDomainErrorCodes.NotFound]);
 
                 // title for notification:
@@ -59,7 +57,7 @@ namespace EduZone.Notifications
 
                 var notification = new Notification
                 {
-                    EntityId = id,
+                    EntityId = enrollId,
                     Title = title,
                     Content = content,
                     IconThumbnail = "",
@@ -91,9 +89,14 @@ namespace EduZone.Notifications
 
                         if (connectionsId is not null)
                         {
+                            NewStudentMsg msg = new NewStudentMsg
+                            {
+                                StudentName = student!.FirstName + " " + student.LastName,
+                                CourseName = courseName
+                            };
                             foreach (var connectionId in connectionsId)
                             {
-                                await sendMessage(connectionId, student!.FirstName + " " + student.LastName);
+                                await sendMessage(connectionId, msg);
                             }
                         }
                     }
@@ -125,7 +128,7 @@ namespace EduZone.Notifications
                     CreatedOn = GetRelativeDate(UnixTimeStampToDateTime((double)x.CreatedOn)),
                     CreationTime = x.CreationTime,
                     Type = x.Type,
-                    Content = L[x.Content, x.GetProperty("studentName") ?? ""]
+                    Content = L[x.Content, x.GetProperty("studentName"),x.GetProperty("courseName") ?? ""]
                 }).ToList()
             };
 
@@ -151,7 +154,7 @@ namespace EduZone.Notifications
 
 
         #region methods
-        private async Task sendMessage(string connectionId, string msg)
+        private async Task sendMessage(string connectionId, NewStudentMsg msg)
         {
             await _hubContext.Clients.Client(connectionId).StudentAddedYouMsg(msg);
         }

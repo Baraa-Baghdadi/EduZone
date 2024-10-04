@@ -73,6 +73,15 @@
     "oneHourAgo": "Hour ago",
     "hoursAgo": "{0} Hours",
     "today": "Today",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "newStudentAddedYourCourse": "{0} joined to {1}",
+    "noNotifications": "No Notifications !",
+    "Notofications": "Notofications",
+    "successfulyUploaded": "Successfuly Uploaded",
+    "removalSuccessful": "Removal Successful",
+    "successfulyUpdated": "Successfuly Updated",
+    "uploadingNow": "Uploading Now Please Wait",
+    "vAlreadyExist": "video is already exist",
+    "oAlreadyExist": "Order is already exist"
   }
 }

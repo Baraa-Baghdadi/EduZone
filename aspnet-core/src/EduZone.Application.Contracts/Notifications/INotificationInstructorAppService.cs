@@ -10,7 +10,7 @@ namespace EduZone.Notifications
 {
     public interface INotificationInstructorAppService : IApplicationService
     {
-        Task CreateNewEnrollmentNotification(Guid id, string content, NotificationTypeEnum type, Dictionary<string, string> extraproperties);
+        Task CreateNewEnrollmentNotification(Guid studentId, Guid instructorId, Guid enrollId,string courseName, string content, NotificationTypeEnum type, Dictionary<string, string> extraproperties);
         Task<PagedResultDto<InstructorNotificationDto>> GetListOfInstructorNotification(PagedAndSortedResultRequestDto input);
         Task MarkAllAsRead();
         Task<int> GetCountOfUnreadingMsgAsync();

@@ -250,25 +250,25 @@ export class CreateCourseComponent implements OnInit {
       this.addNewLessError = null;
       this.allLessons.forEach(element => {
         if (element.videoOrder == lesson.videoOrder) {
-          this.addNewLessError = "order is already exist";
+          this.addNewLessError = "::oAlreadyExist";
           this.toaster.error(this.addNewLessError,"Error");
           return;
         }
         else if(element.title == lesson.title){
-          this.addNewLessError = "video is already exist";
+          this.addNewLessError = "::vAlreadyExist";
           this.toaster.error(this.addNewLessError,"Error");
           return;
         }
       });
       if (this.addNewLessError === null) {
         this.uploadFile(lesson);
-        this.toaster.info("Uploading Now...");
+        this.toaster.info("::uploadingNow");
         this.addNewLessError = null;
       }
     }
     else{
       this.uploadFile(lesson);
-      this.toaster.info("Uploading Now...");       
+      this.toaster.info("::uploadingNow");       
     }
   }
   
@@ -372,7 +372,7 @@ export class CreateCourseComponent implements OnInit {
             this.allLessons = [...this.allLessons]; 
             this.clear();
             this.form2.reset();
-            this.toaster.info("Successfuly Uploaded");
+            this.toaster.info("::successfulyUploaded");
             this.progress = 0 ;  
             this.disableAddNewLesson = false;
             console.log("all Lessons",this.allLessons);
@@ -388,7 +388,7 @@ export class CreateCourseComponent implements OnInit {
     // Delete the file
     deleteObject(desertRef).then(() => {
       // File deleted successfully:
-      this.toaster.info("Removal Successful");      
+      this.toaster.info("::removalSuccessful");      
     }).catch((error) => {
       // Uh-oh, an error occurred!
     });
@@ -397,7 +397,7 @@ export class CreateCourseComponent implements OnInit {
   SaveCourse(){
     this.lessons.setValue(this.allLessons);
     this.service.createNewCourseByInput(this.form.value).subscribe(data => {
-      this.toaster.info("Successfuly Uploaded");
+      this.toaster.info("::successfulyUploaded");
       this.router.navigate(["/my-courses"]);
     });    
   }
@@ -407,7 +407,7 @@ export class CreateCourseComponent implements OnInit {
     var updateCourseInput = {id:this.selected.id,...this.form.value} as UpdateCourseInput;
     console.log("updatedCourse",updateCourseInput); 
     this.service.updateCourse(updateCourseInput).subscribe(data => {
-      this.toaster.info("Successfuly Updated");
+      this.toaster.info("::successfulyUpdated");
       this.router.navigate(["/my-courses"]);
     }
     )

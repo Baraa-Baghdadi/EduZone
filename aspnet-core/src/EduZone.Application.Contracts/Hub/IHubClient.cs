@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EduZone.Notifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace EduZone.Hub
 {
     public interface IHubClient : IApplicationService
     {
-        Task StudentAddedYouMsg(string msg);
+        Task StudentAddedYouMsg(NewStudentMsg msg);
     }
 }

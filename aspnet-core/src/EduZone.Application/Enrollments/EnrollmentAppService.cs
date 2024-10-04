@@ -1,4 +1,7 @@
-﻿using EduZone.Enum;
+﻿using EduZone.Courses;
+using EduZone.Enum;
+using EduZone.Instructors;
+using EduZone.Notifications;
 using EduZone.Students;
 using EduZone.UserNameFromToken;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Data;
+using Volo.Abp.MultiTenancy;
 
 namespace EduZone.Enrollments
 {
@@ -18,12 +23,21 @@ namespace EduZone.Enrollments
         private readonly IEnrollmentRepository _enrollmentRepository;
         private readonly IGetUserNameFromToken _getUserNameFromToken;
         private readonly IStudentRepository _studentRepository;
+        private readonly ICourseRepository _courseRepository;
+        private readonly INotificationInstructorAppService _notificationInstructorAppService;
+        private readonly IDataFilter _dataFilter;
 
-        public EnrollmentAppService(IEnrollmentRepository enrollmentRepository, IGetUserNameFromToken getUserNameFromToken, IStudentRepository studentRepository)
+        public EnrollmentAppService(IEnrollmentRepository enrollmentRepository, 
+            IGetUserNameFromToken getUserNameFromToken, IStudentRepository studentRepository, 
+            INotificationInstructorAppService notificationInstructorAppService, 
+            ICourseRepository courseRepository, IDataFilter dataFilter)
         {
             _enrollmentRepository = enrollmentRepository;
             _getUserNameFromToken = getUserNameFromToken;
             _studentRepository = studentRepository;
+            _notificationInstructorAppService = notificationInstructorAppService;
+            _courseRepository = courseRepository;
+            _dataFilter = dataFilter;
         }
 
         public async Task<EnrollmentDto> AddNewEnroll(NewEnrollmentInput input)
@@ -31,12 +45,19 @@ namespace EduZone.Enrollments
             var studentEmail = _getUserNameFromToken.GetEmailFromToken();
             var student = await _studentRepository.GetStudentByEmail(studentEmail);
 
-            var newEnroll = new Enrollment(GuidGenerator.Create(), student.Id,input.CourseId,false,
-                ServiceHelper.getTimeSpam(DateTime.UtcNow)!.Value,null,CourseStatus.Enrolled);
-            await _enrollmentRepository.InsertAsync(newEnroll, true);
+            using (_dataFilter.Disable<IMultiTenant>())
+            {
+                var course = await _courseRepository.GetCourseById(input.CourseId);
+                var newEnroll = new Enrollment(GuidGenerator.Create(), student.Id, input.CourseId, false,
+                    ServiceHelper.getTimeSpam(DateTime.UtcNow)!.Value, null, CourseStatus.Enrolled);
+                await _enrollmentRepository.InsertAsync(newEnroll, true);
 
 
-            return ObjectMapper.Map<Enrollment,EnrollmentDto>(newEnroll);
+                // send notification for instructor:
+                await SendNotificationForProvider(student.Id, course.InstructorId, newEnroll.Id,course.Title, student.FirstName + " " + student.LastName);
+
+                return ObjectMapper.Map<Enrollment, EnrollmentDto>(newEnroll);
+            }
         }
 
         public async Task<PagedResultDto<EnrollmentDto>> GetEnrollmentsOfInstructor(GetEnrollmentInput input)
@@ -57,5 +78,17 @@ namespace EduZone.Enrollments
                 ?? throw new UserFriendlyException(L[EduZoneDomainErrorCodes.NotFound]);
             return ObjectMapper.Map<Enrollment,EnrollmentDto>(enroll);
         }
+
+
+        #region methods
+
+        private async Task SendNotificationForProvider(Guid studentId, Guid instructorId, Guid enrollId,string courseName, string studentName)
+        {
+            await _notificationInstructorAppService.CreateNewEnrollmentNotification(studentId, instructorId, enrollId,courseName,
+                "newStudentAddedYourCourse", NotificationTypeEnum.NewEnrollment,
+                new Dictionary<string, string> { { "studentName", studentName },{ "courseName", courseName } });
+        }
+
+        #endregion
     }
 }
