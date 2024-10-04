@@ -31,7 +31,7 @@ export class LessonsListComponent implements OnInit {
       var id = response.params.id;
       this.service.getCourseByIdById(id).subscribe((data:any) => { 
         this.mainInfo = data;      
-        this.lessons = data.lessons;
+        this.lessons = data.lessons.sort((a, b) => a.videoOrder - b.videoOrder);
       });
     })
   }

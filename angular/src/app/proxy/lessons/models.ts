@@ -11,6 +11,7 @@ export interface LessonDto extends FullAuditedEntityDto<string> {
 }
 
 export interface LessonDtoForAddCourse {
+  id?: string;
   name?: string;
   title?: string;
   content?: string;

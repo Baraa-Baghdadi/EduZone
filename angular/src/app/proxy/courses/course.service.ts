@@ -1,4 +1,4 @@
-import type { CourseDto, GetCoursesInput, NewCourseInput } from './models';
+import type { CourseDto, GetCoursesInput, NewCourseInput, UpdateCourseInput } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -41,6 +41,15 @@ export class CourseService {
       method: 'GET',
       url: '/api/app/course/my-courses',
       params: { filterText: input.filterText, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  updateCourse = (input: UpdateCourseInput, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, CourseDto>({
+      method: 'PUT',
+      url: '/api/app/course/course',
+      body: input,
     },
     { apiName: this.apiName,...config });
 

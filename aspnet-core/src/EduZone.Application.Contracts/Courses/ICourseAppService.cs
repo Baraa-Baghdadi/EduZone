@@ -15,5 +15,6 @@ namespace EduZone.Courses
         Task<PagedResultDto<CourseDto>> GetAllCourses(GetCoursesInput input);
         Task<CourseDto> CreateNewCourse(NewCourseInput input);
         Task<CourseDto> GetCourseById(Guid id);
+        Task<CourseDto> UpdateCourseAsync(UpdateCourseInput input);
     }
 }

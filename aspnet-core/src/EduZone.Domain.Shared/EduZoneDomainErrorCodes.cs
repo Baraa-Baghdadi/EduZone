@@ -9,4 +9,5 @@ public static class EduZoneDomainErrorCodes
     public const string EmailalreadyExist = "EmailalreadyExist";
     public const string InvalidPassword = "InvalidPassword";
     public const string UserNotFound = "UserNotFound";
+    public const string CourseShouldContainLesson = "CourseShouldContainLesson";
 }

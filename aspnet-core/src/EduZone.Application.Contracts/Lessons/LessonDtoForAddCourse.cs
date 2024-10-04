@@ -8,6 +8,8 @@ namespace EduZone.Lessons
 {
     public class LessonDtoForAddCourse
     {
+        // this Id only for update lesson
+        public Guid? Id { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }

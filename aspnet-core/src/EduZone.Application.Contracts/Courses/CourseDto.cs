@@ -17,6 +17,7 @@ namespace EduZone.Courses
         public string? Icon { get; set; } // as thumbnail
         public string? OrginalImage { get; set; } // return Orginal image for showing it as base 64
         public string? FileType { get; set; }
+        public Guid? CategoryId { get; set; }
         public string? CategoryName { get; set; }
         public string? InstructorName { get; set; }
         public List<LessonDto>? Lessons { get; set; }

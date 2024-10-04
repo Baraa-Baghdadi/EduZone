@@ -2,11 +2,12 @@ import { ToasterService } from '@abp/ng.theme.shared';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '@proxy/categories';
-import { CourseService } from '@proxy/courses';
+import { CourseService, UpdateCourseInput } from '@proxy/courses';
 import { LessonDtoForAddCourse } from '@proxy/lessons';
 import { finalize, tap } from 'rxjs';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL,deleteObject,listAll   } from "firebase/storage";
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
@@ -41,13 +42,23 @@ export class CreateCourseComponent implements OnInit {
   constructor(
     private service : CourseService,private fb:FormBuilder,
     private categoryServ:CategoryService,
-    private toaster : ToasterService){
+    private toaster : ToasterService,private router : Router,
+    private activatedRout : ActivatedRoute){
     }
 
   ngOnInit(): void {
+    this.getAllCategory();
     this.buildForm();
     this.buildForm2();
-    this.getAllCategory();
+    this.activatedRout.params.subscribe((data)=>{
+      if (data.id && data.id!= undefined) {
+        this.getCourseToEdit(data.id);
+      }
+      else{
+        this.buildForm();
+        this.buildForm2();
+      }
+    })
   }
   
   openCourseModal(id:string = null){
@@ -107,19 +118,12 @@ export class CreateCourseComponent implements OnInit {
     });
   }
 
-  // save(){
-  //   console.log(this.form.value);
-  //   if (this.form.invalid || this.blop.valid === null || this.blop.value === undefined ) return;
-  //   const request = this.selected
-  //   ? this.service.createNewCourseByInput(this.form.value)     //this.service.update(this.selected.id,this.form.value) 
-  //   : this.service.createNewCourseByInput(this.form.value);
-
-  //   request
-  //   .pipe(
-  //     finalize(() => this.isModalOpen = false),
-  //     tap(() => {this.form.reset();}),
-  //   ).subscribe() 
-  // }
+  save(){
+    if (this.form.invalid && this.allLessons.length === 0 ) return;
+    const request = this.selected
+    ? this.updateCourse()    //this.service.update(this.selected.id,this.form.value) 
+    : this.SaveCourse();
+  }
 
 
   fileChangeListener(fileInput:any){
@@ -158,9 +162,13 @@ export class CreateCourseComponent implements OnInit {
 
   getCourseToEdit(id:any){
     this.service.getCourseByIdById(id).subscribe((data:any) => {
+      console.log(data);
       this.selected = data;
+      this.allLessons = data.lessons;
+      this.lessons.setValue(data.lessons);
       this.buildForm();
-      this.isModalOpen = true;
+      this.buildForm2();
+      this.makeCourseImageUnRequired();
     });
   }
 
@@ -206,10 +214,11 @@ export class CreateCourseComponent implements OnInit {
       }
       if (file.size > this.videoMaxSize) {
         return false;
-      }      
+      }    
       const url = URL.createObjectURL(file);
       this.videoUrl = url;   
-      this.videoName = file.name;       
+      this.videoName = file.name;    
+      this.disableAddNewLesson = false;   
     }
   }
 
@@ -243,10 +252,12 @@ export class CreateCourseComponent implements OnInit {
         if (element.videoOrder == lesson.videoOrder) {
           this.addNewLessError = "order is already exist";
           this.toaster.error(this.addNewLessError,"Error");
+          return;
         }
         else if(element.title == lesson.title){
           this.addNewLessError = "video is already exist";
           this.toaster.error(this.addNewLessError,"Error");
+          return;
         }
       });
       if (this.addNewLessError === null) {
@@ -263,6 +274,13 @@ export class CreateCourseComponent implements OnInit {
   
   clear(){
     this.form2.reset();
+    this.selectedVideo = null;
+    this.videoDuration = null;
+    this.videoUrl  = null;
+    this.videoName  = null;
+  }
+
+  resetLessonVideo(){
     this.selectedVideo = null;
     this.videoDuration = null;
     this.videoUrl  = null;
@@ -379,7 +397,30 @@ export class CreateCourseComponent implements OnInit {
   SaveCourse(){
     this.lessons.setValue(this.allLessons);
     this.service.createNewCourseByInput(this.form.value).subscribe(data => {
-      console.log(data);
+      this.toaster.info("Successfuly Uploaded");
+      this.router.navigate(["/my-courses"]);
     });    
+  }
+
+  updateCourse(){
+    this.lessons.setValue(this.allLessons);
+    var updateCourseInput = {id:this.selected.id,...this.form.value} as UpdateCourseInput;
+    console.log("updatedCourse",updateCourseInput); 
+    this.service.updateCourse(updateCourseInput).subscribe(data => {
+      this.toaster.info("Successfuly Updated");
+      this.router.navigate(["/my-courses"]);
+    }
+    )
+  }
+
+  makeCourseImageUnRequired(){
+    this.blop.setValidators(null);
+    this.blop.updateValueAndValidity();
+    this.fileName.setValidators(null);
+    this.fileName.updateValueAndValidity();
+    this.fileSize.setValidators(null);
+    this.fileSize.updateValueAndValidity();
+    this.fileType.setValidators(null);
+    this.fileType.updateValueAndValidity();
   }
 }

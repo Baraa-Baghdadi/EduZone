@@ -1,7 +1,7 @@
-<div class="card"  @fade>
-    <h5 class="card-title mt-3 ms-3">
-        {{ '::Menu:instructorInfo' | abpLocalization }}:
-      </h5>
+<h5>
+  {{ '::Menu:instructorInfo' | abpLocalization }}:
+</h5>
+<div class="card mt-2" @fade>
     <div class="card-body">
         <form [formGroup]="form" (ngSubmit)="save()">
             <div class="row">
