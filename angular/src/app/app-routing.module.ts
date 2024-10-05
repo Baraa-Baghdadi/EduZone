@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./instructor/my-courses/my-courses.module').then(m => m.MyCoursesModule),
   },
   {
+    path: 'instructor-Info',
+    loadChildren: () => import('./instructor/instructor-info/instructor-info.module').then(m => m.InstructorInfoModule),
+  },
+  {
     path: 'account',
     loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),
   },

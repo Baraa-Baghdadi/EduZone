@@ -2,11 +2,12 @@ import { ToasterService } from '@abp/ng.theme.shared';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '@proxy/categories';
-import { CourseService } from '@proxy/courses';
-import { LessonDtoForAddCourse } from '@proxy/lessons';
+import { CourseService, UpdateCourseInput } from '@proxy/courses';
+import { LessonDtoForAddCourse, LessonService, UpdateLessonInput } from '@proxy/lessons';
 import { finalize, tap } from 'rxjs';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL,deleteObject,listAll   } from "firebase/storage";
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
@@ -25,6 +26,7 @@ export class CreateCourseComponent implements OnInit {
   isModalOpenForShowImage = false;
   form:FormGroup;
   form2 : FormGroup;
+  updateLessonForm:FormGroup;
   readonly imageMaxSize = 51200000;
   readonly videoMaxSize = 512000000000000;
   imageError : string;
@@ -37,32 +39,41 @@ export class CreateCourseComponent implements OnInit {
   disableAddNewLesson = false;
   // errors:
   addNewLessError = null;
+  updateLessonError = null;
+
+  selectedLesson;
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
   constructor(
     private service : CourseService,private fb:FormBuilder,
     private categoryServ:CategoryService,
-    private toaster : ToasterService){
+    private toaster : ToasterService,private router : Router,
+    private activatedRout : ActivatedRoute,
+    private lessonService : LessonService ){
     }
 
   ngOnInit(): void {
+    this.getAllCategory();
     this.buildForm();
     this.buildForm2();
-    this.getAllCategory();
-  }
-  
-  openCourseModal(id:string = null){
-    if (id) {
-      this.getCourseToEdit(id);
-    }
-    else{
-      this.selected = null;
-      this.showForm();
-    }
+    this.getDataFromUrl();
   }
 
-  showForm(){
-    this.buildForm();
-    this.isModalOpen = true;
+  getDataFromUrl(){
+    this.activatedRout.params.subscribe((data)=>{
+      if (data.id && data.id!= undefined) {
+        this.getCourseToEdit(data.id);
+      }
+      else{
+        this.buildForm();
+        this.buildForm2();
+      }
+    })
+  }
+  
+  updateLesson(title,order){
+    this.isModalOpen = true;    
+    this.selectedLesson = this.allLessons.filter(x => x.title == title && x.videoOrder == order);
+    this.buildUpdateLessonForm();  
   }
 
   buildForm(){
@@ -107,19 +118,21 @@ export class CreateCourseComponent implements OnInit {
     });
   }
 
-  // save(){
-  //   console.log(this.form.value);
-  //   if (this.form.invalid || this.blop.valid === null || this.blop.value === undefined ) return;
-  //   const request = this.selected
-  //   ? this.service.createNewCourseByInput(this.form.value)     //this.service.update(this.selected.id,this.form.value) 
-  //   : this.service.createNewCourseByInput(this.form.value);
+  buildUpdateLessonForm(){
+    this.updateLessonForm = this.fb.group({
+      id:[this.selectedLesson[0].id ],
+      title : [this.selectedLesson[0].title ?? null,Validators.required],
+      content: [this.selectedLesson[0].content ?? null,Validators.required],
+      videoOrder: [this.selectedLesson[0].videoOrder ?? null,Validators.required],
+    });
+  }
 
-  //   request
-  //   .pipe(
-  //     finalize(() => this.isModalOpen = false),
-  //     tap(() => {this.form.reset();}),
-  //   ).subscribe() 
-  // }
+  save(){
+    if (this.form.invalid && this.allLessons.length === 0 ) return;
+    const request = this.selected
+    ? this.updateCourse()    //this.service.update(this.selected.id,this.form.value) 
+    : this.SaveCourse();
+  }
 
 
   fileChangeListener(fileInput:any){
@@ -158,9 +171,14 @@ export class CreateCourseComponent implements OnInit {
 
   getCourseToEdit(id:any){
     this.service.getCourseByIdById(id).subscribe((data:any) => {
+      console.log(data);
       this.selected = data;
+      this.allLessons = data.lessons;
+      this.lessons.setValue(data.lessons);
       this.buildForm();
-      this.isModalOpen = true;
+      this.buildForm2();
+      this.makeCourseImageUnRequired();
+      console.log(this.allLessons);
     });
   }
 
@@ -206,10 +224,11 @@ export class CreateCourseComponent implements OnInit {
       }
       if (file.size > this.videoMaxSize) {
         return false;
-      }      
+      }    
       const url = URL.createObjectURL(file);
       this.videoUrl = url;   
-      this.videoName = file.name;       
+      this.videoName = file.name;    
+      this.disableAddNewLesson = false;   
     }
   }
 
@@ -236,33 +255,41 @@ export class CreateCourseComponent implements OnInit {
     lesson.duration = this.videoDuration;
     lesson.name = this.videoName;
     lesson.fileSize = this.videoSize.value;
-    // we need add url also here...............................
     if (this.allLessons.length != 0 ) {
       this.addNewLessError = null;
       this.allLessons.forEach(element => {
         if (element.videoOrder == lesson.videoOrder) {
-          this.addNewLessError = "order is already exist";
+          this.addNewLessError = "::oAlreadyExist";
           this.toaster.error(this.addNewLessError,"Error");
+          return;
         }
         else if(element.title == lesson.title){
-          this.addNewLessError = "video is already exist";
+          this.addNewLessError = "::vAlreadyExist";
           this.toaster.error(this.addNewLessError,"Error");
+          return;
         }
       });
       if (this.addNewLessError === null) {
         this.uploadFile(lesson);
-        this.toaster.info("Uploading Now...");
+        this.toaster.info("::uploadingNow");
         this.addNewLessError = null;
       }
     }
     else{
       this.uploadFile(lesson);
-      this.toaster.info("Uploading Now...");       
+      this.toaster.info("::uploadingNow");       
     }
   }
   
   clear(){
     this.form2.reset();
+    this.selectedVideo = null;
+    this.videoDuration = null;
+    this.videoUrl  = null;
+    this.videoName  = null;
+  }
+
+  resetLessonVideo(){
     this.selectedVideo = null;
     this.videoDuration = null;
     this.videoUrl  = null;
@@ -354,7 +381,7 @@ export class CreateCourseComponent implements OnInit {
             this.allLessons = [...this.allLessons]; 
             this.clear();
             this.form2.reset();
-            this.toaster.info("Successfuly Uploaded");
+            this.toaster.info("::successfulyUploaded");
             this.progress = 0 ;  
             this.disableAddNewLesson = false;
             console.log("all Lessons",this.allLessons);
@@ -370,7 +397,7 @@ export class CreateCourseComponent implements OnInit {
     // Delete the file
     deleteObject(desertRef).then(() => {
       // File deleted successfully:
-      this.toaster.info("Removal Successful");      
+      this.toaster.info("::removalSuccessful");      
     }).catch((error) => {
       // Uh-oh, an error occurred!
     });
@@ -379,7 +406,73 @@ export class CreateCourseComponent implements OnInit {
   SaveCourse(){
     this.lessons.setValue(this.allLessons);
     this.service.createNewCourseByInput(this.form.value).subscribe(data => {
-      console.log(data);
+      this.toaster.info("::successfulyUploaded");
+      this.router.navigate(["/my-courses"]);
     });    
+  }
+
+  updateCourse(){
+    this.lessons.setValue(this.allLessons);
+    var updateCourseInput = {id:this.selected.id,...this.form.value} as UpdateCourseInput;
+    console.log("updatedCourse",updateCourseInput); 
+    this.service.updateCourse(updateCourseInput).subscribe(data => {
+      this.toaster.info("::successfulyUpdated");
+      this.router.navigate(["/my-courses"]);
+    }
+    )
+  }
+
+  makeCourseImageUnRequired(){
+    this.blop.setValidators(null);
+    this.blop.updateValueAndValidity();
+    this.fileName.setValidators(null);
+    this.fileName.updateValueAndValidity();
+    this.fileSize.setValidators(null);
+    this.fileSize.updateValueAndValidity();
+    this.fileType.setValidators(null);
+    this.fileType.updateValueAndValidity();
+  }
+
+  get updateLessonId(){
+    return this.updateLessonForm.get('id') as FormControl;
+  }
+  get updateLessonTitle(){
+    return this.updateLessonForm.get('title') as FormControl;
+  }
+  get updateLessonContent(){
+    return this.updateLessonForm.get('content') as FormControl;
+  }
+  get updateLessonVideoOrder(){
+    return this.updateLessonForm.get('videoOrder') as FormControl;
+  }
+
+
+  updateLeason(){
+    this.updateLessonError = null;
+    this.allLessons.forEach(element => {
+      if (element.id != this.updateLessonId.value  && element.videoOrder == this.updateLessonVideoOrder.value) {
+        this.updateLessonError = "::oAlreadyExist";
+        this.toaster.error(this.updateLessonError,"Error");
+        return;
+      }
+      else if(element.id != this.updateLessonId.value && element.title == this.updateLessonTitle.value){
+        this.updateLessonError = "::vAlreadyExist";
+        this.toaster.error(this.updateLessonError,"Error");
+        return;
+      }
+    });
+    if (this.updateLessonError === null) {
+      var payLoad = {} as UpdateLessonInput;
+      payLoad.id = this.updateLessonId.value;
+      payLoad.title = this.updateLessonTitle.value;
+      payLoad.content = this.updateLessonContent.value;
+      payLoad.videoOrder = this.updateLessonVideoOrder.value;
+      this.lessonService.updateLessonByInput(payLoad).subscribe((data)=>{
+        this.toaster.info("::successfullyUpdated");
+        this.isModalOpen = false ;
+        this.getDataFromUrl();
+        this.updateLessonError = null ;
+      });
+    }
   }
 }

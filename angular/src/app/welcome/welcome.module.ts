@@ -5,7 +5,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { WelcomeRoutingModule } from './welcome-routing.module';
-
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 @NgModule({
   declarations: [
     WelcomeComponent,
@@ -15,7 +15,8 @@ import { WelcomeRoutingModule } from './welcome-routing.module';
     CommonModule,
     WelcomeRoutingModule,
     NgbDropdownModule,
-    SharedModule
+    SharedModule,
+    InfiniteScrollModule
   ]
 })
 export class WelcomeModule { }

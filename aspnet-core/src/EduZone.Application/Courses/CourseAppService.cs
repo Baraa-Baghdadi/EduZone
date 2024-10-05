@@ -15,7 +15,6 @@ using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Domain.Repositories;
-using static SkiaSharp.HarfBuzz.SKShaper;
 
 namespace EduZone.Courses
 {
@@ -23,6 +22,7 @@ namespace EduZone.Courses
     public class CourseAppService : EduZoneAppService, ICourseAppService
     {
         private readonly ICourseRepository _courseRepository;
+        private readonly IRepository<Lesson> _lessonsRepository;
         private readonly IGetUserNameFromToken _getUserNameFromToken;
         private readonly IRepository<Category> _categoryRepository;
         private readonly IRepository<Instructor> _instructorRepository;
@@ -30,6 +30,7 @@ namespace EduZone.Courses
         private readonly IBlobContainer _blobContainer;
 
         public CourseAppService(ICourseRepository courseRepository, IGetUserNameFromToken getUserNameFromToken,
+            IRepository<Lesson> lessonsRepository,
             IRepository<Category> categoryRepository, 
             IRepository<Instructor> instructorRepository, IAttachmentAppService attachmentAppService,
             IBlobContainer blobContainer)
@@ -40,6 +41,7 @@ namespace EduZone.Courses
             _instructorRepository = instructorRepository;
             _attachmentAppService = attachmentAppService;
             _blobContainer = blobContainer;
+            _lessonsRepository = lessonsRepository;
         }
 
 
@@ -119,5 +121,64 @@ namespace EduZone.Courses
             mappingData.OrginalImage = Convert.ToBase64String(await _attachmentAppService.GetImage(course.ImageId));
             return mappingData;
         }
+
+        public async Task<CourseDto> UpdateCourseAsync(UpdateCourseInput input)
+        {
+            if (input.Lessons!.Count == 0) throw new UserFriendlyException(L[EduZoneDomainErrorCodes.CourseShouldContainLesson]);
+
+            var courseDb = await _courseRepository.FirstOrDefaultAsync(c => c.Id == input.Id)
+                ?? throw new UserFriendlyException(L[EduZoneDomainErrorCodes.NotFound]);
+
+            // update data:
+            courseDb.Title = input.Title;
+            courseDb.Description = input.Description;
+            courseDb.Price = input.Price;
+            courseDb.NewPrice = input.NewPrice;
+            courseDb.CategoryId = input.CategoryId;
+
+
+            // if image updated:
+            if (input.IsIconUpdated && input.FileName is not null && input.FileSize is not null)
+            {
+                courseDb.Icon = ServiceHelper.GetThumbNail(input.Blop);
+
+                // Create Image in Attachment Table For Get Orginal Image:
+                var newImage = new AttachmentCreateDto()
+                {
+                    Blop = input.Blop,
+                    FileName = input.FileName,
+                    FileType = input.FileType,
+                    FileSize = input.FileSize ?? 0
+                };
+                await _attachmentAppService.DeleteImage(courseDb.ImageId);
+                var orginalImage = await _attachmentAppService.CreateAttachmentAsync(newImage);
+                courseDb.ImageId = orginalImage.Id;
+            }
+
+            // update Lessons:
+            _lessonsRepository.DisableTracking();
+            var dbLessons = await _lessonsRepository.GetListAsync(r => r.CourseId == input.Id);
+            _lessonsRepository.EnableTracking();
+
+            // new lessons:
+            var newLessons = input.Lessons.Where(x => x.Id == Guid.Empty || x.Id is null).ToList();
+            var lessons = ObjectMapper.Map<List<LessonDtoForAddCourse>,List<Lesson>>(newLessons);
+            lessons.ForEach(x => { x.SetId(GuidGenerator.Create());x.CourseId = courseDb.Id; });
+            if(lessons.Any()) await _lessonsRepository.InsertManyAsync(lessons);
+
+            // for deleted lessons:
+            var deletedLessonId = dbLessons.Where(dbI => !input.Lessons.Any(x => x.Id == dbI.Id));
+            if (deletedLessonId.Any()) await _lessonsRepository.DeleteManyAsync(deletedLessonId);
+
+            // for update lessons:
+            //var updatedLessons = input.Lessons.Where(x => x.Id != Guid.Empty || x.Id is null).ToList();
+            //var mappedUpdtedLessons = ObjectMapper.Map<List<LessonDtoForAddCourse>, List<Lesson>>(updatedLessons!);
+            //if (mappedUpdtedLessons.Any()) await _lessonsRepository.UpdateManyAsync(mappedUpdtedLessons);
+
+            // final update:
+            var result = await _courseRepository.UpdateAsync(courseDb, true);
+            return ObjectMapper.Map<Course, CourseDto>(result);
+        }
+
     }
 }

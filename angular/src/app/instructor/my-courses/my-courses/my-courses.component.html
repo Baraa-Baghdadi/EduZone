@@ -52,6 +52,9 @@
                 <button ngbDropdownItem [routerLink]="'./lessons-list/'+row.id">
                   {{ '::ViewLessons' | abpLocalization }}
                 </button>
+                <button ngbDropdownItem [routerLink]="'./createCourse/'+row.id">
+                  {{ '::updateCourse' | abpLocalization }}
+                </button>
               </div>
             </div>
           </ng-template>

@@ -15,3 +15,10 @@ export interface InstructorDto extends FullAuditedEntityDto<string> {
   about?: string;
   fullMobileNumber?: string;
 }
+
+export interface UpdateInstructorInfoInput {
+  firstName: string;
+  lastName: string;
+  gender: Gender;
+  about: string;
+}

@@ -5,6 +5,7 @@ using EduZone.Enrollments;
 using EduZone.Instructors;
 using EduZone.Lessons;
 using EduZone.Localization;
+using EduZone.Notifications;
 using EduZone.Students;
 using Microsoft.Extensions.Localization;
 using System.Globalization;
@@ -28,6 +29,7 @@ public class EduZoneApplicationAutoMapperProfile : Profile,ISingletonDependency
         CreateMap<Lesson, LessonDto>().ReverseMap();
         CreateMap<Lesson, LessonDtoForAddCourse>().ReverseMap();
         CreateMap<Category,CategoryDto>().ReverseMap();
+        CreateMap<Notification, InstructorNotificationDto>().ReverseMap();
 
         CreateMap<Enrollment, EnrollmentDto>()
             .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.Student != null ? src.Student.FirstName : ""))

@@ -1,6 +1,6 @@
 <div class="row">
   <!-- Bell -->
-   <div *abpPermission="'DawaaNeo.Dashboard.Tenant'" class="col-2 position-relative" (click)="showMsgList()">
+   <div *abpPermission="'EduZone.Dashboard.Tenant'" class="col-2 position-relative" (click)="showMsgList()">
     <div class="notificationIcon">
       <i class="fa fa-bell-o bell mt-1 cpointer" ></i>
       <span style="top:5px !important;font-size:10px;" 
@@ -10,10 +10,10 @@
       </span>
     </div>
     <!-- Scroll Pagination -->
-    <div *ngIf="isShowListOfNotification" class="list">
+    <div *ngIf="isShowListOfNotification" class="list" style="z-index: 1000 !important;">
       <!-- Notifications List -->
-      <div *ngIf="(notificationListener.NotificationList$ | async) as List">
-        <h5 class="text-center text-danger" *ngIf="List.totalCount === 0">{{"::noNotifications" | abpLocalization}}</h5>    
+      <div *ngIf="(notificationListener.NotificationList$ | async) as List" style="z-index: 1000 !important;">
+        <h5 class="text-center text-danger mt-2" *ngIf="List.totalCount === 0">{{"::noNotifications" | abpLocalization}}</h5>    
         <h4 class="text-center text-dark p-2 border-bottom" *ngIf="List.totalCount !== 0">{{"::Notofications" | abpLocalization}}</h4>   
         <div infiniteScroll  
         class="list2"

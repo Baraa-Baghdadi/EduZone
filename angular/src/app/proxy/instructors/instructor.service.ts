@@ -1,4 +1,4 @@
-import type { GetInstructorInput, InstructorDto } from './models';
+import type { GetInstructorInput, InstructorDto, UpdateInstructorInfoInput } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -24,6 +24,23 @@ export class InstructorService {
       method: 'GET',
       url: '/api/app/Teacher/GetInstructorById',
       params: { id },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getInstructorInfo = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, InstructorDto>({
+      method: 'GET',
+      url: '/api/app/Teacher/GetInstructorInfo',
+    },
+    { apiName: this.apiName,...config });
+  
+
+  updateInstructorInfoByInput = (input: UpdateInstructorInfoInput, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, boolean>({
+      method: 'PUT',
+      url: '/api/app/Teacher/UpdateInstructorInfo',
+      body: input,
     },
     { apiName: this.apiName,...config });
 

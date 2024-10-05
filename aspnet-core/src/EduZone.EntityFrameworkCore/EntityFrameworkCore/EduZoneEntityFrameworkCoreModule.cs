@@ -18,6 +18,7 @@ using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.FileSystem;
 using EduZone.Enrollments;
 using EduZone.Courses;
+using EduZone.Notifications;
 
 namespace EduZone.EntityFrameworkCore;
 
@@ -53,6 +54,7 @@ namespace EduZone.EntityFrameworkCore;
             options.AddRepository<Instructor, EfCoreInstructorRepository>();
             options.AddRepository<Enrollment, EfCoreEnrollmentRepository>();
             options.AddRepository<Course, EfCoreCourseRepository>();
+            options.AddRepository<Notification, EfCoreNotificationRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>

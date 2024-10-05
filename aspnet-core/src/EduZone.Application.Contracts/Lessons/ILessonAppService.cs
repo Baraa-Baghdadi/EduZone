@@ -10,5 +10,6 @@ namespace EduZone.Lessons
     public interface ILessonAppService : IApplicationService
     {
         Task<List<LessonDto>> GetLessonsByCourseId(Guid id);
+        Task<bool> UpdateLesson(UpdateLessonInput input);
     }
 }

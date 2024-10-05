@@ -61,7 +61,7 @@ namespace EduZone.Courses
         {
             return query
                 .WhereIf(!string.IsNullOrWhiteSpace(filterText), e => e.Title!.Contains(filterText!) 
-                || e.Description!.Contains(filterText!));
+                || e.Description!.Contains(filterText!) || e.Category.Name.Contains(filterText!));
         }
 
     }

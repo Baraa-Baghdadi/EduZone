@@ -2,13 +2,14 @@ import { AuthService, ConfigStateService, getLocaleDirection, LocalizationServic
 import { LocaleDirection } from '@abp/ng.theme.shared';
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
+import { NotificationListenerService } from 'src/app/services/notifications/notification-listener.service';
 
 @Component({
   selector: 'app-new-header',
   templateUrl: './new-header.component.html',
   styleUrl: './new-header.component.scss'
 })
-export class NewHeaderComponent {
+export class NewHeaderComponent implements OnInit {
   availableLangs = [{value:"en",name:"English"},{value:"ar",name:"العربية"}];
   selectedLang = this.sessionState.getLanguage();
   labelOfSelectedLang = this.selectedLang === "en" ? "English" : "العربية" ;
@@ -18,13 +19,51 @@ export class NewHeaderComponent {
   private dir = new BehaviorSubject<LocaleDirection>('ltr');
   dir$ = this.dir.asObservable();
 
+  allMsgs : any;
+  // For pagination:
+  isLoading=false;
+  currentPage=1;
+  itemsPerPage=10;
+  toggleLoading = ()=>this.isLoading=!this.isLoading;
+
+  // it will be called when this component gets initialized.
+  loadData= ()=>{
+    this.toggleLoading();
+    this.getMsgList(this.currentPage,this.itemsPerPage);
+  }
+  
+  // this method will be called on scrolling the page
+  appendData= ()=>{
+    this.toggleLoading();
+    this.getMsgList(this.currentPage,this.itemsPerPage);
+  }
+
+  onScroll= ()=>{
+    this.currentPage++;     
+    this.appendData();
+  }
+
+  showMsgList(){
+    this.isShowListOfNotification = true;
+    this.makeAllMsgAsReaded();
+  }
+
 
   constructor(
     private config: ConfigStateService,
     private sessionState:SessionStateService,
     public localizationService : LocalizationService,
+    public notificationListener : NotificationListenerService,
     private elementRef: ElementRef) { 
       this.listenToLanguageChanges();
+    }
+
+    ngOnInit() {
+      const tenantId = this.config.getOne("currentUser").tenantId;
+      if (tenantId) {  
+        this.getUnreadedMsg();
+        this.loadData();
+      }
     }
     
     // For Select language:
@@ -39,6 +78,7 @@ export class NewHeaderComponent {
       this.localizationService.currentLang$.pipe(map(locale => getLocaleDirection(locale))).subscribe(dir => {
         this.dir.next(dir);
         this.setBodyDir(dir);
+        this.notificationListener.makeNotificationListEmpty();
       })
     }
   
@@ -61,4 +101,20 @@ export class NewHeaderComponent {
         }
       }
     }
+
+
+  // For Notifications:
+  getUnreadedMsg(){
+  this.notificationListener.getUnreadedMsg();         
+  }
+
+  makeAllMsgAsReaded(){
+    this.notificationListener.makeAllMsgAsReaded();
+  }
+
+  getMsgList(page=1,itemsPerPage=10){
+    this.notificationListener.getMsgList(page,itemsPerPage);
+  }
+
+
 }

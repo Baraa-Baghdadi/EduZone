@@ -22,6 +22,7 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
+using EduZone.Notifications;
 
 namespace EduZone.EntityFrameworkCore;
 
@@ -71,6 +72,8 @@ public class EduZoneDbContext :
     public DbSet<Course> Courses { get; set; }
     public DbSet<Lesson> Lessons { get; set; }
     public DbSet<Review> Reviews { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
+
 
     public EduZoneDbContext(DbContextOptions<EduZoneDbContext> options)
         : base(options)
@@ -150,6 +153,12 @@ public class EduZoneDbContext :
             b.ToTable(EduZoneConsts.DbTablePrefix + "Reviews", EduZoneConsts.DbSchema);
             b.ConfigureByConvention();
         });
-        
-        }
+
+        builder.Entity<Notification>(b =>
+        {
+            b.ToTable(EduZoneConsts.DbTablePrefix + "Notifications", EduZoneConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
+
+    }
 }

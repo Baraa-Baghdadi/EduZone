@@ -7,6 +7,7 @@ const routes: Routes = [
   {path:"",component:MyCoursesComponent},
   {path:"createCourse",component:CreateCourseComponent},
   {path:"lessons-list/:id",component:LessonsListComponent},
+  {path:"createCourse/:id",component:CreateCourseComponent},
 ];
 
 @NgModule({

@@ -31,13 +31,15 @@
     "@angular/platform-browser": "~18.1.0",
     "@angular/platform-browser-dynamic": "~18.1.0",
     "@angular/router": "~18.1.0",
+    "@microsoft/signalr": "^8.0.7",
     "@ng-select/ng-select": "^13.8.1",
     "bootstrap-icons": "~1.8.0",
+    "firebase": "^10.12.3",
+    "firebase-tools": "^13.13.1",
+    "ngx-infinite-scroll": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.14.0",
-    "firebase": "^10.12.3",
-    "firebase-tools": "^13.13.1"
+    "zone.js": "~0.14.0"
   },
   "devDependencies": {
     "@abp/ng.schematics": "~8.3.0",

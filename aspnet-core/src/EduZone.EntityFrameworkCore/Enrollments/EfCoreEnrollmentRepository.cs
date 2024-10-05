@@ -37,6 +37,19 @@ namespace EduZone.Enrollments
             return await query.PageBy(skipCount, maxResultCount).ToListAsync(cancellationToken);
         }
 
+        public async Task<long> GetCountAsyncWithoutTenant(string? filterText = null, CancellationToken cancellationToken = default)
+        {
+            var query = ApplyFilter((await GetQueryableAsync()).IgnoreQueryFilters().Include(r => r.Student).Include(r => r.Course).ThenInclude(r => r.Category), filterText);
+            return await query.LongCountAsync(GetCancellationToken(cancellationToken));
+        }
+
+        public async Task<List<Enrollment>> GetListAsyncWithoutTenant(string? filterText = null, string? sorting = null, int maxResultCount = int.MaxValue, int skipCount = 0, CancellationToken cancellationToken = default)
+        {
+            var query = ApplyFilter((await GetQueryableAsync()).IgnoreQueryFilters().Include(r => r.Student).Include(r => r.Course).ThenInclude(r => r.Category), filterText);
+            query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? EnrollmentConst.GetDefaultSorting(false) : sorting);
+            return await query.PageBy(skipCount, maxResultCount).ToListAsync(cancellationToken);
+        }
+
         protected virtual IQueryable<Enrollment> ApplyFilter(
         IQueryable<Enrollment> query,
         string? filterText = null

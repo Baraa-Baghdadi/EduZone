@@ -1193,6 +1193,31 @@
                     "type": "EduZone.Instructors.InstructorDto",
                     "typeSimple": "EduZone.Instructors.InstructorDto"
                   }
+                },
+                {
+                  "name": "GetInstructorInfo",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "EduZone.Instructors.InstructorDto",
+                    "typeSimple": "EduZone.Instructors.InstructorDto"
+                  }
+                },
+                {
+                  "name": "UpdateInstructorInfo",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "EduZone.Instructors.UpdateInstructorInfoInput, EduZone.Application.Contracts",
+                      "type": "EduZone.Instructors.UpdateInstructorInfoInput",
+                      "typeSimple": "EduZone.Instructors.UpdateInstructorInfoInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
                 }
               ]
             }
@@ -1316,6 +1341,58 @@
               "returnValue": {
                 "type": "EduZone.Instructors.InstructorDto",
                 "typeSimple": "EduZone.Instructors.InstructorDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Instructors.IInstructorsAppService"
+            },
+            "GetInstructorInfo": {
+              "uniqueName": "GetInstructorInfo",
+              "name": "GetInstructorInfo",
+              "httpMethod": "GET",
+              "url": "api/app/Teacher/GetInstructorInfo",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "EduZone.Instructors.InstructorDto",
+                "typeSimple": "EduZone.Instructors.InstructorDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Instructors.IInstructorsAppService"
+            },
+            "UpdateInstructorInfoByInput": {
+              "uniqueName": "UpdateInstructorInfoByInput",
+              "name": "UpdateInstructorInfo",
+              "httpMethod": "PUT",
+              "url": "api/app/Teacher/UpdateInstructorInfo",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "EduZone.Instructors.UpdateInstructorInfoInput, EduZone.Application.Contracts",
+                  "type": "EduZone.Instructors.UpdateInstructorInfoInput",
+                  "typeSimple": "EduZone.Instructors.UpdateInstructorInfoInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "EduZone.Instructors.UpdateInstructorInfoInput",
+                  "typeSimple": "EduZone.Instructors.UpdateInstructorInfoInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
               },
               "allowAnonymous": null,
               "implementFrom": "EduZone.Instructors.IInstructorsAppService"
@@ -1701,6 +1778,23 @@
                     "type": "EduZone.Courses.CourseDto",
                     "typeSimple": "EduZone.Courses.CourseDto"
                   }
+                },
+                {
+                  "name": "UpdateCourseAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "EduZone.Courses.UpdateCourseInput, EduZone.Application.Contracts",
+                      "type": "EduZone.Courses.UpdateCourseInput",
+                      "typeSimple": "EduZone.Courses.UpdateCourseInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "EduZone.Courses.CourseDto",
+                    "typeSimple": "EduZone.Courses.CourseDto"
+                  }
                 }
               ]
             }
@@ -1916,6 +2010,43 @@
                   "defaultValue": null,
                   "constraintTypes": [],
                   "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "EduZone.Courses.CourseDto",
+                "typeSimple": "EduZone.Courses.CourseDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.Courses.ICourseAppService"
+            },
+            "UpdateCourseAsyncByInput": {
+              "uniqueName": "UpdateCourseAsyncByInput",
+              "name": "UpdateCourseAsync",
+              "httpMethod": "PUT",
+              "url": "api/app/course/course",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "EduZone.Courses.UpdateCourseInput, EduZone.Application.Contracts",
+                  "type": "EduZone.Courses.UpdateCourseInput",
+                  "typeSimple": "EduZone.Courses.UpdateCourseInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "EduZone.Courses.UpdateCourseInput",
+                  "typeSimple": "EduZone.Courses.UpdateCourseInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
                   "descriptorName": ""
                 }
               ],
@@ -2298,6 +2429,23 @@
                     "type": "System.Collections.Generic.List<EduZone.Lessons.LessonDto>",
                     "typeSimple": "[EduZone.Lessons.LessonDto]"
                   }
+                },
+                {
+                  "name": "UpdateLesson",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "EduZone.Lessons.UpdateLessonInput, EduZone.Application.Contracts",
+                      "type": "EduZone.Lessons.UpdateLessonInput",
+                      "typeSimple": "EduZone.Lessons.UpdateLessonInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
                 }
               ]
             }
@@ -2339,6 +2487,407 @@
               },
               "allowAnonymous": null,
               "implementFrom": "EduZone.Lessons.ILessonAppService"
+            },
+            "UpdateLessonByInput": {
+              "uniqueName": "UpdateLessonByInput",
+              "name": "UpdateLesson",
+              "httpMethod": "PUT",
+              "url": "api/app/lesson/lesson",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "EduZone.Lessons.UpdateLessonInput, EduZone.Application.Contracts",
+                  "type": "EduZone.Lessons.UpdateLessonInput",
+                  "typeSimple": "EduZone.Lessons.UpdateLessonInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "EduZone.Lessons.UpdateLessonInput",
+                  "typeSimple": "EduZone.Lessons.UpdateLessonInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Lessons.ILessonAppService"
+            }
+          }
+        },
+        "EduZone.Notifications.NotificationInstructorAppService": {
+          "controllerName": "NotificationInstructor",
+          "controllerGroupName": "NotificationInstructor",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "EduZone.Notifications.NotificationInstructorAppService",
+          "interfaces": [
+            {
+              "type": "EduZone.Notifications.INotificationInstructorAppService",
+              "name": "INotificationInstructorAppService",
+              "methods": [
+                {
+                  "name": "CreateNewEnrollmentNotification",
+                  "parametersOnMethod": [
+                    {
+                      "name": "studentId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "instructorId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "enrollId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "courseName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "content",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "type",
+                      "typeAsString": "EduZone.Notifications.NotificationTypeEnum, EduZone.Domain.Shared",
+                      "type": "EduZone.Notifications.NotificationTypeEnum",
+                      "typeSimple": "EduZone.Notifications.NotificationTypeEnum",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "extraproperties",
+                      "typeAsString": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                      "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
+                      "typeSimple": "{string:string}",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetListOfInstructorNotification",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                      "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                      "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Notifications.InstructorNotificationDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Notifications.InstructorNotificationDto>"
+                  }
+                },
+                {
+                  "name": "MarkAllAsRead",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetCountOfUnreadingMsgAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Int32",
+                    "typeSimple": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "CreateNewEnrollmentNotificationByStudentIdAndInstructorIdAndEnrollIdAndCourseNameAndContentAndTypeAndExtraproperties": {
+              "uniqueName": "CreateNewEnrollmentNotificationByStudentIdAndInstructorIdAndEnrollIdAndCourseNameAndContentAndTypeAndExtraproperties",
+              "name": "CreateNewEnrollmentNotification",
+              "httpMethod": "POST",
+              "url": "api/app/notification-instructor/new-enrollment-notification",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "studentId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "instructorId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "enrollId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "courseName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "content",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "type",
+                  "typeAsString": "EduZone.Notifications.NotificationTypeEnum, EduZone.Domain.Shared",
+                  "type": "EduZone.Notifications.NotificationTypeEnum",
+                  "typeSimple": "EduZone.Notifications.NotificationTypeEnum",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "extraproperties",
+                  "typeAsString": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
+                  "typeSimple": "{string:string}",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "studentId",
+                  "name": "studentId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "instructorId",
+                  "name": "instructorId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "enrollId",
+                  "name": "enrollId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "courseName",
+                  "name": "courseName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "content",
+                  "name": "content",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "type",
+                  "name": "type",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "extraproperties",
+                  "name": "extraproperties",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
+                  "typeSimple": "{string:string}",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Notifications.INotificationInstructorAppService"
+            },
+            "GetListOfInstructorNotificationByInput": {
+              "uniqueName": "GetListOfInstructorNotificationByInput",
+              "name": "GetListOfInstructorNotification",
+              "httpMethod": "GET",
+              "url": "api/app/notification-instructor/of-instructor-notification",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                  "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Notifications.InstructorNotificationDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Notifications.InstructorNotificationDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Notifications.INotificationInstructorAppService"
+            },
+            "GetCountOfUnreadingMsgAsync": {
+              "uniqueName": "GetCountOfUnreadingMsgAsync",
+              "name": "GetCountOfUnreadingMsgAsync",
+              "httpMethod": "GET",
+              "url": "api/app/notification-instructor/count-of-unreading-msg",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Int32",
+                "typeSimple": "number"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Notifications.INotificationInstructorAppService"
+            },
+            "MarkAllAsRead": {
+              "uniqueName": "MarkAllAsRead",
+              "name": "MarkAllAsRead",
+              "httpMethod": "POST",
+              "url": "api/app/notification-instructor/mark-all-as-read",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Notifications.INotificationInstructorAppService"
             }
           }
         }
@@ -5320,6 +5869,18 @@
           "regex": null
         },
         {
+          "name": "CategoryId",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "CategoryName",
           "jsonName": null,
           "type": "System.String",
@@ -5475,6 +6036,159 @@
           "type": "System.Int32",
           "typeSimple": "number",
           "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "IsIconUpdated",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CategoryId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Lessons",
+          "jsonName": null,
+          "type": "[EduZone.Lessons.LessonDtoForAddCourse]",
+          "typeSimple": "[EduZone.Lessons.LessonDtoForAddCourse]",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "EduZone.Courses.UpdateCourseInput": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Id",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Title",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Description",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Price",
+          "jsonName": null,
+          "type": "System.Double",
+          "typeSimple": "number",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "NewPrice",
+          "jsonName": null,
+          "type": "System.Double",
+          "typeSimple": "number",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Blop",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "FileType",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "FileName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "FileSize",
+          "jsonName": null,
+          "type": "System.Int32?",
+          "typeSimple": "number?",
+          "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
@@ -5796,6 +6510,63 @@
         }
       ]
     },
+    "EduZone.Instructors.UpdateInstructorInfoInput": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FirstName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "LastName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Gender",
+          "jsonName": null,
+          "type": "EduZone.Enum.Gender",
+          "typeSimple": "EduZone.Enum.Gender",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "About",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
     "EduZone.InstructorsAuth.NewInstructorInput": {
       "baseType": null,
       "isEnum": false,
@@ -6035,6 +6806,18 @@
       "genericArguments": null,
       "properties": [
         {
+          "name": "Id",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "Name",
           "jsonName": null,
           "type": "System.String",
@@ -6119,6 +6902,156 @@
           "regex": null
         }
       ]
+    },
+    "EduZone.Lessons.UpdateLessonInput": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Id",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Title",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Content",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "VideoOrder",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "EduZone.Notifications.InstructorNotificationDto": {
+      "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "EntityId",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Title",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Content",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Type",
+          "jsonName": null,
+          "type": "EduZone.Notifications.NotificationTypeEnum",
+          "typeSimple": "EduZone.Notifications.NotificationTypeEnum",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "IsRead",
+          "jsonName": null,
+          "type": "System.Boolean?",
+          "typeSimple": "boolean?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CreatedOn",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "EduZone.Notifications.NotificationTypeEnum": {
+      "baseType": "System.Enum",
+      "isEnum": true,
+      "enumNames": [
+        "NewEnrollment"
+      ],
+      "enumValues": [
+        0
+      ],
+      "genericArguments": null,
+      "properties": null
     },
     "EduZone.StudentAuth.NewStudentInput": {
       "baseType": null,
