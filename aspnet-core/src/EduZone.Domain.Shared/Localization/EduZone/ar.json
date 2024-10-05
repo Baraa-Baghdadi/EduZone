@@ -3,6 +3,7 @@
   "texts": {
     "AppName": "EduZoneApp",
     "NoDatatoDisplay": "لايوجد بيانات",
+    "or": "أو",
     "Menu:Home": "الصفحة الرئيسية",
     "Menu:Instructors": "المقدمين",
     "Menu:Students": "الطلاب",
@@ -10,7 +11,7 @@
     "Menu:MyCourses": "دوراتي التدريبية",
     "Menu:instructorInfo": "معلومات الاستاذ",
     "Welcome": "مرحباً",
-    "SignUp": "تسجيل الدخول",
+    "SignUp": "التسجيل",
     "Permission:EduZoneApp": "منطقة التعليم",
     "Permission:Admin": "المسؤول",
     "Permission:Admin.Create": "إضافة",
@@ -79,6 +80,19 @@
     "yesterday": "أمس",
     "newStudentAddedYourCourse": "انضم {0} إلى {1}",
     "noNotifications": "لا يوجد إشعارات",
-    "Notofications": "الإشعارات"
+    "Notofications": "الإشعارات",
+    "successfulyUploaded": "تم الرفع بنجاح",
+    "removalSuccessful": "تمت الإزالة بنجاح",
+    "successfulyUpdated": "تم التعديل بنجاح",
+    "uploadingNow": "يتم رفع الجلسة يرجى الانتظار",
+    "vAlreadyExist": "الجلسة موجودة مسبقا",
+    "oAlreadyExist": "هذا الترتيب محجوز مسبقا",
+    "courseDetails": "تفاصيل الدورة التدريبية",
+    "desCourseDetails": "إعداد تفاصيل دورتك التدريبية",
+    "addLessons": "إضافة جلسة",
+    "desAddLessons": "إعداد تفاصيل جلساتك",
+    "update": "تعديل",
+    "alreadyEnrolled": "أنت مسجل مسبقا في هذا الكورس"
+
   }
 }

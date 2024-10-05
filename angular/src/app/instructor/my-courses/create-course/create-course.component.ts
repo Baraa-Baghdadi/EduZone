@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '@proxy/categories';
 import { CourseService, UpdateCourseInput } from '@proxy/courses';
-import { LessonDtoForAddCourse } from '@proxy/lessons';
+import { LessonDtoForAddCourse, LessonService, UpdateLessonInput } from '@proxy/lessons';
 import { finalize, tap } from 'rxjs';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL,deleteObject,listAll   } from "firebase/storage";
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -26,6 +26,7 @@ export class CreateCourseComponent implements OnInit {
   isModalOpenForShowImage = false;
   form:FormGroup;
   form2 : FormGroup;
+  updateLessonForm:FormGroup;
   readonly imageMaxSize = 51200000;
   readonly videoMaxSize = 512000000000000;
   imageError : string;
@@ -38,18 +39,26 @@ export class CreateCourseComponent implements OnInit {
   disableAddNewLesson = false;
   // errors:
   addNewLessError = null;
+  updateLessonError = null;
+
+  selectedLesson;
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
   constructor(
     private service : CourseService,private fb:FormBuilder,
     private categoryServ:CategoryService,
     private toaster : ToasterService,private router : Router,
-    private activatedRout : ActivatedRoute){
+    private activatedRout : ActivatedRoute,
+    private lessonService : LessonService ){
     }
 
   ngOnInit(): void {
     this.getAllCategory();
     this.buildForm();
     this.buildForm2();
+    this.getDataFromUrl();
+  }
+
+  getDataFromUrl(){
     this.activatedRout.params.subscribe((data)=>{
       if (data.id && data.id!= undefined) {
         this.getCourseToEdit(data.id);
@@ -61,19 +70,10 @@ export class CreateCourseComponent implements OnInit {
     })
   }
   
-  openCourseModal(id:string = null){
-    if (id) {
-      this.getCourseToEdit(id);
-    }
-    else{
-      this.selected = null;
-      this.showForm();
-    }
-  }
-
-  showForm(){
-    this.buildForm();
-    this.isModalOpen = true;
+  updateLesson(title,order){
+    this.isModalOpen = true;    
+    this.selectedLesson = this.allLessons.filter(x => x.title == title && x.videoOrder == order);
+    this.buildUpdateLessonForm();  
   }
 
   buildForm(){
@@ -115,6 +115,15 @@ export class CreateCourseComponent implements OnInit {
       fileSize:[null],
       videoOrder: [null,Validators.required],
       url:[null],
+    });
+  }
+
+  buildUpdateLessonForm(){
+    this.updateLessonForm = this.fb.group({
+      id:[this.selectedLesson[0].id ],
+      title : [this.selectedLesson[0].title ?? null,Validators.required],
+      content: [this.selectedLesson[0].content ?? null,Validators.required],
+      videoOrder: [this.selectedLesson[0].videoOrder ?? null,Validators.required],
     });
   }
 
@@ -169,6 +178,7 @@ export class CreateCourseComponent implements OnInit {
       this.buildForm();
       this.buildForm2();
       this.makeCourseImageUnRequired();
+      console.log(this.allLessons);
     });
   }
 
@@ -245,7 +255,6 @@ export class CreateCourseComponent implements OnInit {
     lesson.duration = this.videoDuration;
     lesson.name = this.videoName;
     lesson.fileSize = this.videoSize.value;
-    // we need add url also here...............................
     if (this.allLessons.length != 0 ) {
       this.addNewLessError = null;
       this.allLessons.forEach(element => {
@@ -422,5 +431,48 @@ export class CreateCourseComponent implements OnInit {
     this.fileSize.updateValueAndValidity();
     this.fileType.setValidators(null);
     this.fileType.updateValueAndValidity();
+  }
+
+  get updateLessonId(){
+    return this.updateLessonForm.get('id') as FormControl;
+  }
+  get updateLessonTitle(){
+    return this.updateLessonForm.get('title') as FormControl;
+  }
+  get updateLessonContent(){
+    return this.updateLessonForm.get('content') as FormControl;
+  }
+  get updateLessonVideoOrder(){
+    return this.updateLessonForm.get('videoOrder') as FormControl;
+  }
+
+
+  updateLeason(){
+    this.updateLessonError = null;
+    this.allLessons.forEach(element => {
+      if (element.id != this.updateLessonId.value  && element.videoOrder == this.updateLessonVideoOrder.value) {
+        this.updateLessonError = "::oAlreadyExist";
+        this.toaster.error(this.updateLessonError,"Error");
+        return;
+      }
+      else if(element.id != this.updateLessonId.value && element.title == this.updateLessonTitle.value){
+        this.updateLessonError = "::vAlreadyExist";
+        this.toaster.error(this.updateLessonError,"Error");
+        return;
+      }
+    });
+    if (this.updateLessonError === null) {
+      var payLoad = {} as UpdateLessonInput;
+      payLoad.id = this.updateLessonId.value;
+      payLoad.title = this.updateLessonTitle.value;
+      payLoad.content = this.updateLessonContent.value;
+      payLoad.videoOrder = this.updateLessonVideoOrder.value;
+      this.lessonService.updateLessonByInput(payLoad).subscribe((data)=>{
+        this.toaster.info("::successfullyUpdated");
+        this.isModalOpen = false ;
+        this.getDataFromUrl();
+        this.updateLessonError = null ;
+      });
+    }
   }
 }

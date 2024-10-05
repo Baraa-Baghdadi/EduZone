@@ -11,11 +11,11 @@ export class NotificationInstructorService {
   apiName = 'Default';
   
 
-  createNewEnrollmentNotificationByIdAndContentAndTypeAndExtraproperties = (id: string, content: string, type: NotificationTypeEnum, extraproperties: Record<string, string>, config?: Partial<Rest.Config>) =>
+  createNewEnrollmentNotificationByStudentIdAndInstructorIdAndEnrollIdAndCourseNameAndContentAndTypeAndExtraproperties = (studentId: string, instructorId: string, enrollId: string, courseName: string, content: string, type: NotificationTypeEnum, extraproperties: Record<string, string>, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',
-      url: `/api/app/notification-instructor/${id}/new-enrollment-notification`,
-      params: { content, type },
+      url: '/api/app/notification-instructor/new-enrollment-notification',
+      params: { studentId, instructorId, enrollId, courseName, content, type },
       body: extraproperties,
     },
     { apiName: this.apiName,...config });

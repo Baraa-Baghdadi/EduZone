@@ -3,6 +3,7 @@
   "texts": {
     "AppName": "EduZoneApp",
     "NoDatatoDisplay": "No Data To Display",
+    "or": "OR",
     "Menu:Home": "Home",
     "Menu:Instructors": "Instructors",
     "Menu:Students": "Students",
@@ -82,6 +83,12 @@
     "successfulyUpdated": "Successfuly Updated",
     "uploadingNow": "Uploading Now Please Wait",
     "vAlreadyExist": "video is already exist",
-    "oAlreadyExist": "Order is already exist"
+    "oAlreadyExist": "Order is already exist",
+    "courseDetails": "Course Details",
+    "desCourseDetails": "Setup your course details",
+    "addLessons": "Add Lessons",
+    "desAddLessons": "Setup your lessons details",
+    "update": "Update",
+    "alreadyEnrolled": "already Enrolled in this course"
   }
 }

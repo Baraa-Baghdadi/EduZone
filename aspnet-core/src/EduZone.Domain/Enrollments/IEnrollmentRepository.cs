@@ -25,5 +25,21 @@ namespace EduZone.Enrollments
         );
 
         Task<Enrollment> GetByIdWithDetails( Guid id );
+
+        #region mobile
+        Task<List<Enrollment>> GetListAsyncWithoutTenant(
+        string? filterText = null,
+        string? sorting = null,
+        int maxResultCount = int.MaxValue,
+        int skipCount = 0,
+        CancellationToken cancellationToken = default
+        );
+
+        Task<long> GetCountAsyncWithoutTenant(
+        string? filterText = null,
+        CancellationToken cancellationToken = default
+        );
+
+        #endregion
     }
 }

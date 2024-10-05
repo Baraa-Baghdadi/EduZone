@@ -4,15 +4,15 @@
         <span class="lpx-wizard-number flex-center rounded-3 mb-2 mx-auto">
             <strong>1</strong>
         </span>
-        <h5 class="mb-0 text-dark"><strong>Course Details</strong></h5>
-        <small class="text-muted">Setup your course details</small>
+        <h5 class="mb-0 text-dark"><strong>{{"::courseDetails" | abpLocalization}}</strong></h5>
+        <small class="text-muted">{{"::desCourseDetails" | abpLocalization}}</small>
       </li>
       <li class="lpx-wizard-item mx-2" [ngClass]="{active:active === 2}"  data-wizard-item="">
         <span class="lpx-wizard-number flex-center rounded-3 mb-2 mx-auto"> 
             <strong>2</strong>
         </span>
-        <h5 class="mb-0 text-dark"><strong>Add Lessons</strong></h5>
-        <small class="text-muted">Setup your lessons details</small>
+        <h5 class="mb-0 text-dark"><strong>{{"::addLessons" | abpLocalization}}</strong></h5>
+        <small class="text-muted">{{"::desAddLessons" | abpLocalization}}</small>
       </li>
     </ul>
   </div>
@@ -20,11 +20,11 @@
     <div class="card-body">
         <form [formGroup]="form">
             <div class="row">
-              <div class="mt-2 col-6">
+              <div class="col-6">
                 <input [placeholder]= "'::Title' | abpLocalization" type="text" id="title" class="form-control mt-1" formControlName="title" autofocus>
               </div>
     
-              <div class="mt-2 col-6 form-group">
+              <div class="col-6 form-group">
                 <ng-select id="category" [placeholder]= "'::Category' | abpLocalization" class="form-control mt-2" formControlName="categoryId">
                     <ng-option *ngFor="let item of allCategories" [value]="item.id">
                       {{item.name}}
@@ -41,7 +41,7 @@
                 </div>
     
                 <div class="mt-2 col-12">
-                  <textarea rows="2" [placeholder]= "'::Description' | abpLocalization" type="text" id="description" class="form-control mt-1" formControlName="description" ></textarea>
+                  <textarea rows="3" [placeholder]= "'::Description' | abpLocalization" type="text" id="description" class="form-control mt-1" formControlName="description" ></textarea>
                 </div>
                 
               <div class="form-group col-12 col-md-12 mt-2 ">
@@ -58,7 +58,7 @@
               </div>
             </div>
           </form>
-          <div class="d-flex justify-content-end mt-2">
+          <div class="d-flex justify-content-end mt-1">
             <button type="button" class="btn btn-secondary cancel-btn" [routerLink]="'/my-courses'">
                 {{ '::Close' | abpLocalization }}
               </button>
@@ -130,6 +130,9 @@
               <button ngbDropdownItem (click)="removeFromLessons(row.order,row.name)">
                 {{ '::remove' | abpLocalization }}
               </button>
+              <button ngbDropdownItem (click)="updateLesson(row.title,row.videoOrder)">
+                {{ '::update' | abpLocalization }}
+              </button>
             </div>
           </div>
         </ng-template>
@@ -151,3 +154,41 @@
       </div>
     </div>
   </div>
+  <!-- Modal for update lesson -->
+  <abp-modal [(visible)]="isModalOpen">
+    <ng-template #abpHeader>
+      <h3>{{'::Edit'  | abpLocalization }}:</h3>
+    </ng-template>
+  
+    <ng-template #abpBody>
+      <form [formGroup]="updateLessonForm">
+        <div class="row">
+          <div class="col-12">
+            <label for="title">{{'::lessonTitle' | abpLocalization}}:</label>
+            <input [placeholder]= "'::lessonTitle' | abpLocalization" type="text" id="title" class="form-control mt-1" formControlName="title">
+          </div>
+
+          <div class="mt-2 col-12">
+            <label for="lessonOrder">{{'::lessonOrder' | abpLocalization}}:</label>
+            <input [placeholder]= "'::lessonOrder' | abpLocalization" type="text" id="lessonOrder" class="form-control mt-1" formControlName="videoOrder" >
+          </div>
+  
+          <div class="mt-2 col-12">
+            <label for="Content">{{'::Content' | abpLocalization}}:</label>
+              <textarea rows="4" [placeholder]= "'::Content' | abpLocalization" type="text" id="Content" class="form-control mt-1" formControlName="content" ></textarea>
+            </div>
+        </div>
+      </form>
+    </ng-template>
+  
+    <ng-template #abpFooter>
+      <button type="button" class="btn btn-secondary" abpClose>
+        {{ '::Close' | abpLocalization }}
+      </button>
+  
+      <button class="btn btn-primary" (click)="updateLeason()" [disabled]="updateLessonForm.invalid">
+        <i class="fa fa-check mr-1"></i>
+        {{ '::Save' | abpLocalization }}
+      </button>
+    </ng-template>
+  </abp-modal>

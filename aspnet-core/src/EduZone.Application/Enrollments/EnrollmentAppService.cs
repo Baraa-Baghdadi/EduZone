@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Data;
+using Volo.Abp.Domain.Repositories;
 using Volo.Abp.MultiTenancy;
 
 namespace EduZone.Enrollments
@@ -45,16 +46,31 @@ namespace EduZone.Enrollments
             var studentEmail = _getUserNameFromToken.GetEmailFromToken();
             var student = await _studentRepository.GetStudentByEmail(studentEmail);
 
+            // check if student already in course:
+            bool isExist = (await _enrollmentRepository.GetListAsyncWithoutTenant()).Any(
+                e => e.CourseId == input.CourseId && e.StudentId == student.Id);
+
+            if (isExist)
+            {
+                throw new UserFriendlyException(L[EduZoneDomainErrorCodes.alreadyEnrolled]);
+            };
+
             using (_dataFilter.Disable<IMultiTenant>())
             {
+
                 var course = await _courseRepository.GetCourseById(input.CourseId);
                 var newEnroll = new Enrollment(GuidGenerator.Create(), student.Id, input.CourseId, false,
                     ServiceHelper.getTimeSpam(DateTime.UtcNow)!.Value, null, CourseStatus.Enrolled);
                 await _enrollmentRepository.InsertAsync(newEnroll, true);
 
 
-                // send notification for instructor:
-                await SendNotificationForProvider(student.Id, course.InstructorId, newEnroll.Id,course.Title, student.FirstName + " " + student.LastName);
+                // send notification to instructor:
+                try
+                {
+                    await SendNotificationForProvider(student.Id, course.InstructorId, newEnroll.Id, course.Title, student.FirstName + " " + student.LastName);
+                }
+                catch { }
+
 
                 return ObjectMapper.Map<Enrollment, EnrollmentDto>(newEnroll);
             }

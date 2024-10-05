@@ -20,3 +20,10 @@ export interface LessonDtoForAddCourse {
   videoOrder: number;
   url?: string;
 }
+
+export interface UpdateLessonInput {
+  id?: string;
+  title?: string;
+  content?: string;
+  videoOrder: number;
+}
