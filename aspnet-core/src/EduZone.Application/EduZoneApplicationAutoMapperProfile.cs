@@ -45,7 +45,7 @@ public class EduZoneApplicationAutoMapperProfile : Profile,ISingletonDependency
 
         CreateMap<Rate, RateDto>()
             .ForMember(dest => dest.CourseName, opt => opt.MapFrom(src => src.Course != null ? src.Course.Title : ""))
-            .ForMember(dest => dest.InstructorName, opt => opt.MapFrom(src => src.Course.Instructor != null ? src.Course.Instructor.FirstName + " " + src.Course.Instructor.LastName : ""));
+            .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Course.Category != null ? src.Course.Category.Name : ""));
 
     }
 }

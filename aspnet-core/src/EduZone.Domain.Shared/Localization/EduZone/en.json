@@ -62,7 +62,7 @@
     "ViewLessons": "View Lessons",
     "enrollmentDate": "enrollment Date",
     "courseTitle": "Course Title",
-    "myStudentDesc": "Click here to check your current course enrollments, track your progress, and stay updated on your academic journey. Keep everything in one place!",
+    "myStudentDesc": "Click here to check current enrollments in your courses, track your progress, and stay up to date with your students. Keep everything in one place!",
     "myCoursesDesc": "Click here to view and manage the courses you’ve created. Access course details, edit content, and keep track of your progress all in one place!",
     "instructorInfoDesc": "Click here to access your personal information, update your details, and manage your profile.ensure your information is always up to date!",
     "aboutIns": "About Instructor",
@@ -93,6 +93,7 @@
     "alreadyEnrolled": "already Enrolled in this course",
     "ratingValidationValue": "rating should be between 0 & 5",
     "courseName": "Course Name",
-    "rate": "Rate"
+    "rate": "Rate",
+    "coursesRatings": "Click here to Check your course reviews, find out what your learners are thinking, and decide how to improve your courses"
   }
 }

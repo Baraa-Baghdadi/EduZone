@@ -3003,7 +3003,7 @@
                 "type": "System.Boolean",
                 "typeSimple": "boolean"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Ratings.IRateAppService"
             },
             "GetRateMyCourseByInput": {
@@ -3076,7 +3076,7 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Ratings.RateDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Ratings.RateDto>"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Ratings.IRateAppService"
             }
           }
@@ -7285,6 +7285,18 @@
         },
         {
           "name": "CourseName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "InstructorName",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
