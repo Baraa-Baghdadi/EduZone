@@ -1,0 +1,41 @@
+<div class="container" @fade>
+    <div class="row" style="align-items: center">
+      <div class="col col-md-6">
+        <h5 class="card-title">
+          {{ '::Menu:coursesRating' | abpLocalization }}
+        </h5>
+      </div>
+    </div>
+    <div class="card mt-2">
+      <div class="input-group">
+        <input type="text"class="form-control bg-white"[placeholder]="'::Search' | abpLocalization" [(ngModel)]="ratingsFilter.filterText" #search/>
+        <div class="input-group-append mainBackground">
+          <button class="btn" type="button">
+            <i class="fa fa-search text-white"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-2">
+      <div class="card-body">
+        <ngx-datatable [rows]="ratings.items" [count]="ratings.totalCount" [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
+          <ngx-datatable-column [width]="200"  [name]="'::courseName' | abpLocalization" prop="courseName"></ngx-datatable-column>
+          <ngx-datatable-column [width]="200"  [name]="'::instructorName' | abpLocalization" prop="instructorName"></ngx-datatable-column>
+          <ngx-datatable-column [width]="200"  [name]="'::rate' | abpLocalization" prop="rate">
+            <ng-template let-row="row" ngx-datatable-cell-template style="margin-top: -16px !important;">
+              <!-- For information: https://classic.yarnpkg.com/en/package/ngx-stars-rating -->
+              <ngx-stars-rating [rate]="row.rate" [starTemplate]="starCustomTemplate">
+              <ng-template #starCustomTemplate>
+                <span class="material-symbols-outlined" style="font-size: 15px">
+                  <i class="fa fa-star"></i>
+                </span>
+              </ng-template>
+            </ngx-stars-rating>
+              </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>   
+    <!-- End Table -->
+</div>
+

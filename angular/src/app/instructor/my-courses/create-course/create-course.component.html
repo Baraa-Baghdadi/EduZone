@@ -21,11 +21,13 @@
         <form [formGroup]="form">
             <div class="row">
               <div class="col-6">
+                <label class="ms-1" for="title">{{'::Title' | abpLocalization}}*</label>
                 <input [placeholder]= "'::Title' | abpLocalization" type="text" id="title" class="form-control mt-1" formControlName="title" autofocus>
               </div>
     
               <div class="col-6 form-group">
-                <ng-select id="category" [placeholder]= "'::Category' | abpLocalization" class="form-control mt-2" formControlName="categoryId">
+                <label class="ms-1" for="category">{{'::Category' | abpLocalization}}*</label>
+                <ng-select id="category" [placeholder]= "'::Category' | abpLocalization" class="form-control mt-1" formControlName="categoryId">
                     <ng-option *ngFor="let item of allCategories" [value]="item.id">
                       {{item.name}}
                     </ng-option>
@@ -33,14 +35,17 @@
               </div>
       
               <div class="mt-2 col-6">
-                  <input [placeholder]= "'::Price' | abpLocalization" type="text" id="price" class="form-control mt-1" formControlName="price" >
+                <label class="ms-1" for="price">{{'::Price' | abpLocalization}}*</label>
+                  <input  [placeholder]= "9.99" type="text" id="price" class="form-control mt-1" formControlName="price" pattern="[0-9]+(\.[0-9]{2})" >
                 </div>
       
                 <div class="mt-2 col-6">
-                  <input [placeholder]= "'::NewPrice' | abpLocalization" type="text" id="newPrice" class="form-control mt-1" formControlName="newPrice" >
+                  <label class="ms-1" for="newPrice">{{'::NewPrice' | abpLocalization}}*</label>
+                  <input [placeholder]= "9.99" type="text" id="newPrice" class="form-control mt-1" formControlName="newPrice" pattern="[0-9]+(\.[0-9]{2})" >
                 </div>
     
                 <div class="mt-2 col-12">
+                  <label class="ms-1" for="description">{{'::Description' | abpLocalization}}*</label>
                   <textarea rows="3" [placeholder]= "'::Description' | abpLocalization" type="text" id="description" class="form-control mt-1" formControlName="description" ></textarea>
                 </div>
                 

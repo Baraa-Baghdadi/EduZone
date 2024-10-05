@@ -1,6 +1,6 @@
 import { ToasterService } from '@abp/ng.theme.shared';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '@proxy/categories';
 import { CourseService, UpdateCourseInput } from '@proxy/courses';
 import { LessonDtoForAddCourse, LessonService, UpdateLessonInput } from '@proxy/lessons';
@@ -106,6 +106,7 @@ export class CreateCourseComponent implements OnInit {
     });
   }
 
+
   buildForm2(){
     this.form2 = this.fb.group({
       name : [null],
@@ -201,6 +202,9 @@ export class CreateCourseComponent implements OnInit {
   }
   get isIconUpdated(){
     return this.form.get('isIconUpdated') as FormControl;
+  }
+  get price(){
+    return this.form.get('price') as FormControl;
   }
 
   getAllCategory(){
@@ -475,4 +479,6 @@ export class CreateCourseComponent implements OnInit {
       });
     }
   }
+
+ 
 }
