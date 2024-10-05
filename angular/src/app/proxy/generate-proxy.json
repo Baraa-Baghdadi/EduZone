@@ -2890,6 +2890,196 @@
               "implementFrom": "EduZone.Notifications.INotificationInstructorAppService"
             }
           }
+        },
+        "EduZone.Ratings.RateAppService": {
+          "controllerName": "Rate",
+          "controllerGroupName": "Rate",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "EduZone.Ratings.RateAppService",
+          "interfaces": [
+            {
+              "type": "EduZone.Ratings.IRateAppService",
+              "name": "IRateAppService",
+              "methods": [
+                {
+                  "name": "RateCourse",
+                  "parametersOnMethod": [
+                    {
+                      "name": "courseId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "rating",
+                      "typeAsString": "System.Double, System.Private.CoreLib",
+                      "type": "System.Double",
+                      "typeSimple": "number",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
+                },
+                {
+                  "name": "GetRateMyCourse",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "EduZone.Ratings.GetCourseRatingOfInstructor, EduZone.Application.Contracts",
+                      "type": "EduZone.Ratings.GetCourseRatingOfInstructor",
+                      "typeSimple": "EduZone.Ratings.GetCourseRatingOfInstructor",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Ratings.RateDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Ratings.RateDto>"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "RateCourseByCourseIdAndRating": {
+              "uniqueName": "RateCourseByCourseIdAndRating",
+              "name": "RateCourse",
+              "httpMethod": "POST",
+              "url": "api/app/rate/rate-course/{courseId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "courseId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "rating",
+                  "typeAsString": "System.Double, System.Private.CoreLib",
+                  "type": "System.Double",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "courseId",
+                  "name": "courseId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "rating",
+                  "name": "rating",
+                  "jsonName": null,
+                  "type": "System.Double",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Ratings.IRateAppService"
+            },
+            "GetRateMyCourseByInput": {
+              "uniqueName": "GetRateMyCourseByInput",
+              "name": "GetRateMyCourse",
+              "httpMethod": "GET",
+              "url": "api/app/rate/rate-my-course",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "EduZone.Ratings.GetCourseRatingOfInstructor, EduZone.Application.Contracts",
+                  "type": "EduZone.Ratings.GetCourseRatingOfInstructor",
+                  "typeSimple": "EduZone.Ratings.GetCourseRatingOfInstructor",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "FilterText",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Ratings.RateDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Ratings.RateDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Ratings.IRateAppService"
+            }
+          }
         }
       }
     },
@@ -7052,6 +7242,72 @@
       ],
       "genericArguments": null,
       "properties": null
+    },
+    "EduZone.Ratings.GetCourseRatingOfInstructor": {
+      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FilterText",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "EduZone.Ratings.RateDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "CourseId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CourseName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Rate",
+          "jsonName": null,
+          "type": "System.Double?",
+          "typeSimple": "number?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
     },
     "EduZone.StudentAuth.NewStudentInput": {
       "baseType": null,

@@ -10,6 +10,7 @@
     "Menu:MyStudents": "My Students",
     "Menu:MyCourses": "My Courses",
     "Menu:instructorInfo": "Instructor Info",
+    "Menu:coursesRating": "Courses Rating",
     "Welcome": "Welcome",
     "SignUp": "Sign Up",
     "Permission:EduZoneApp": "EduZoneApp",
@@ -89,6 +90,9 @@
     "addLessons": "Add Lessons",
     "desAddLessons": "Setup your lessons details",
     "update": "Update",
-    "alreadyEnrolled": "already Enrolled in this course"
+    "alreadyEnrolled": "already Enrolled in this course",
+    "ratingValidationValue": "rating should be between 0 & 5",
+    "courseName": "Course Name",
+    "rate": "Rate"
   }
 }

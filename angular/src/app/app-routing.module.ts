@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./instructor/my-courses/my-courses.module').then(m => m.MyCoursesModule),
   },
   {
+    path: 'courses-Rating',
+    loadChildren: () => import('./instructor/instructor-ratings/instructor-ratings.module').then(m => m.InstructorRatingsModule),
+  },
+  {
     path: 'instructor-Info',
     loadChildren: () => import('./instructor/instructor-info/instructor-info.module').then(m => m.InstructorInfoModule),
   },

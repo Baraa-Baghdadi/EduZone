@@ -10,6 +10,7 @@
     "Menu:MyStudents": "طلابي",
     "Menu:MyCourses": "دوراتي التدريبية",
     "Menu:instructorInfo": "معلومات الاستاذ",
+    "Menu:coursesRating": "تقييمات الدورات التدريبية",
     "Welcome": "مرحباً",
     "SignUp": "التسجيل",
     "Permission:EduZoneApp": "منطقة التعليم",
@@ -92,7 +93,9 @@
     "addLessons": "إضافة جلسة",
     "desAddLessons": "إعداد تفاصيل جلساتك",
     "update": "تعديل",
-    "alreadyEnrolled": "أنت مسجل مسبقا في هذا الكورس"
-
+    "alreadyEnrolled": "أنت مسجل مسبقا في هذا الكورس",
+    "ratingValidationValue": "التقييم يجب أن يكون بين 0 و 5",
+    "courseName": "اسم الدورة التدريبية",
+    "rate": "التقييم"
   }
 }
