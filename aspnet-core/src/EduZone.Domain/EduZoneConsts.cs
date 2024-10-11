@@ -11,6 +11,7 @@ public static class EduZoneConsts
 
     public const string EmailingFolderName = "EmailTemplate";
     public const string FilesFolderName = "Files";
+    public const string CertificateFolderName = "Certificates";
 
     public const string SuccessMessage = "SuccessMessage";
     public const string Success = "Success";

@@ -1,19 +1,21 @@
 ﻿using EduZone.Attachments;
 using EduZone.Categories;
-using EduZone.Enrollments;
+using EduZone.CreateCertificate;
 using EduZone.Instructors;
 using EduZone.Lessons;
 using EduZone.Permissions;
+using EduZone.QrCode;
+using EduZone.QrPdf;
 using EduZone.UserNameFromToken;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.BlobStoring;
+using Volo.Abp.Content;
 using Volo.Abp.Domain.Repositories;
 
 namespace EduZone.Courses
@@ -27,21 +29,20 @@ namespace EduZone.Courses
         private readonly IRepository<Category> _categoryRepository;
         private readonly IRepository<Instructor> _instructorRepository;
         private readonly IAttachmentAppService _attachmentAppService;
-        private readonly IBlobContainer _blobContainer;
 
         public CourseAppService(ICourseRepository courseRepository, IGetUserNameFromToken getUserNameFromToken,
             IRepository<Lesson> lessonsRepository,
             IRepository<Category> categoryRepository, 
-            IRepository<Instructor> instructorRepository, IAttachmentAppService attachmentAppService,
-            IBlobContainer blobContainer)
+            IRepository<Instructor> instructorRepository, IAttachmentAppService attachmentAppService
+            )
         {
             _courseRepository = courseRepository;
             _getUserNameFromToken = getUserNameFromToken;
             _categoryRepository = categoryRepository;
             _instructorRepository = instructorRepository;
             _attachmentAppService = attachmentAppService;
-            _blobContainer = blobContainer;
             _lessonsRepository = lessonsRepository;
+
         }
 
 
@@ -60,7 +61,6 @@ namespace EduZone.Courses
             };
         }
 
-
         // For Instructor:
         [Authorize(EduZonePermissions.Courses.View)]
         public async Task<PagedResultDto<CourseDto>> GetMyCourses(GetCoursesInput input)
@@ -74,7 +74,6 @@ namespace EduZone.Courses
                 Items = ObjectMapper.Map<List<Course>, List<CourseDto>>(items)
             };
         }
-
 
         [Authorize(EduZonePermissions.Courses.Create)]
         public async Task<CourseDto> CreateNewCourse(NewCourseInput input)
@@ -122,6 +121,7 @@ namespace EduZone.Courses
             return mappingData;
         }
 
+        [Authorize(EduZonePermissions.Courses.Edit)]
         public async Task<CourseDto> UpdateCourseAsync(UpdateCourseInput input)
         {
             if (input.Lessons!.Count == 0) throw new UserFriendlyException(L[EduZoneDomainErrorCodes.CourseShouldContainLesson]);
@@ -179,6 +179,7 @@ namespace EduZone.Courses
             var result = await _courseRepository.UpdateAsync(courseDb, true);
             return ObjectMapper.Map<Course, CourseDto>(result);
         }
+
 
     }
 }
