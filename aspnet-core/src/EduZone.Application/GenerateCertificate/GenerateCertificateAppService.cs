@@ -1,4 +1,5 @@
 ﻿using EduZone.CreateCertificate;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace EduZone.GenerateCertificate
 {
+    [Authorize]
     public class GenerateCertificateAppService : EduZoneAppService, IGenerateCertificateAppService
     {
         private readonly CreateCertificateService _createCertificateService;
