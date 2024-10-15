@@ -19,7 +19,7 @@ namespace EduZone.CreateCertificate
             _converter = converter;
         }
 
-        public async Task GenerateCertificate(string name,string courseName,DateTime date)
+        public async Task<string> GenerateCertificate(string name,string courseName,DateTime date)
         {
             FileStream fileStream;
             byte[] pdf;
@@ -52,6 +52,8 @@ namespace EduZone.CreateCertificate
             string certificatepath = Path.Combine(_Environment.WebRootPath, EduZoneConsts.CertificateFolderName, $"{courseName +" for "+ name }.pdf");
             // Save the PDF to a file
             File.WriteAllBytes(certificatepath, pdf);
+
+            return certificatepath;
         }
     }
 }

@@ -63,16 +63,16 @@ namespace EduZone.InstructorsAuth
             var createdTenant = await _tenantManager.CreateAsync(newTenantName);
             await _tenantRepository.InsertAsync(createdTenant, true);
 
-            await _distributedEventBus.PublishAsync(new TenantCreatedEto
-            {
-                Id = createdTenant.Id,
-                Name = createdTenant.Name,
-                Properties =
-                {
-                    {"AdminEmail","admin@abp.io" },
-                    {"AdminPassword","1q2w3E*" }
-                }
-            });
+            //await _distributedEventBus.PublishAsync(new TenantCreatedEto
+            //{
+            //    Id = createdTenant.Id,
+            //    Name = createdTenant.Name,
+            //    Properties =
+            //    {
+            //        {"AdminEmail","admin@abp.io" },
+            //        {"AdminPassword","1q2w3E*" }
+            //    }
+            //});
 
             await _createTenantRoles(createdTenant.Id);
             #endregion
@@ -94,7 +94,7 @@ namespace EduZone.InstructorsAuth
             #endregion
 
             var instructor = new Instructor(GuidGenerator.Create(),createdTenant.Id, input.FirstName, input.LastName, input.Gender, input.Email
-                , input.About, input.CountryCode, input.MobileNumber);
+                , input.About);
 
             await _instructorRepository.InsertAsync(instructor, true);
 
@@ -174,6 +174,9 @@ namespace EduZone.InstructorsAuth
                         await SendWelcomeEmail(user.Email, instructor.Id, instructorName, tenantName.Name);
                         return true;
                     }
+                    else if (result.Errors.Any(x => x.Code == "InvalidToken")){
+                        return false;
+                    }
                 }
                 return false;
             }
@@ -249,7 +252,7 @@ namespace EduZone.InstructorsAuth
                 try
                 {
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    string confirmLink = _configuration["App:AngularUrl"] +
+                    string confirmLink = _configuration["App:ClientUrl"] +
                         _configuration["App:ConfirmationEmailLink"] + user.Email + "&c=" + token;
                     return confirmLink;
                 }

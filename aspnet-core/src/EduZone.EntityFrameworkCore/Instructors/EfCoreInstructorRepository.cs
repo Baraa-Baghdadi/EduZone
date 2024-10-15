@@ -47,7 +47,7 @@ namespace EduZone.Instructors
          Gender? gender = null)
         {
             return query
-                .WhereIf(!string.IsNullOrWhiteSpace(filterText), e => e.FirstName!.Contains(filterText!) || e.LastName!.Contains(filterText!) || e.CountryCode!.Contains(filterText!) || e.MobileNumber!.Contains(filterText!) || e.CountryCode + e.MobileNumber == filterText || e.Email!.Contains(filterText!))
+                .WhereIf(!string.IsNullOrWhiteSpace(filterText), e => e.FirstName!.Contains(filterText!) || e.LastName!.Contains(filterText!)  || e.Email!.Contains(filterText!))
                 .WhereIf(gender.HasValue, e => e.Gender == gender);
         }
     }

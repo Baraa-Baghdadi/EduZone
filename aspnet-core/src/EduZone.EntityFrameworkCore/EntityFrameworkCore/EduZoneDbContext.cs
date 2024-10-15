@@ -24,6 +24,7 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using EduZone.Notifications;
 using EduZone.Ratings;
+using EduZone.Certificates;
 
 namespace EduZone.EntityFrameworkCore;
 
@@ -75,6 +76,7 @@ public class EduZoneDbContext :
     public DbSet<Review> Reviews { get; set; }
     public DbSet<Notification> Notifications { get; set; }
     public DbSet<Rate> Ratings { get; set; }
+    public DbSet<Certificate> Certificates { get; set; }
 
 
     public EduZoneDbContext(DbContextOptions<EduZoneDbContext> options)
@@ -166,6 +168,12 @@ public class EduZoneDbContext :
         builder.Entity<Rate>(b =>
         {
             b.ToTable(EduZoneConsts.DbTablePrefix + "Ratings", EduZoneConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
+
+        builder.Entity<Certificate>(b =>
+        {
+            b.ToTable(EduZoneConsts.DbTablePrefix + "Certificates", EduZoneConsts.DbSchema);
             b.ConfigureByConvention();
         });
 

@@ -19,11 +19,10 @@ namespace EduZone.InstructorsAuth
         public Gender Gender { get; set; }
         [Required]
         public string Email { get; set; }
+        [Required]
         public string Password { get; set; }
         [Required]
-        public string CountryCode { get; set; }
-        [Required]
-        public string MobileNumber { get; set; }
+        public string ConfirmPassword { get; set; }
         [AllowNull]
         public string About { get; set; }
     }

@@ -8,6 +8,6 @@ namespace EduZone.GenerateCertificate
 {
     public interface IGenerateCertificateAppService
     {
-        Task<bool> GenerateService(CertificateInfo input);
+        Task<bool> GenerateCertificate(CertificateInfo input);
     }
 }

@@ -1,5 +1,7 @@
 import { CoreModule, provideAbpCore, withOptions } from '@abp/ng.core';
 import { registerLocale } from '@abp/ng.core/locale';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+
 import {
   InternetConnectionStatusComponent,
   ThemeSharedModule,
@@ -21,6 +23,7 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
 import { ThemeLeptonXModule } from '@abp/ng.theme.lepton-x';
 import { SideMenuLayoutModule } from '@abp/ng.theme.lepton-x/layouts';
 import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
+import { EmailConfirmationComponent } from './email-confirm/email-confirmation/email-confirmation.component';
 
 @NgModule({
   imports: [
@@ -29,6 +32,7 @@ import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
     AppRoutingModule,
     CoreModule,
     ThemeSharedModule,
+    NgbDropdownModule,
     
     
     
@@ -37,7 +41,7 @@ import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
                    SideMenuLayoutModule.forRoot(),
                    AccountLayoutModule.forRoot(),
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, EmailConfirmationComponent],
   providers: [
     APP_ROUTE_PROVIDER,
     provideAbpCore(

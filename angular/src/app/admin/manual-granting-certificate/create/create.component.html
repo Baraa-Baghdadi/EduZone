@@ -1,0 +1,32 @@
+<h5>
+    {{ '::Menu:grantingCertificate' | abpLocalization }}:
+  </h5>
+  <div class="card mt-2" @fade>
+      <div class="card-body">
+          <form [formGroup]="form">
+              <div class="row">
+                <div class="mt-2 col-4">
+                  <input [placeholder]= "'::studentName' | abpLocalization" type="text" id="studentName" class="form-control mt-1" formControlName="studentName" autofocus>
+                </div>
+      
+        
+                <div class="mt-2 col-4">
+                    <input [placeholder]= "'::courseName' | abpLocalization" type="text" id="courseName" class="form-control mt-1" formControlName="courseName" >
+                  </div>
+      
+                  <div class="mt-2 col-4">
+                    <input [placeholder]= "'::issuedOn' | abpLocalization" type="text" id="date" class="form-control mt-1" formControlName="date" >
+                  </div>
+              </div>
+            </form>
+            <div class="d-flex justify-content-end mt-4">
+              <button type="button" class="btn btn-secondary cancel-btn" routerLink="/">
+                  {{ '::Cancel' | abpLocalization }}
+                </button>
+            
+                <button class="btn btn-primary ms-1" [disabled]="!form.valid">
+                  {{ '::Save' | abpLocalization }}
+                </button>
+            </div>
+      </div>
+    </div>

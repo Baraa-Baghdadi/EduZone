@@ -1,0 +1,106 @@
+<div class="all" @fade *ngIf="!showRegisterPage">
+    <!-- Logo of Dawaa -->
+<div class="d-block text-center">
+    <img style="width: 7%;" src="../../../assets/mainLog-removebg-preview.png" class="mainLogo" alt="">
+</div>
+<div class="card container p-4 pb-0">
+    <div class="d-flex align-center">
+        <div class="ms-1 pointer" routerLink="/">
+            <i class="fa" [ngClass]="{'fa':true,'fa-arrow-left':selectedLang === 'en','fa-arrow-right':selectedLang === 'ar'}" aria-hidden="true"></i>
+            <span class="ms-2">{{'::back' | abpLocalization}}</span>
+        </div>
+        <div ngbDropdown  class="btn-group ms-auto dropdown">
+            <button class="dropdown-toggle btn btn-sm btn-light languageBtnBg"
+            data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
+            <i class="bi bi-translate me-1"></i>{{labelOfSelectedLang}}
+          </button>
+          <div ngbDropdownMenu>
+            <button ngbDropdownItem *ngFor="let lang of availableLangs" (click)="selectLang(lang.value)">
+              {{lang.name}}
+            </button>
+          </div>
+          </div>
+    </div>
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-4 mt-1">
+                <label class="ms-1" for="firstName">{{'::firstName' | abpLocalization}}*</label>
+                <input [placeholder]= "'::firstName' | abpLocalization" type="text" id="firstName" class="form-control mt-1" formControlName="firstName" autofocus>
+              </div>
+
+              <div class="col-4 mt-1">
+                <label class="ms-1" for="lastName">{{'::lastName' | abpLocalization}}*</label>
+                <input [placeholder]= "'::lastName' | abpLocalization" type="text" id="lastName" class="form-control mt-1" formControlName="lastName">
+              </div>
+
+              <div class="col-4 form-group">
+                <label class="ms-1" for="gender">{{'::gender' | abpLocalization}}*</label>
+                <ng-select id="gender" [placeholder]= "'::gender' | abpLocalization" class="form-control mt-2" formControlName="gender">
+                    <ng-option *ngFor="let item of genders" [value]="item.value" >
+                      {{item.key}}
+                    </ng-option>
+                </ng-select>
+              </div>
+
+              <div class="col-4 mt-2">
+                <label class="ms-1" for="email">{{'::email' | abpLocalization}}*</label>
+                <input [placeholder]= "'::email' | abpLocalization" type="text" id="email" class="form-control mt-1" formControlName="email">
+              </div>
+
+              <div class="col-4 mt-2">
+                <label class="ms-1" for="password">{{'::password' | abpLocalization}}*</label>
+                <input [placeholder]= "'::password' | abpLocalization" type="text" id="password" class="form-control mt-1" formControlName="password">
+              </div>
+
+              <div class="col-4 mt-2">
+                <label class="ms-1" for="confirmPassword">{{'::confirmPassword' | abpLocalization}}*</label>
+                <input [placeholder]= "'::confirmPassword' | abpLocalization" type="password" id="confirmPassword" class="form-control mt-1" formControlName="confirmPassword">
+              </div>
+
+              <div class="col-12 mt-2">
+                <label class="ms-1" for="about">{{'::about' | abpLocalization}}*</label>
+                <textarea rows="3" [placeholder]= "'::about' | abpLocalization" type="text" id="about" class="form-control mt-1" formControlName="about" ></textarea>
+            </div>
+        </div>
+    </form>
+    <div class="d-flex justify-content-end mt-3 mb-3">
+        <button type="button" class="btn btn-secondary cancel-btn">
+            {{ '::Cancel' | abpLocalization }}
+          </button>
+      
+          <button class="btn btn-primary ms-1" [disabled]="!form.valid" (click)="submit()">
+            {{ '::Submit' | abpLocalization }}
+          </button>
+      </div>
+</div>
+</div>
+<div class="pt-4" *ngIf="showRegisterPage">
+    <!-- Logo of Dawaa -->
+    <div class="d-block text-center">
+        <img style="width: 14%;" src="../../../assets/mainLog-removebg-preview.png" class="mainLogo" alt="">
+    </div>
+    <p class="text-center main-secondary-color fs-2 mt-2 mainColor">{{'::welcome' | abpLocalization}}</p>
+    <div class="card container p-4 pb-0 w-50">
+        <div class="d-flex align-center">
+            <div class="ms-1 pointer" routerLink="/">
+                <i class="fa" [ngClass]="{'fa':true,'fa-arrow-left':selectedLang === 'en','fa-arrow-right':selectedLang === 'ar'}" aria-hidden="true"></i>
+                <span class="ms-2">{{'::back' | abpLocalization}}</span>
+            </div>
+            <div ngbDropdown  class="btn-group ms-auto dropdown">
+                <button class="dropdown-toggle btn btn-sm btn-light languageBtnBg"
+                data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
+                <i class="bi bi-translate me-1"></i>{{labelOfSelectedLang}}
+              </button>
+              <div ngbDropdownMenu>
+                <button ngbDropdownItem *ngFor="let lang of availableLangs" (click)="selectLang(lang.value)">
+                  {{lang.name}}
+                </button>
+              </div>
+              </div>
+        </div>
+        <div class="content">
+            <p class="text-center main-secondary-color fs-2 secondryColor">{{'::registerComplete' | abpLocalization}}</p>
+            <h5 class="text-center ng-star-inserted">{{"::chckYourEmail" | abpLocalization}}</h5>
+        </div>
+    </div>
+</div>

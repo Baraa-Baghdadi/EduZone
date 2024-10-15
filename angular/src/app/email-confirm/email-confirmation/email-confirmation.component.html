@@ -1,0 +1,42 @@
+<div class="pt-4">
+    <!-- Logo of Dawaa -->
+    <div class="d-block text-center">
+        <img style="width: 14%;" src="../../../assets/mainLog-removebg-preview.png" class="mainLogo" alt="">
+    </div>
+    <p class="text-center main-secondary-color fs-2 mt-2 mainColor">{{'::welcome' | abpLocalization}}</p>
+    <div class="card container p-4 pb-0 w-50">
+        <div class="d-flex align-center">
+            <div ngbDropdown  class="btn-group ms-auto dropdown">
+                <button class="dropdown-toggle btn btn-sm btn-light languageBtnBg"
+                data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
+                <i class="bi bi-translate me-1"></i>{{labelOfSelectedLang}}
+              </button>
+              <div ngbDropdownMenu>
+                <button ngbDropdownItem *ngFor="let lang of availableLangs" (click)="selectLang(lang.value)">
+                  {{lang.name}}
+                </button>
+              </div>
+              </div>
+        </div>
+        <div class="content" *ngIf="showSuccessMsg === true;else errorMsg">
+            <p class="text-center main-secondary-color fs-2 secondryColor">{{'::verificationComplete' | abpLocalization}}</p>
+            <h5 class="text-center ng-star-inserted">{{"::verficationDoneMsg" | abpLocalization}}</h5>
+            <div class="d-flex justify-content-center mb-2" >
+                <a (click)="login()" id="loginBtn" role="button" class="btn btn-primary">
+                <i aria-hidden="true" class="fa fa-sign-in me-1"></i>
+                {{"::Login" | abpLocalization}}
+            </a>
+        </div>
+        </div>
+    </div>
+</div>
+<ng-template class="content" #errorMsg>
+<p class="text-center main-secondary-color fs-2 secondryColor">{{'::verificationFailed' | abpLocalization}}</p>
+<h5 class="text-center ng-star-inserted">{{"::expiredLinkMsg" | abpLocalization}}</h5>
+<div class="d-flex justify-content-center mb-2">
+    <a id="loginBtn" role="button" class="btn btn-primary">
+    <i aria-hidden="true" class="fa fa-sign-in me-1"></i>
+    {{"::resend" | abpLocalization}}
+</a>
+</div>
+</ng-template>

@@ -129,3 +129,6 @@ html {
     border-color: #008b99 !important;
     background-color: #008b99 !important;
 }
+#LoginInput_UserNameOrEmailAddress {
+    -webkit-text-fill-color: black !important;
+}

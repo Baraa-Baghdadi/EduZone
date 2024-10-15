@@ -1,0 +1,73 @@
+<div class="container" @fade>
+    <div class="row" style="align-items: center">
+      <div class="col col-md-6">
+        <h5 class="card-title">
+          {{ '::Menu:studentsCertificates' | abpLocalization }}
+        </h5>
+      </div>
+      <!-- <div class="text-end col col-md-6">
+        <div class="text-lg-end pt-2" [routerLink]="'./createCourse'">
+          <button  id="create" class="btn btn-primary" type="button" >
+            <i class="fa fa-plus me-1"></i>
+            <span>{{ '::NewCourse' | abpLocalization }}</span>
+          </button>
+        </div>
+      </div> -->
+    </div>
+    <div class="card mt-2">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control bg-white"
+          [placeholder]="'::Search' | abpLocalization"
+          [(ngModel)]="certificateFilter.filterText"
+          #search
+        />
+        <div class="input-group-append mainBackground">
+          <button class="btn" type="button">
+            <i class="fa fa-search text-white"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-2">
+      <div class="card-body">
+        <ngx-datatable [rows]="certificates.items" [count]="certificates.totalCount" [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
+                <ngx-datatable-column
+                  [name]="'::Actions' | abpLocalization"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div ngbDropdown container="body" class="d-inline-block">
+                      <button
+                        class="btn btn-primary btn-sm dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        ngbDropdownToggle
+                      >
+                     <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+                      </button>
+                      <div ngbDropdownMenu>
+                        <button ngbDropdownItem (click)="downloadCertificate(row.id)">
+                          {{ '::DownloadCertificate' | abpLocalization }}
+                        </button>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+          <ngx-datatable-column [width]="150"  [name]="'::studentName' | abpLocalization" prop="studentName"></ngx-datatable-column>
+          <ngx-datatable-column [width]="200"  [name]="'::courseTitle' | abpLocalization" prop="courseTitle"></ngx-datatable-column>
+          <ngx-datatable-column [width]="220"  [name]="'::instructorName' | abpLocalization" prop="instructorName"></ngx-datatable-column>
+          <ngx-datatable-column [width]="150"  [name]="'::createdOn' | abpLocalization" prop="createdOn">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.createdOn*1000 | date: 'dd/MM/yyyy' }} 
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+    
+    <!-- End Table -->
+
+</div>
+

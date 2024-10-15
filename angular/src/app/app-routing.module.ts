@@ -1,6 +1,7 @@
 import { authGuard } from '@abp/ng.core';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EmailConfirmationComponent } from './email-confirm/email-confirmation/email-confirmation.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,14 @@ const routes: Routes = [
   {
     path: 'welcome',
     loadChildren: () => import('./welcome/welcome.module').then(m => m.WelcomeModule),
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./instructor-register/instructor-register.module').then(m => m.InstructorRegisterModule),
+  },
+  {
+    path:"email-confirmation",
+    component : EmailConfirmationComponent
   },
   {
     path: 'all-instructor',
@@ -35,6 +44,14 @@ const routes: Routes = [
   {
     path: 'instructor-Info',
     loadChildren: () => import('./instructor/instructor-info/instructor-info.module').then(m => m.InstructorInfoModule),
+  },
+  {
+    path: 'students-Certificates',
+    loadChildren: () => import('./admin/manual-granting-certificate/manual-granting-certificate.module').then(m => m.ManualGrantingCertificateModule),
+  },
+  {
+    path: 'my-students-Certificates',
+    loadChildren: () => import('./instructor/my-student-certificates/my-student-certificates.module').then(m => m.MyStudentCertificatesModule),
   },
   {
     path: 'account',
