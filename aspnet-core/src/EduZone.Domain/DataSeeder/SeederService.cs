@@ -11,13 +11,15 @@ namespace EduZone.DataSeeder
     {
         private readonly EduZoneDbMigrationService _migrationService;
         private readonly OpenIddictDataSeedContributor _openIddictSeedContributer;
+        private readonly AdminHostSeederContributer _adminHostSeederContributer;
         private readonly CategorySeeder _categorySeeder;
 
         public SeederService(EduZoneDbMigrationService migrationService, OpenIddictDataSeedContributor openIddictSeedContributer,
-            CategorySeeder categorySeeder)
+            AdminHostSeederContributer adminHostSeederContributer, CategorySeeder categorySeeder)
         {
             _migrationService = migrationService;
             _openIddictSeedContributer = openIddictSeedContributer;
+            _adminHostSeederContributer = adminHostSeederContributer;
             _categorySeeder = categorySeeder;
         }
 
@@ -28,8 +30,11 @@ namespace EduZone.DataSeeder
             var context = new DataSeedContext();
             await _openIddictSeedContributer.SeedAsync(context);
 
+            // admin seed:
+            await _adminHostSeederContributer.HostAdminSeedAsync();
+
             // seed data:
-            // await _categorySeeder.Seed();
+            await _categorySeeder.Seed();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using EduZone.Emailing;
+﻿using EduZone.DataSeeder;
+using EduZone.Emailing;
 using EduZone.Instructors;
 using EduZone.Permissions;
 using Microsoft.Extensions.Configuration;
@@ -63,16 +64,16 @@ namespace EduZone.InstructorsAuth
             var createdTenant = await _tenantManager.CreateAsync(newTenantName);
             await _tenantRepository.InsertAsync(createdTenant, true);
 
-            //await _distributedEventBus.PublishAsync(new TenantCreatedEto
-            //{
-            //    Id = createdTenant.Id,
-            //    Name = createdTenant.Name,
-            //    Properties =
-            //    {
-            //        {"AdminEmail","admin@abp.io" },
-            //        {"AdminPassword","1q2w3E*" }
-            //    }
-            //});
+            await _distributedEventBus.PublishAsync(new TenantCreatedEto
+            {
+                Id = createdTenant.Id,
+                Name = createdTenant.Name,
+                Properties =
+                {
+                    {"AdminEmail","admin@abp.io" },
+                    {"AdminPassword","1q2w3E*" }
+                }
+            });
 
             await _createTenantRoles(createdTenant.Id);
             #endregion
@@ -182,6 +183,25 @@ namespace EduZone.InstructorsAuth
             }
         }
 
+        public async Task ResendVerficationEmail(string targetEmail)
+        {
+            using (DataFilter.Disable<IMultiTenant>())
+            {
+                //find user by email
+                var user = await _userManager.FindByEmailAsync(targetEmail.Replace(" ", "+"));
+                if (user == null) throw new UserFriendlyException("Not Found");
+                string confirmationLink = await _generateEmailConformaitionLink(user);
+                await _backgroundJobManager.EnqueueAsync(
+                new EmailSendingArgs
+                {
+                    Template = "Verification",
+                    TargetEmail = user.Email,
+                    ConfirmationLink = confirmationLink
+                }
+                );
+            }
+        }
+
 
         #region Methods
 
@@ -230,9 +250,10 @@ namespace EduZone.InstructorsAuth
             var permissions = await _permissionDefinitionManager.GetPermissionsAsync();
             using (CurrentTenant.Change(tenantId))
             {
+                var adminRole = await _roleManager.FindByNameAsync("admin");
                 string InstructorRoleName = EduZoneConsts.InstructorRoleName;
                 var instructorRolePermission = permissions.Where(x => x.IsEnabled &&
-                (x.Name.StartsWith(EduZonePermissions.GroupName) || x.Name.StartsWith("AbpIdentity."))
+                (x.Name.StartsWith(EduZonePermissions.GroupName))
                 && x.MultiTenancySide != MultiTenancySides.Host);
 
                 var createdRole = await _roleManager.CreateAsync(new IdentityRole(Guid.NewGuid(),

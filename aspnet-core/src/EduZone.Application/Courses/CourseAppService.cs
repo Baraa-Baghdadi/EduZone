@@ -48,7 +48,7 @@ namespace EduZone.Courses
 
 
         // For Admin:
-        [Authorize(EduZonePermissions.AllCourses.View)]
+        //[Authorize(EduZonePermissions.AllCourses.View)]
         public async Task<PagedResultDto<CourseDto>> GetAllCourses(GetCoursesInput input)
         {
             var totalCount = await _courseRepository.GetCountWithoutTenantAsync(input.FilterText);

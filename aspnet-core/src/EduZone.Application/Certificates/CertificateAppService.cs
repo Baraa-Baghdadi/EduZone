@@ -54,6 +54,7 @@ namespace EduZone.Certificates
         }
 
         // For Instructor:
+        [Authorize(EduZonePermissions.InstructorCertificates.GetCertificate)]
         public async Task<PagedResultDto<CertificateDto>> GetMyStudientsCertificates(GetCertificatesInput input)
         {
             var totalCount = await _certificateRepository.GetCountAsync(input.FilterText);

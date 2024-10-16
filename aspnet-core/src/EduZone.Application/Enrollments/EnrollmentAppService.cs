@@ -76,6 +76,7 @@ namespace EduZone.Enrollments
             }
         }
 
+
         public async Task<PagedResultDto<EnrollmentDto>> GetEnrollmentsOfInstructor(GetEnrollmentInput input)
         {
             var totalCount = await _enrollmentRepository.GetCountAsync(input.FilterText);

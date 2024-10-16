@@ -3,6 +3,8 @@
 public static class EduZoneConsts
 {
     public const string DbTablePrefix = "App";
+    public const string AdminEmailDefaultValue = "admin@abp.io";
+    public const string AdminPasswordDefaultValue = "1q2w3E*";
 
     public const string DbSchema = null;
 

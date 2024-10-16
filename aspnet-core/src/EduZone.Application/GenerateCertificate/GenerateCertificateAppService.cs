@@ -20,7 +20,7 @@ namespace EduZone.GenerateCertificate
             _createCertificateService = createCertificateService;
         }
 
-        [Authorize(EduZonePermissions.AdminCertificates.GenerateCertificate)]
+        //[Authorize(EduZonePermissions.AdminCertificates.GenerateCertificate)]
         public async Task<bool> GenerateCertificate(CertificateInfo input)
         {
             await _createCertificateService.GenerateCertificate(input.StudentName, input.CourseName, input.Date);
