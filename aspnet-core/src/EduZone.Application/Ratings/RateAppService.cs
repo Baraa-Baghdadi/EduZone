@@ -69,6 +69,7 @@ namespace EduZone.Ratings
                 input.Sorting, input.MaxResultCount, input.SkipCount);
             var mappedItem = ObjectMapper.Map<List<Rate>, List<RateDto>>(items);
 
+            // calculate average of rate for each course:
             foreach (var item in mappedItem)
             {
                 item.Rate = (await _ratingRepository.GetListAsync()).Where(r => r.CourseId == item.CourseId).Select(r => r.Value).Average();

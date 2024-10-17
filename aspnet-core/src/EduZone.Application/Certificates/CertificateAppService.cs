@@ -67,8 +67,31 @@ namespace EduZone.Certificates
             };
         }
 
-        // Download Certificate:
-        public async Task<IRemoteStreamContent> GenerateCertificateAndDownlaod(Guid id)
+        // Download Certificate For Instructor:
+        [Authorize(EduZonePermissions.InstructorCertificates.GetCertificate)]
+        public async Task<IRemoteStreamContent> InstructorDownlaodCertificate(Guid id)
+        {
+            var certificate = await _certificateRepository.GetCertificateById(id) ??
+                throw new UserFriendlyException(L[EduZoneDomainErrorCodes.NotFound]);
+
+            var mappedCertificate = ObjectMapper.Map<Certificate, CertificateDto>(certificate);
+
+            var certificatePath = await _createCertificateService.GenerateCertificate(mappedCertificate!.StudentName!, mappedCertificate!.CourseTitle!
+                , mappedCertificate.CreationTime);
+
+            if (File.Exists(certificatePath))
+            {
+                var certificateStream = new RemoteStreamContent(new MemoryStream(System.IO.File.ReadAllBytes(certificatePath)), $"{mappedCertificate!.CourseTitle! + " for " + mappedCertificate!.StudentName!}.pdf");
+                File.Delete(certificatePath);
+                return certificateStream;
+
+            }
+            return null;
+        }
+
+        // For Admin
+        [Authorize(EduZonePermissions.AdminCertificates.GetCertificate)]
+        public async Task<IRemoteStreamContent> AdminDownlaodCertificate(Guid id)
         {
             using (_dataFilter.Disable<IMultiTenant>())
             {
@@ -90,5 +113,6 @@ namespace EduZone.Certificates
                 return null;
             }
         }
+
     }
 }

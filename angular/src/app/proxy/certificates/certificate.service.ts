@@ -10,11 +10,11 @@ export class CertificateService {
   apiName = 'Default';
   
 
-  generateCertificateAndDownlaodById = (id: string, config?: Partial<Rest.Config>) =>
+  adminDownlaodCertificateById = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, Blob>({
       method: 'POST',
       responseType: 'blob',
-      url: `/api/app/certificate/${id}/generate-certificate-and-downlaod`,
+      url: `/api/app/certificate/${id}/admin-downlaod-certificate`,
     },
     { apiName: this.apiName,...config });
   
@@ -41,6 +41,15 @@ export class CertificateService {
       method: 'GET',
       url: '/api/app/certificate/my-studients-certificates',
       params: { filterText: input.filterText, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  instructorDownlaodCertificateById = (id: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, Blob>({
+      method: 'POST',
+      responseType: 'blob',
+      url: `/api/app/certificate/${id}/instructor-downlaod-certificate`,
     },
     { apiName: this.apiName,...config });
 

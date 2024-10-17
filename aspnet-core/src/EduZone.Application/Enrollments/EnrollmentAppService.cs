@@ -41,7 +41,7 @@ namespace EduZone.Enrollments
             _dataFilter = dataFilter;
         }
 
-        public async Task<EnrollmentDto> AddNewEnroll(NewEnrollmentInput input)
+        public async Task<bool> AddNewEnroll(NewEnrollmentInput input)
         {
             var studentEmail = _getUserNameFromToken.GetEmailFromToken();
             var student = await _studentRepository.GetStudentByEmail(studentEmail);
@@ -72,7 +72,7 @@ namespace EduZone.Enrollments
                 catch { }
 
 
-                return ObjectMapper.Map<Enrollment, EnrollmentDto>(newEnroll);
+                return true;
             }
         }
 

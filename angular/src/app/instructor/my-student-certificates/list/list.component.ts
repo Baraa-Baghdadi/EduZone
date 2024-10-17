@@ -57,7 +57,7 @@ export class ListComponent {
     }
 
     downloadCertificate(id){
-      this.service.generateCertificateAndDownlaodById(id).subscribe(res => {
+      this.service.instructorDownlaodCertificateById(id).subscribe(res => {
         const blob = new Blob([res],{type:"application/pdf"});
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);

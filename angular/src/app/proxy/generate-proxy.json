@@ -1032,7 +1032,24 @@
                   }
                 },
                 {
-                  "name": "GenerateCertificateAndDownlaod",
+                  "name": "InstructorDownlaodCertificate",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
+                },
+                {
+                  "name": "AdminDownlaodCertificate",
                   "parametersOnMethod": [
                     {
                       "name": "id",
@@ -1232,14 +1249,14 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Certificates.CertificateDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Certificates.CertificateDto>"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Certificates.ICertificateAppService"
             },
-            "GenerateCertificateAndDownlaodById": {
-              "uniqueName": "GenerateCertificateAndDownlaodById",
-              "name": "GenerateCertificateAndDownlaod",
+            "InstructorDownlaodCertificateById": {
+              "uniqueName": "InstructorDownlaodCertificateById",
+              "name": "InstructorDownlaodCertificate",
               "httpMethod": "POST",
-              "url": "api/app/certificate/{id}/generate-certificate-and-downlaod",
+              "url": "api/app/certificate/{id}/instructor-downlaod-certificate",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -1269,7 +1286,44 @@
                 "type": "Volo.Abp.Content.IRemoteStreamContent",
                 "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.Certificates.ICertificateAppService"
+            },
+            "AdminDownlaodCertificateById": {
+              "uniqueName": "AdminDownlaodCertificateById",
+              "name": "AdminDownlaodCertificate",
+              "httpMethod": "POST",
+              "url": "api/app/certificate/{id}/admin-downlaod-certificate",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Certificates.ICertificateAppService"
             }
           }
@@ -2496,8 +2550,8 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "EduZone.Enrollments.EnrollmentDto",
-                    "typeSimple": "EduZone.Enrollments.EnrollmentDto"
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
                   }
                 }
               ]
@@ -2535,8 +2589,8 @@
                 }
               ],
               "returnValue": {
-                "type": "EduZone.Enrollments.EnrollmentDto",
-                "typeSimple": "EduZone.Enrollments.EnrollmentDto"
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
               },
               "allowAnonymous": false,
               "implementFrom": "EduZone.Enrollments.IEnrollmentAppService"
@@ -2698,6 +2752,23 @@
                     "type": "System.Boolean",
                     "typeSimple": "boolean"
                   }
+                },
+                {
+                  "name": "ResendVerficationEmail",
+                  "parametersOnMethod": [
+                    {
+                      "name": "targetEmail",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
                 }
               ]
             }
@@ -2773,6 +2844,43 @@
               "returnValue": {
                 "type": "System.Boolean",
                 "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.InstructorsAuth.IInstructorsAuthAppService"
+            },
+            "ResendVerficationEmailByTargetEmail": {
+              "uniqueName": "ResendVerficationEmailByTargetEmail",
+              "name": "ResendVerficationEmail",
+              "httpMethod": "POST",
+              "url": "api/app/instructor-auth/resend-verfication-email",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "targetEmail",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "targetEmail",
+                  "name": "targetEmail",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
               },
               "allowAnonymous": null,
               "implementFrom": "EduZone.InstructorsAuth.IInstructorsAuthAppService"
@@ -7776,6 +7884,18 @@
           "name": "CourseId",
           "jsonName": null,
           "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "StudentName",
+          "jsonName": null,
+          "type": "System.String",
           "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
