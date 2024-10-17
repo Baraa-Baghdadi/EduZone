@@ -13,6 +13,6 @@ namespace EduZone.Enrollments
     {
         Task<PagedResultDto<EnrollmentDto>> GetEnrollmentsOfInstructor(GetEnrollmentInput input);
         Task<EnrollmentDto> GetEnrollmentById(Guid id);
-        Task<EnrollmentDto> AddNewEnroll(NewEnrollmentInput input);
+        Task<bool> AddNewEnroll(NewEnrollmentInput input);
     }
 }

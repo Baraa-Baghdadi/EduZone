@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using EduZone.Attachments;
 using EduZone.Students;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using Volo.Abp.AspNetCore.Mvc;
 
 namespace EduZone.Controllers.Students
 {
+    [Authorize]
     [RemoteService]
     [Area("app")]
     [ControllerName("Admin Student Info")]

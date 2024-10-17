@@ -19,9 +19,9 @@
     <div class="card mt-2">
       <div class="card-body">
         <ngx-datatable [rows]="ratings.items" [count]="ratings.totalCount" [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
-          <ngx-datatable-column [width]="200"  [name]="'::courseName' | abpLocalization" prop="courseName"></ngx-datatable-column>
-          <ngx-datatable-column [width]="200"  [name]="'::instructorName' | abpLocalization" prop="instructorName"></ngx-datatable-column>
-          <ngx-datatable-column [width]="200"  [name]="'::rate' | abpLocalization" prop="rate">
+          <ngx-datatable-column [width]="250"  [name]="'::courseName' | abpLocalization" prop="courseName"></ngx-datatable-column>
+          <ngx-datatable-column [width]="250"  [name]="'::Category' | abpLocalization" prop="category"></ngx-datatable-column>
+          <ngx-datatable-column   [name]="'::rate' | abpLocalization" prop="rate">
             <ng-template let-row="row" ngx-datatable-cell-template style="margin-top: -16px !important;">
               <!-- For information: https://classic.yarnpkg.com/en/package/ngx-stars-rating -->
               <ngx-stars-rating [rate]="row.rate" [starTemplate]="starCustomTemplate">

@@ -10,7 +10,7 @@ namespace EduZone.Ratings
     {
         public Guid CourseId { get; set; }
         public string? CourseName { get; set; }
-        public string? InstructorName { get; set; }
+        public string? Category { get; set; }
         public double? Rate { get; set; }
     }
 }

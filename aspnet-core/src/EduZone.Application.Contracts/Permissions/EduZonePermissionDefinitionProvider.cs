@@ -10,7 +10,7 @@ public class EduZonePermissionDefinitionProvider : PermissionDefinitionProvider
     public override void Define(IPermissionDefinitionContext context)
     {
 
-        var EduZoneAppGroup = context.AddGroup(EduZonePermissions.GroupName, L("Permission:EduZoneApp"));
+        var EduZoneAppGroup = context.AddGroup(EduZonePermissions.GroupName, L("Permission:EduZone"));
 
         EduZoneAppGroup.AddPermission(EduZonePermissions.Dashboard.Host, L("Permission:Dashboard"), Volo.Abp.MultiTenancy.MultiTenancySides.Host);
         EduZoneAppGroup.AddPermission(EduZonePermissions.Dashboard.Tenant, L("Permission:Dashboard"), Volo.Abp.MultiTenancy.MultiTenancySides.Tenant);
@@ -22,6 +22,15 @@ public class EduZonePermissionDefinitionProvider : PermissionDefinitionProvider
         var allStudentsPermession = EduZoneAppGroup.AddPermission(EduZonePermissions.AllStudents.Default, L("Permission:AllStudents"), multiTenancySide: MultiTenancySides.Host);
         allStudentsPermession.AddChild(EduZonePermissions.AllStudents.Edit, L("Permission:Edit"), multiTenancySide: MultiTenancySides.Host);
         allStudentsPermession.AddChild(EduZonePermissions.AllStudents.View, L("Permission:View"), multiTenancySide: MultiTenancySides.Host);
+
+
+        var InstructorCertificatePermession = EduZoneAppGroup.AddPermission(EduZonePermissions.InstructorCertificates.Default, L("Permission:Certificates"), multiTenancySide: MultiTenancySides.Tenant);
+        InstructorCertificatePermession.AddChild(EduZonePermissions.InstructorCertificates.GetCertificate, L("Permission:GetCertificate"), multiTenancySide: MultiTenancySides.Tenant);
+        InstructorCertificatePermession.AddChild(EduZonePermissions.InstructorCertificates.GenerateCertificate, L("Permission:GenerateCertificate"), multiTenancySide: MultiTenancySides.Tenant);
+
+        var AdminCertificatePermession = EduZoneAppGroup.AddPermission(EduZonePermissions.AdminCertificates.Default, L("Permission:Certificates"), multiTenancySide: MultiTenancySides.Host);
+        AdminCertificatePermession.AddChild(EduZonePermissions.AdminCertificates.GetCertificate, L("Permission:GetCertificate"), multiTenancySide: MultiTenancySides.Host);
+        AdminCertificatePermession.AddChild(EduZonePermissions.AdminCertificates.GenerateCertificate, L("Permission:GenerateCertificate"), multiTenancySide: MultiTenancySides.Host);
 
         var allCoursesPermession = EduZoneAppGroup.AddPermission(EduZonePermissions.AllCourses.Default, L("Permission:AllCourses"), multiTenancySide: MultiTenancySides.Host);
         allCoursesPermession.AddChild(EduZonePermissions.AllCourses.Edit, L("Permission:Edit"), multiTenancySide: MultiTenancySides.Host);

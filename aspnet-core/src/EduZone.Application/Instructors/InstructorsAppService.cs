@@ -58,8 +58,8 @@ namespace EduZone.Instructors
         [Authorize(EduZonePermissions.Dashboard.Tenant)]
         public async Task<InstructorDto> GetInstructorInfo()
         {
-            var userEmail = _getUserNameFromToken.GetEmailFromToken();
-            var instructor = await _instructorRepository.FirstOrDefaultAsync(r => r.Email == userEmail)
+            var tenantId = CurrentTenant.Id;
+            var instructor = await _instructorRepository.FirstOrDefaultAsync(r => r.TenantId == tenantId)
                 ?? throw new UserFriendlyException(L[EduZoneDomainErrorCodes.UserNotFound]);
             return ObjectMapper.Map<Instructor, InstructorDto>(instructor);
         }
@@ -67,8 +67,8 @@ namespace EduZone.Instructors
         [Authorize(EduZonePermissions.Dashboard.Tenant)]
         public async Task<bool> UpdateInstructorInfo(UpdateInstructorInfoInput input)
         {
-            var userEmail = _getUserNameFromToken.GetEmailFromToken();
-            var instructor = await _instructorRepository.FirstOrDefaultAsync(r => r.Email == userEmail)
+            var tenantId = CurrentTenant.Id;
+            var instructor = await _instructorRepository.FirstOrDefaultAsync(r => r.TenantId == tenantId)
                 ?? throw new UserFriendlyException(L[EduZoneDomainErrorCodes.UserNotFound]);
 
             // update Info:

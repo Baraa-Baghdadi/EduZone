@@ -11,7 +11,7 @@ export class EnrollmentService {
   
 
   addNewEnrollByInput = (input: NewEnrollmentInput, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, EnrollmentDto>({
+    this.restService.request<any, boolean>({
       method: 'POST',
       url: '/api/app/enrollment/new-enroll',
       body: input,

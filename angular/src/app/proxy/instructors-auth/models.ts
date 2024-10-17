@@ -5,9 +5,8 @@ export interface NewInstructorInput {
   lastName: string;
   gender: Gender;
   email: string;
-  password?: string;
-  countryCode: string;
-  mobileNumber: string;
+  password: string;
+  confirmPassword: string;
   about?: string;
 }
 

@@ -6,6 +6,8 @@ export interface GetCourseRatingOfInstructor extends PagedAndSortedResultRequest
 
 export interface RateDto {
   courseId?: string;
+  studentName?: string;
   courseName?: string;
+  category?: string;
   rate?: number;
 }

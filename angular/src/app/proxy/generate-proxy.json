@@ -968,6 +968,366 @@
             }
           }
         },
+        "EduZone.Certificates.CertificateAppService": {
+          "controllerName": "Certificate",
+          "controllerGroupName": "Certificate",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "EduZone.Certificates.CertificateAppService",
+          "interfaces": [
+            {
+              "type": "EduZone.Certificates.ICertificateAppService",
+              "name": "ICertificateAppService",
+              "methods": [
+                {
+                  "name": "GetMyStudientsCertificates",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "EduZone.Certificates.GetCertificatesInput, EduZone.Application.Contracts",
+                      "type": "EduZone.Certificates.GetCertificatesInput",
+                      "typeSimple": "EduZone.Certificates.GetCertificatesInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Certificates.CertificateDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Certificates.CertificateDto>"
+                  }
+                },
+                {
+                  "name": "GetAllCertificates",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "EduZone.Certificates.GetCertificatesInput, EduZone.Application.Contracts",
+                      "type": "EduZone.Certificates.GetCertificatesInput",
+                      "typeSimple": "EduZone.Certificates.GetCertificatesInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Certificates.CertificateDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Certificates.CertificateDto>"
+                  }
+                },
+                {
+                  "name": "GetCertificateById",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "EduZone.Certificates.CertificateDto",
+                    "typeSimple": "EduZone.Certificates.CertificateDto"
+                  }
+                },
+                {
+                  "name": "InstructorDownlaodCertificate",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
+                },
+                {
+                  "name": "AdminDownlaodCertificate",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetCertificateByIdById": {
+              "uniqueName": "GetCertificateByIdById",
+              "name": "GetCertificateById",
+              "httpMethod": "GET",
+              "url": "api/app/certificate/{id}/certificate-by-id",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "EduZone.Certificates.CertificateDto",
+                "typeSimple": "EduZone.Certificates.CertificateDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.Certificates.ICertificateAppService"
+            },
+            "GetAllCertificatesByInput": {
+              "uniqueName": "GetAllCertificatesByInput",
+              "name": "GetAllCertificates",
+              "httpMethod": "GET",
+              "url": "api/app/certificate/certificates",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "EduZone.Certificates.GetCertificatesInput, EduZone.Application.Contracts",
+                  "type": "EduZone.Certificates.GetCertificatesInput",
+                  "typeSimple": "EduZone.Certificates.GetCertificatesInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "FilterText",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Certificates.CertificateDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Certificates.CertificateDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.Certificates.ICertificateAppService"
+            },
+            "GetMyStudientsCertificatesByInput": {
+              "uniqueName": "GetMyStudientsCertificatesByInput",
+              "name": "GetMyStudientsCertificates",
+              "httpMethod": "GET",
+              "url": "api/app/certificate/my-studients-certificates",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "EduZone.Certificates.GetCertificatesInput, EduZone.Application.Contracts",
+                  "type": "EduZone.Certificates.GetCertificatesInput",
+                  "typeSimple": "EduZone.Certificates.GetCertificatesInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "FilterText",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Certificates.CertificateDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Certificates.CertificateDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.Certificates.ICertificateAppService"
+            },
+            "InstructorDownlaodCertificateById": {
+              "uniqueName": "InstructorDownlaodCertificateById",
+              "name": "InstructorDownlaodCertificate",
+              "httpMethod": "POST",
+              "url": "api/app/certificate/{id}/instructor-downlaod-certificate",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.Certificates.ICertificateAppService"
+            },
+            "AdminDownlaodCertificateById": {
+              "uniqueName": "AdminDownlaodCertificateById",
+              "name": "AdminDownlaodCertificate",
+              "httpMethod": "POST",
+              "url": "api/app/certificate/{id}/admin-downlaod-certificate",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.Certificates.ICertificateAppService"
+            }
+          }
+        },
         "EduZone.Controllers.Attachments.AttachmentController": {
           "controllerName": "Attachment",
           "controllerGroupName": "Attachment API",
@@ -1148,6 +1508,78 @@
             }
           }
         },
+        "EduZone.Controllers.GenerateCertificate.GenerateCertificateController": {
+          "controllerName": "GenerateCertificate",
+          "controllerGroupName": "Certificate",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "EduZone.Controllers.GenerateCertificate.GenerateCertificateController",
+          "interfaces": [
+            {
+              "type": "EduZone.GenerateCertificate.IGenerateCertificateAppService",
+              "name": "IGenerateCertificateAppService",
+              "methods": [
+                {
+                  "name": "GenerateCertificate",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "EduZone.GenerateCertificate.CertificateInfo, EduZone.Application.Contracts",
+                      "type": "EduZone.GenerateCertificate.CertificateInfo",
+                      "typeSimple": "EduZone.GenerateCertificate.CertificateInfo",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GenerateCertificateByInput": {
+              "uniqueName": "GenerateCertificateByInput",
+              "name": "GenerateCertificate",
+              "httpMethod": "POST",
+              "url": "api/app/Certificate/GenerateCertificate",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "EduZone.GenerateCertificate.CertificateInfo, EduZone.Application.Contracts",
+                  "type": "EduZone.GenerateCertificate.CertificateInfo",
+                  "typeSimple": "EduZone.GenerateCertificate.CertificateInfo",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "EduZone.GenerateCertificate.CertificateInfo",
+                  "typeSimple": "EduZone.GenerateCertificate.CertificateInfo",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.GenerateCertificate.IGenerateCertificateAppService"
+            }
+          }
+        },
         "EduZone.Controllers.Instructors.InstructorController": {
           "controllerName": "Instructor",
           "controllerGroupName": "Admin Teacher Info",
@@ -1305,7 +1737,7 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Instructors.InstructorDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Instructors.InstructorDto>"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Instructors.IInstructorsAppService"
             },
             "GetInstructorByIdById": {
@@ -1342,7 +1774,7 @@
                 "type": "EduZone.Instructors.InstructorDto",
                 "typeSimple": "EduZone.Instructors.InstructorDto"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Instructors.IInstructorsAppService"
             },
             "GetInstructorInfo": {
@@ -1357,7 +1789,7 @@
                 "type": "EduZone.Instructors.InstructorDto",
                 "typeSimple": "EduZone.Instructors.InstructorDto"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Instructors.IInstructorsAppService"
             },
             "UpdateInstructorInfoByInput": {
@@ -1394,7 +1826,7 @@
                 "type": "System.Boolean",
                 "typeSimple": "boolean"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Instructors.IInstructorsAppService"
             }
           }
@@ -1657,7 +2089,7 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Students.StudentDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Students.StudentDto>"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Students.IStudentAppService"
             },
             "GetStudentByIdById": {
@@ -1694,7 +2126,7 @@
                 "type": "EduZone.Students.StudentDto",
                 "typeSimple": "EduZone.Students.StudentDto"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Students.IStudentAppService"
             }
           }
@@ -2118,8 +2550,8 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "EduZone.Enrollments.EnrollmentDto",
-                    "typeSimple": "EduZone.Enrollments.EnrollmentDto"
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
                   }
                 }
               ]
@@ -2157,8 +2589,8 @@
                 }
               ],
               "returnValue": {
-                "type": "EduZone.Enrollments.EnrollmentDto",
-                "typeSimple": "EduZone.Enrollments.EnrollmentDto"
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
               },
               "allowAnonymous": false,
               "implementFrom": "EduZone.Enrollments.IEnrollmentAppService"
@@ -2320,6 +2752,23 @@
                     "type": "System.Boolean",
                     "typeSimple": "boolean"
                   }
+                },
+                {
+                  "name": "ResendVerficationEmail",
+                  "parametersOnMethod": [
+                    {
+                      "name": "targetEmail",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
                 }
               ]
             }
@@ -2395,6 +2844,43 @@
               "returnValue": {
                 "type": "System.Boolean",
                 "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.InstructorsAuth.IInstructorsAuthAppService"
+            },
+            "ResendVerficationEmailByTargetEmail": {
+              "uniqueName": "ResendVerficationEmailByTargetEmail",
+              "name": "ResendVerficationEmail",
+              "httpMethod": "POST",
+              "url": "api/app/instructor-auth/resend-verfication-email",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "targetEmail",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "targetEmail",
+                  "name": "targetEmail",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
               },
               "allowAnonymous": null,
               "implementFrom": "EduZone.InstructorsAuth.IInstructorsAuthAppService"
@@ -3003,7 +3489,7 @@
                 "type": "System.Boolean",
                 "typeSimple": "boolean"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Ratings.IRateAppService"
             },
             "GetRateMyCourseByInput": {
@@ -3076,7 +3562,7 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Ratings.RateDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Ratings.RateDto>"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "EduZone.Ratings.IRateAppService"
             }
           }
@@ -5967,6 +6453,108 @@
         }
       ]
     },
+    "EduZone.Certificates.CertificateDto": {
+      "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "StudentName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CourseTitle",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "InstructorName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "StudentId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CourseId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CreatedOn",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "EduZone.Certificates.GetCertificatesInput": {
+      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FilterText",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
     "EduZone.Courses.CourseDto": {
       "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Guid>",
       "isEnum": false,
@@ -6574,6 +7162,51 @@
       "genericArguments": null,
       "properties": null
     },
+    "EduZone.GenerateCertificate.CertificateInfo": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "StudentName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CourseName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Date",
+          "jsonName": null,
+          "type": "System.DateTime",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
     "EduZone.Instructors.GetInstructorInput": {
       "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
       "isEnum": false,
@@ -6676,18 +7309,6 @@
         },
         {
           "name": "About",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "FullMobileNumber",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -6817,18 +7438,6 @@
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "CountryCode",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
           "isRequired": true,
           "minLength": null,
           "maxLength": null,
@@ -6837,7 +7446,7 @@
           "regex": null
         },
         {
-          "name": "MobileNumber",
+          "name": "ConfirmPassword",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -7284,7 +7893,31 @@
           "regex": null
         },
         {
+          "name": "StudentName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "CourseName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Category",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -10289,6 +10922,51 @@
           "jsonName": null,
           "type": "System.Boolean",
           "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Volo.Abp.Content.IRemoteStreamContent": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FileName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ContentType",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ContentLength",
+          "jsonName": null,
+          "type": "System.Int64?",
+          "typeSimple": "number?",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,

@@ -32,6 +32,8 @@ using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.PermissionManagement;
 using EduZone.StartupTasks;
 using EduZone.Hub;
+using DinkToPdf.Contracts;
+using DinkToPdf;
 
 namespace EduZone;
 
@@ -264,5 +266,8 @@ public class EduZoneHttpApiHostModule : AbpModule
     private void ConfigureStartupTasks(ServiceConfigurationContext context)
     {
         context.Services.AddTransient<IStartupTask, CreateDatabaseStartupTask>();
+        // for create pdf from HTML:
+        context.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
     }
 }

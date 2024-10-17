@@ -1,4 +1,5 @@
-﻿using EduZone.Emailing;
+﻿using EduZone.DataSeeder;
+using EduZone.Emailing;
 using EduZone.Instructors;
 using EduZone.Permissions;
 using Microsoft.Extensions.Configuration;
@@ -94,7 +95,7 @@ namespace EduZone.InstructorsAuth
             #endregion
 
             var instructor = new Instructor(GuidGenerator.Create(),createdTenant.Id, input.FirstName, input.LastName, input.Gender, input.Email
-                , input.About, input.CountryCode, input.MobileNumber);
+                , input.About);
 
             await _instructorRepository.InsertAsync(instructor, true);
 
@@ -174,8 +175,30 @@ namespace EduZone.InstructorsAuth
                         await SendWelcomeEmail(user.Email, instructor.Id, instructorName, tenantName.Name);
                         return true;
                     }
+                    else if (result.Errors.Any(x => x.Code == "InvalidToken")){
+                        return false;
+                    }
                 }
                 return false;
+            }
+        }
+
+        public async Task ResendVerficationEmail(string targetEmail)
+        {
+            using (DataFilter.Disable<IMultiTenant>())
+            {
+                //find user by email
+                var user = await _userManager.FindByEmailAsync(targetEmail.Replace(" ", "+"));
+                if (user == null) throw new UserFriendlyException("Not Found");
+                string confirmationLink = await _generateEmailConformaitionLink(user);
+                await _backgroundJobManager.EnqueueAsync(
+                new EmailSendingArgs
+                {
+                    Template = "Verification",
+                    TargetEmail = user.Email,
+                    ConfirmationLink = confirmationLink
+                }
+                );
             }
         }
 
@@ -227,9 +250,10 @@ namespace EduZone.InstructorsAuth
             var permissions = await _permissionDefinitionManager.GetPermissionsAsync();
             using (CurrentTenant.Change(tenantId))
             {
+                var adminRole = await _roleManager.FindByNameAsync("admin");
                 string InstructorRoleName = EduZoneConsts.InstructorRoleName;
                 var instructorRolePermission = permissions.Where(x => x.IsEnabled &&
-                (x.Name.StartsWith(EduZonePermissions.GroupName) || x.Name.StartsWith("AbpIdentity."))
+                (x.Name.StartsWith(EduZonePermissions.GroupName))
                 && x.MultiTenancySide != MultiTenancySides.Host);
 
                 var createdRole = await _roleManager.CreateAsync(new IdentityRole(Guid.NewGuid(),
@@ -249,7 +273,7 @@ namespace EduZone.InstructorsAuth
                 try
                 {
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    string confirmLink = _configuration["App:AngularUrl"] +
+                    string confirmLink = _configuration["App:ClientUrl"] +
                         _configuration["App:ConfirmationEmailLink"] + user.Email + "&c=" + token;
                     return confirmLink;
                 }

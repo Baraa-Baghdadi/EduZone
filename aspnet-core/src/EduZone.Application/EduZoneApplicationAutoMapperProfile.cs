@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EduZone.Categories;
+using EduZone.Certificates;
 using EduZone.Courses;
 using EduZone.Enrollments;
 using EduZone.Instructors;
@@ -45,7 +46,12 @@ public class EduZoneApplicationAutoMapperProfile : Profile,ISingletonDependency
 
         CreateMap<Rate, RateDto>()
             .ForMember(dest => dest.CourseName, opt => opt.MapFrom(src => src.Course != null ? src.Course.Title : ""))
-            .ForMember(dest => dest.InstructorName, opt => opt.MapFrom(src => src.Course.Instructor != null ? src.Course.Instructor.FirstName + " " + src.Course.Instructor.LastName : ""));
+            .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Course.Category != null ? src.Course.Category.Name : ""));
+
+        CreateMap<Certificate, CertificateDto>()
+         .ForMember(dest => dest.StudentName, opt => opt.MapFrom(src => src.Student != null ? src.Student.FirstName + " " + src.Student.LastName : ""))
+         .ForMember(dest => dest.InstructorName, opt => opt.MapFrom(src => src.Course.Instructor != null ? src.Course.Instructor.FirstName + " " + src.Course.Instructor.LastName : ""))
+         .ForMember(dest => dest.CourseTitle, opt => opt.MapFrom(src => src.Course.Title != null ? src.Course.Title : ""));
 
     }
 }

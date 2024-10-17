@@ -465,6 +465,19 @@ export class CreateCourseComponent implements OnInit {
         return;
       }
     });
+    // update before submit course:
+    if(this.updateLessonId.value == null || this.updateLessonId.value == undefined){
+      var index = this.allLessons.findIndex(x => x.title == this.selectedLesson[0].title && x.videoOrder == this.selectedLesson[0].videoOrder);
+      if (index != -1) {
+        this.allLessons[index].title = this.updateLessonTitle.value;
+        this.selectedLesson[0].videoOrder = this.updateLessonVideoOrder.value;
+        this.selectedLesson[0].content= this.updateLessonContent.value;
+        // update lessons table:
+        this.allLessons = [...this.allLessons]; 
+        this.isModalOpen = false ;
+      }
+      return;
+    }
     if (this.updateLessonError === null) {
       var payLoad = {} as UpdateLessonInput;
       payLoad.id = this.updateLessonId.value;

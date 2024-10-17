@@ -28,6 +28,20 @@ public static class EduZonePermissions
         public const string Edit = GroupName + ".AllStudents.Edit";
     }
 
+    public static class AdminCertificates
+    {
+        public const string Default = GroupName + ".AdminCertificates";
+        public const string GetCertificate = GroupName + ".AdminCertificates.GetCertificate";
+        public const string GenerateCertificate = GroupName + ".AdminCertificates.GenerateCertificate";
+    }
+
+    public static class InstructorCertificates
+    {
+        public const string Default = GroupName + ".InstructorCertificates";
+        public const string GetCertificate = GroupName + ".InstructorCertificates.GetCertificate";
+        public const string GenerateCertificate = GroupName + ".InstructorCertificates.GenerateCertificate";
+    }
+
     public static class AllCourses
     {
         public const string Default = GroupName + ".AllCourses";

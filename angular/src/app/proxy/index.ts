@@ -1,9 +1,11 @@
 import * as ApiResponse from './api-response';
 import * as Attachments from './attachments';
 import * as Categories from './categories';
+import * as Certificates from './certificates';
 import * as Courses from './courses';
 import * as Enrollments from './enrollments';
 import * as Enum from './enum';
+import * as GenerateCertificate from './generate-certificate';
 import * as Instructors from './instructors';
 import * as InstructorsAuth from './instructors-auth';
 import * as Lessons from './lessons';
@@ -11,4 +13,4 @@ import * as Notifications from './notifications';
 import * as Ratings from './ratings';
 import * as StudentAuth from './student-auth';
 import * as Students from './students';
-export { ApiResponse, Attachments, Categories, Courses, Enrollments, Enum, Instructors, InstructorsAuth, Lessons, Notifications, Ratings, StudentAuth, Students };
+export { ApiResponse, Attachments, Categories, Certificates, Courses, Enrollments, Enum, GenerateCertificate, Instructors, InstructorsAuth, Lessons, Notifications, Ratings, StudentAuth, Students };

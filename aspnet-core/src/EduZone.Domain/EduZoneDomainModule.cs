@@ -34,7 +34,7 @@ namespace EduZone;
     typeof(AbpSettingManagementDomainModule),
     typeof(AbpTenantManagementDomainModule),
     typeof(AbpEmailingModule)
-)]
+    )]
 [DependsOn(typeof(BlobStoringDatabaseDomainModule))]
     [DependsOn(typeof(AbpBlobStoringFileSystemModule))]
     public class EduZoneDomainModule : AbpModule

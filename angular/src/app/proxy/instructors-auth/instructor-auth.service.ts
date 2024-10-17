@@ -18,6 +18,15 @@ export class InstructorAuthService {
     { apiName: this.apiName,...config });
   
 
+  resendVerficationEmailByTargetEmail = (targetEmail: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/instructor-auth/resend-verfication-email',
+      params: { targetEmail },
+    },
+    { apiName: this.apiName,...config });
+  
+
   verifyByInput = (input: VerifyCodeDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, boolean>({
       method: 'POST',

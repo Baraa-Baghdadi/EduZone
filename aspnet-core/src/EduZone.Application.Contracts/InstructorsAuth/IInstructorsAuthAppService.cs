@@ -11,5 +11,6 @@ namespace EduZone.InstructorsAuth
     {
         Task<bool> CreateNewInstructor(NewInstructorInput input);
         public Task<bool> Verify(VerifyCodeDto input);
+        public Task ResendVerficationEmail(string targetEmail);
     }
 }
