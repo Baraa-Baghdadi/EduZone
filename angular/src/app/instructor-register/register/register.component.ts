@@ -77,7 +77,12 @@ export class RegisterComponent implements OnInit {
       password : [null , Validators.required],
       confirmPassword : [null ,Validators.required],
       about : [null ,Validators.required],
-    });
+    },{ validator: this.passwordMatchValidator});
+  }
+
+  passwordMatchValidator(form: FormGroup) {
+    return form.get('password')?.value === form.get('confirmPassword')?.value
+      ? null : { mismatch: true };
   }
 
   submit(){

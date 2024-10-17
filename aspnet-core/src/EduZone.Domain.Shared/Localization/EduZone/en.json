@@ -118,6 +118,7 @@
     "verficationDoneMsg": "Thanks for verifying your email, please press Login button to login to your account.",
     "verificationFailed": "Verification Link Expired",
     "expiredLinkMsg": "It looks like the verification link you clicked has expired. Please request a new verification email to continue.",
-    "resend": "Resend"
+    "resend": "Resend",
+    "passwordsNotMatch": "Passwords do not match."
   }
 }

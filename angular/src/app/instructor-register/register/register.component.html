@@ -49,12 +49,15 @@
 
               <div class="col-4 mt-2">
                 <label class="ms-1" for="password">{{'::password' | abpLocalization}}*</label>
-                <input [placeholder]= "'::password' | abpLocalization" type="text" id="password" class="form-control mt-1" formControlName="password">
+                <input [placeholder]= "'::password' | abpLocalization" type="password" id="password" class="form-control mt-1" formControlName="password">
               </div>
 
               <div class="col-4 mt-2">
                 <label class="ms-1" for="confirmPassword">{{'::confirmPassword' | abpLocalization}}*</label>
                 <input [placeholder]= "'::confirmPassword' | abpLocalization" type="password" id="confirmPassword" class="form-control mt-1" formControlName="confirmPassword">
+                <div *ngIf="form.errors?.mismatch && form.get('confirmPassword')?.touched">
+                  <small class="text-danger ms-1">{{"::passwordsNotMatch" | abpLocalization}}</small>
+                </div>
               </div>
 
               <div class="col-12 mt-2">
@@ -63,7 +66,7 @@
             </div>
         </div>
     </form>
-    <div class="d-flex justify-content-end mt-3 mb-3">
+    <div class="d-flex justify-content-end mt-3 mb-3" routerLink="/">
         <button type="button" class="btn btn-secondary cancel-btn">
             {{ '::Cancel' | abpLocalization }}
           </button>
