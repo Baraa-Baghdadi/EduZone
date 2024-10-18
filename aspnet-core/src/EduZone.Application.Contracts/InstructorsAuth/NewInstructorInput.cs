@@ -25,5 +25,7 @@ namespace EduZone.InstructorsAuth
         public string ConfirmPassword { get; set; }
         [AllowNull]
         public string About { get; set; }
+        [Required]
+        public string License { get; set; }
     }
 }

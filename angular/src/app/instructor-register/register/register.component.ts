@@ -70,6 +70,7 @@ export class RegisterComponent implements OnInit {
 
   buildForm(){
     this.form = this.fb.group({
+      license : [null,Validators.required],
       firstName : [null ,Validators.required],
       lastName : [ null ,Validators.required],
       gender : [null, Validators.required],

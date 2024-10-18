@@ -8,6 +8,7 @@ export interface NewInstructorInput {
   password: string;
   confirmPassword: string;
   about?: string;
+  license: string;
 }
 
 export interface VerifyCodeDto {
