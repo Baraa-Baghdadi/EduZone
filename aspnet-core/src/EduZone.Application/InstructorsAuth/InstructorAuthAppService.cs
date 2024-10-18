@@ -1,6 +1,7 @@
 ﻿using EduZone.DataSeeder;
 using EduZone.Emailing;
 using EduZone.Instructors;
+using EduZone.Licenses;
 using EduZone.Permissions;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.BackgroundJobs;
+using Volo.Abp.Domain.Repositories;
 using Volo.Abp.EventBus.Distributed;
 using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
@@ -35,11 +37,13 @@ namespace EduZone.InstructorsAuth
 
         private readonly IInstructorRepository _instructorRepository;
 
+        private IRepository<License> _licenseRepository;
+
         public InstructorAuthAppService(IdentityUserManager userManager, IdentityRoleManager roleManager, 
             IPermissionManager permissionManager, IPermissionDefinitionManager permissionDefinitionManager,
             ITenantManager tenantManager, ITenantRepository tenantRepository, IDistributedEventBus distributedEventBus, 
             IConfiguration configuration, IBackgroundJobManager backgroundJobManager, 
-            IInstructorRepository instructorRepository)
+            IInstructorRepository instructorRepository, IRepository<License> licenseRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -51,14 +55,27 @@ namespace EduZone.InstructorsAuth
             _configuration = configuration;
             _backgroundJobManager = backgroundJobManager;
             _instructorRepository = instructorRepository;
+            _licenseRepository = licenseRepository;
         }
 
         public async Task<bool> CreateNewInstructor(NewInstructorInput input)
         {
             var isUnique = await _checkUniqueEmail(input.Email);
-            if (isUnique == 0) throw new UserFriendlyException("EmailShouldBeUniqueMessage");
+            if (isUnique == 0) throw new UserFriendlyException(L[EduZoneDomainErrorCodes.EmailShouldBeUniqueMessage]);
 
             var newTenantName = await _normalizeTenantName(input.FirstName + " " + input.LastName);
+            
+            // check license: 
+
+            bool isValidLicense = await _isLicenseValid(input.License);
+
+            if (!isValidLicense) throw new UserFriendlyException(L[EduZoneDomainErrorCodes.InvalidLicense]);
+
+            var license = await _licenseRepository.FirstOrDefaultAsync(l => l.Key == input.License)
+                ?? throw new UserFriendlyException(L[EduZoneDomainErrorCodes.InvalidLicense]);
+
+            // end check license...
+
 
             #region create new tenant
             var createdTenant = await _tenantManager.CreateAsync(newTenantName);
@@ -95,11 +112,19 @@ namespace EduZone.InstructorsAuth
             #endregion
 
             var instructor = new Instructor(GuidGenerator.Create(),createdTenant.Id, input.FirstName, input.LastName, input.Gender, input.Email
-                , input.About);
+                , input.About, license.Id);
 
             await _instructorRepository.InsertAsync(instructor, true);
 
             if (CurrentUnitOfWork != null) await CurrentUnitOfWork.CompleteAsync();
+
+            // make licesnse as used:
+
+            license.IsUsed = true;
+
+            await _licenseRepository.UpdateAsync(license,true);
+
+            // Send Email:
 
             await SendVerificationEmail(input.Email, input.FirstName + " " + input.LastName, createdTenant.Name);
 
@@ -281,6 +306,12 @@ namespace EduZone.InstructorsAuth
 
                 return "";
             }
+        }
+
+        private async Task<bool> _isLicenseValid(string licenseKey)
+        {
+            var license = await _licenseRepository.FirstOrDefaultAsync(l => l.Key == licenseKey);
+            return license != null && license.ExpirationDate > DateTime.UtcNow && !license.IsUsed;
         }
 
         #endregion

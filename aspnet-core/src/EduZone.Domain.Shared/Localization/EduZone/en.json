@@ -119,6 +119,8 @@
     "verificationFailed": "Verification Link Expired",
     "expiredLinkMsg": "It looks like the verification link you clicked has expired. Please request a new verification email to continue.",
     "resend": "Resend",
-    "passwordsNotMatch": "Passwords do not match."
+    "passwordsNotMatch": "Passwords do not match.",
+    "license": "License",
+    "InvalidLicense": "Incorrect License Key,Ensure that you've entered the correct license key"
   }
 }

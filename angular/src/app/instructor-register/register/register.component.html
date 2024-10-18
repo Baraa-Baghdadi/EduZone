@@ -60,14 +60,19 @@
                 </div>
               </div>
 
-              <div class="col-12 mt-2">
+              <div class="col-6 mt-2">
+                <label class="ms-1" for="license">{{'::license' | abpLocalization}}*</label>
+                <input [placeholder]= "'::license' | abpLocalization" type="text" id="license" class="form-control mt-1" formControlName="license">
+              </div>
+
+              <div class="col-6 mt-2">
                 <label class="ms-1" for="about">{{'::about' | abpLocalization}}*</label>
-                <textarea rows="3" [placeholder]= "'::about' | abpLocalization" type="text" id="about" class="form-control mt-1" formControlName="about" ></textarea>
+                <textarea rows="1" [placeholder]= "'::about' | abpLocalization" type="text" id="about" class="form-control mt-1" formControlName="about" ></textarea>
             </div>
         </div>
     </form>
-    <div class="d-flex justify-content-end mt-3 mb-3" routerLink="/">
-        <button type="button" class="btn btn-secondary cancel-btn">
+    <div class="d-flex justify-content-end mt-3 mb-3">
+        <button type="button" class="btn btn-secondary cancel-btn" routerLink="/">
             {{ '::Cancel' | abpLocalization }}
           </button>
       
