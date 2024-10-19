@@ -8,6 +8,8 @@ namespace EduZone.Licenses
     {
         Task<PagedResultDto<LicenseDto>> GetListAsync(GetLicenseInput input); // get all for admin
         Task<LicenseDto> GetById(Guid id); // get single for admin
+        Task<bool> CreateLicanse(CreateLicenseInput input);
+        Task<bool> UpdateLicanse(Guid id, CreateLicenseInput input); 
 
     }
 }
