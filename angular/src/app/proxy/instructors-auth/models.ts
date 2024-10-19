@@ -8,6 +8,8 @@ export interface NewInstructorInput {
   password: string;
   confirmPassword: string;
   about?: string;
+  countryCode: string;
+  mobileNumber: string;
   license: string;
 }
 

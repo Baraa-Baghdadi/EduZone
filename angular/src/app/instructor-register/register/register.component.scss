@@ -14,4 +14,74 @@
 ::ng-deep .ng-select .ng-select-container:hover{
     box-shadow: 0 0px 0 rgba(0, 0, 0, .06);
 }
+// for select language:
+.dropdown {
+  position: relative;
+  width: 100px;
+}
 // End
+// for mobile number:
+
+  .mobile-dropdown{
+    position: absolute;left:0;border: none;
+  }
+  
+  .dropdown-header {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    direction: ltr;
+  }
+  
+  .dropdown-list {
+    position: absolute;
+    top: 100%;
+    border: 1px solid #ccc;
+    background-color: white;
+    z-index: 1000;
+    max-height: 150px;
+    width: 220px;
+    max-width: 220px;
+    overflow-y: scroll;
+    inset-inline-end: 0px !important;
+  }
+  
+  .dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    direction: ltr;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .arrow {
+    float: right;
+    transition: transform 0.2s;
+  }
+  
+  .arrow.open {
+    transform: rotate(180deg);
+  }
+#mobileNumber{
+    padding-left: 90px;
+}
+.code{
+    margin-top: 2px;
+}
+// end mobile number
+
+
+
+
+
+
+
+
+
+
+
+
+

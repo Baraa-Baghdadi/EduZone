@@ -112,7 +112,7 @@ namespace EduZone.InstructorsAuth
             #endregion
 
             var instructor = new Instructor(GuidGenerator.Create(),createdTenant.Id, input.FirstName, input.LastName, input.Gender, input.Email
-                , input.About, license.Id);
+                , input.About,input.CountryCode,input.MobileNumber ,license.Id);
 
             await _instructorRepository.InsertAsync(instructor, true);
 

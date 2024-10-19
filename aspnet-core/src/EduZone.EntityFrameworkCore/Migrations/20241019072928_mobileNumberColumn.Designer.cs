@@ -4,6 +4,7 @@ using EduZone.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace EduZone.Migrations
 {
     [DbContext(typeof(EduZoneDbContext))]
-    partial class EduZoneDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241019072928_mobileNumberColumn")]
+    partial class mobileNumberColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,7 +410,6 @@ namespace EduZone.Migrations
                         .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("CountryCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreationTime")
@@ -440,7 +442,6 @@ namespace EduZone.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullMobileNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
@@ -468,7 +469,6 @@ namespace EduZone.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("MobileNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("TenantId")

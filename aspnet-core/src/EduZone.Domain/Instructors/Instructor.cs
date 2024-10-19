@@ -14,6 +14,9 @@ namespace EduZone.Instructors
         public Gender Gender { get; set; }
         public string Email { get; set; }
         public string About { get; set; }
+        public string CountryCode { get; set; }
+        public string MobileNumber { get; set; }
+        public string FullMobileNumber { get; set; }
         public Guid? LicenseId { get; set; }
         public License License { get; set; }
 
@@ -23,7 +26,7 @@ namespace EduZone.Instructors
         }
 
         public Instructor(Guid id,Guid tenantId,string firstName, string lastName, Gender gender, string email,
-        string about, Guid licenseId)
+        string about,string countryCode,string mobileNumber ,Guid licenseId)
         {
             Id = id;
             TenantId = tenantId;
@@ -32,7 +35,10 @@ namespace EduZone.Instructors
             Gender = gender;
             Email = email;
             About = about;
+            CountryCode = countryCode;
+            MobileNumber = mobileNumber;
             LicenseId = licenseId;
+            FullMobileNumber = countryCode + mobileNumber;
         }
 
     }
