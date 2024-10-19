@@ -1,4 +1,4 @@
-import { AuthService, ConfigStateService, getLocaleDirection, LocalizationService, SessionStateService } from '@abp/ng.core';
+import { ConfigStateService, getLocaleDirection, LocalizationService, SessionStateService } from '@abp/ng.core';
 import { LocaleDirection } from '@abp/ng.theme.shared';
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';

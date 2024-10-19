@@ -26,6 +26,10 @@ namespace EduZone.InstructorsAuth
         [AllowNull]
         public string About { get; set; }
         [Required]
+        public string CountryCode { get; set; }
+        [Required]
+        public string MobileNumber { get; set; }
+        [Required]
         public string License { get; set; }
     }
 }

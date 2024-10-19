@@ -2131,6 +2131,47 @@
             }
           }
         },
+        "EduZone.CountryCodes.CountryCodeAppService": {
+          "controllerName": "CountryCode",
+          "controllerGroupName": "CountryCode",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "EduZone.CountryCodes.CountryCodeAppService",
+          "interfaces": [
+            {
+              "type": "EduZone.CountryCodes.ICountryCodeAppService",
+              "name": "ICountryCodeAppService",
+              "methods": [
+                {
+                  "name": "GetCountryCodesAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<EduZone.CountryCodes.CountryCodeDto>",
+                    "typeSimple": "[EduZone.CountryCodes.CountryCodeDto]"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetCountryCodesAsync": {
+              "uniqueName": "GetCountryCodesAsync",
+              "name": "GetCountryCodesAsync",
+              "httpMethod": "GET",
+              "url": "api/app/country-code/country-codes",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<EduZone.CountryCodes.CountryCodeDto>",
+                "typeSimple": "[EduZone.CountryCodes.CountryCodeDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "EduZone.CountryCodes.ICountryCodeAppService"
+            }
+          }
+        },
         "EduZone.Courses.CourseAppService": {
           "controllerName": "Course",
           "controllerGroupName": "Course",
@@ -6555,6 +6596,63 @@
         }
       ]
     },
+    "EduZone.CountryCodes.CountryCodeDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Code",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Name",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Flag",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ExampleNumber",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
     "EduZone.Courses.CourseDto": {
       "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Guid>",
       "isEnum": false,
@@ -7318,6 +7416,42 @@
           "minimum": null,
           "maximum": null,
           "regex": null
+        },
+        {
+          "name": "CountryCode",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "MobileNumber",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "FullMobileNumber",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
         }
       ]
     },
@@ -7463,6 +7597,30 @@
           "type": "System.String",
           "typeSimple": "string",
           "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CountryCode",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "MobileNumber",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
           "minLength": null,
           "maxLength": null,
           "minimum": null,

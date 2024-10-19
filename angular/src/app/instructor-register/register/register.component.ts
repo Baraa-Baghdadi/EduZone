@@ -1,8 +1,9 @@
 import { getLocaleDirection, LocalizationService, SessionStateService } from '@abp/ng.core';
 import { LocaleDirection } from '@abp/ng.theme.shared';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CountryCodeService } from '@proxy/country-codes';
 import { genderOptions } from '@proxy/enum';
 import { InstructorAuthService } from '@proxy/instructors-auth';
 import { BehaviorSubject, map } from 'rxjs';
@@ -31,9 +32,15 @@ export class RegisterComponent implements OnInit {
   form:FormGroup;
   genders = genderOptions;
 
-  // complete regster:
+  // complete register:
   showRegisterPage = false ;
 
+  // codes:
+  defaultCode = "+963";
+  defaultFlag = "https://flagsapi.com/SY/flat/24.png";
+  countryCodes = [];
+  selectedOption: string = '';
+  isOpen: boolean = false;
 
   /**
    *
@@ -41,13 +48,18 @@ export class RegisterComponent implements OnInit {
   constructor(private fb:FormBuilder,
     private sessionState:SessionStateService,
     private localizationService:LocalizationService,
-    private authService:InstructorAuthService) {
+    private authService:InstructorAuthService,
+    private countryCodeService : CountryCodeService,
+    private elementRef: ElementRef ) {
       this.listenToLanguageChanges();
   }
 
   ngOnInit(): void {
+    this.getCountryCode();
     this.buildForm();
   }
+
+
 
   selectLang(lang:any){
     this.sessionState.setLanguage(lang);
@@ -78,12 +90,37 @@ export class RegisterComponent implements OnInit {
       password : [null , Validators.required],
       confirmPassword : [null ,Validators.required],
       about : [null ,Validators.required],
+      countryCode : [this.defaultCode,Validators.required],
+      mobileNumber : [null,Validators.required]
     },{ validator: this.passwordMatchValidator});
   }
 
+  // match password and confirm validation:
   passwordMatchValidator(form: FormGroup) {
     return form.get('password')?.value === form.get('confirmPassword')?.value
       ? null : { mismatch: true };
+  }
+
+  get countryCode(){
+    return this.form.get('countryCode') as FormControl;
+  }
+
+  getCountryCode(){
+    this.countryCodeService.getCountryCodes().subscribe((data:any) => {
+      this.countryCodes = data;
+    })
+  }
+
+  // custom dropdown for mobile number:
+
+  toggleDropdown() {
+    this.isOpen = !this.isOpen;    
+  }
+
+  selectOption(option: string) {
+    this.selectedOption = option;
+    this.countryCode.setValue(option);
+    this.isOpen = false;
   }
 
   submit(){
@@ -95,4 +132,5 @@ export class RegisterComponent implements OnInit {
       });
     }
   }
+
 }

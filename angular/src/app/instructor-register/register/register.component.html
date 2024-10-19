@@ -24,17 +24,14 @@
     <form [formGroup]="form">
         <div class="row">
             <div class="col-4 mt-1">
-                <label class="ms-1" for="firstName">{{'::firstName' | abpLocalization}}*</label>
                 <input [placeholder]= "'::firstName' | abpLocalization" type="text" id="firstName" class="form-control mt-1" formControlName="firstName" autofocus>
               </div>
 
               <div class="col-4 mt-1">
-                <label class="ms-1" for="lastName">{{'::lastName' | abpLocalization}}*</label>
                 <input [placeholder]= "'::lastName' | abpLocalization" type="text" id="lastName" class="form-control mt-1" formControlName="lastName">
               </div>
 
               <div class="col-4 form-group">
-                <label class="ms-1" for="gender">{{'::gender' | abpLocalization}}*</label>
                 <ng-select id="gender" [placeholder]= "'::gender' | abpLocalization" class="form-control mt-2" formControlName="gender">
                     <ng-option *ngFor="let item of genders" [value]="item.value" >
                       {{item.key}}
@@ -43,17 +40,14 @@
               </div>
 
               <div class="col-4 mt-2">
-                <label class="ms-1" for="email">{{'::email' | abpLocalization}}*</label>
                 <input [placeholder]= "'::email' | abpLocalization" type="text" id="email" class="form-control mt-1" formControlName="email">
               </div>
 
               <div class="col-4 mt-2">
-                <label class="ms-1" for="password">{{'::password' | abpLocalization}}*</label>
                 <input [placeholder]= "'::password' | abpLocalization" type="password" id="password" class="form-control mt-1" formControlName="password">
               </div>
 
               <div class="col-4 mt-2">
-                <label class="ms-1" for="confirmPassword">{{'::confirmPassword' | abpLocalization}}*</label>
                 <input [placeholder]= "'::confirmPassword' | abpLocalization" type="password" id="confirmPassword" class="form-control mt-1" formControlName="confirmPassword">
                 <div *ngIf="form.errors?.mismatch && form.get('confirmPassword')?.touched">
                   <small class="text-danger ms-1">{{"::passwordsNotMatch" | abpLocalization}}</small>
@@ -61,25 +55,44 @@
               </div>
 
               <div class="col-6 mt-2">
-                <label class="ms-1" for="license">{{'::license' | abpLocalization}}*</label>
                 <input [placeholder]= "'::license' | abpLocalization" type="text" id="license" class="form-control mt-1" formControlName="license">
               </div>
 
               <div class="col-6 mt-2">
-                <label class="ms-1" for="about">{{'::about' | abpLocalization}}*</label>
-                <textarea rows="1" [placeholder]= "'::about' | abpLocalization" type="text" id="about" class="form-control mt-1" formControlName="about" ></textarea>
+                <div class= "mt-1" style="position: relative;">
+                  <div class="mobile-dropdown">
+                    <div class="dropdown-header" (click)="toggleDropdown()">
+                      <img [src]="selectedOption.flag || defaultFlag">
+                      <span class="ms-1 d-block code">{{ selectedOption.code || defaultCode }}</span>
+                    </div>
+                    <div class="dropdown-list" [ngClass]="{'d-block':isOpen,'d-none':!isOpen}">
+                      <div 
+                        class="dropdown-item" 
+                        *ngFor="let option of countryCodes" 
+                        (click)="selectOption(option)">
+                        <img [src]="option.flag">
+                        <span class="ms-2">{{option.name}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <input class="form-control" id="mobileNumber" type="tel" [placeholder]="selectedOption.exampleNumber || 'Mobile Number'" formControlName="mobileNumber">
+                </div>
+              </div>
+
+              <div class="col-12 pb-3 mt-2">
+                <textarea rows="3" [placeholder]= "'::about' | abpLocalization" type="text" id="about" class="form-control mt-1" formControlName="about" ></textarea>
             </div>
-        </div>
-    </form>
-    <div class="d-flex justify-content-end mt-3 mb-3">
-        <button type="button" class="btn btn-secondary cancel-btn" routerLink="/">
-            {{ '::Cancel' | abpLocalization }}
-          </button>
-      
-          <button class="btn btn-primary ms-1" [disabled]="!form.valid" (click)="submit()">
-            {{ '::Submit' | abpLocalization }}
-          </button>
-      </div>
+          </div>
+    </form> 
+    <div class="text-end mt-2 mb-3">
+      <button type="button" class="btn btn-secondary cancel-btn" routerLink="/">
+          {{ '::Cancel' | abpLocalization }}
+        </button>
+    
+        <button class="btn btn-primary ms-1" [disabled]="!form.valid" (click)="submit()">
+          {{ '::Submit' | abpLocalization }}
+        </button>
+    </div>
 </div>
 </div>
 <div class="pt-4" *ngIf="showRegisterPage">

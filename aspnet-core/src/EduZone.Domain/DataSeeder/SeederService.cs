@@ -14,15 +14,17 @@ namespace EduZone.DataSeeder
         private readonly AdminHostSeederContributer _adminHostSeederContributer;
         private readonly CategorySeeder _categorySeeder;
         private readonly LicenseSeeder _licenseSeeder;
+        private readonly CountryCodesSeeder _countryCodesSeeder;
 
         public SeederService(EduZoneDbMigrationService migrationService, OpenIddictDataSeedContributor openIddictSeedContributer,
-            AdminHostSeederContributer adminHostSeederContributer, CategorySeeder categorySeeder, LicenseSeeder licenseSeeder)
+            AdminHostSeederContributer adminHostSeederContributer, CategorySeeder categorySeeder, LicenseSeeder licenseSeeder, CountryCodesSeeder countryCodesSeeder)
         {
             _migrationService = migrationService;
             _openIddictSeedContributer = openIddictSeedContributer;
             _adminHostSeederContributer = adminHostSeederContributer;
             _categorySeeder = categorySeeder;
             _licenseSeeder = licenseSeeder;
+            _countryCodesSeeder = countryCodesSeeder;
         }
 
         [UnitOfWork]
@@ -36,10 +38,13 @@ namespace EduZone.DataSeeder
             await _adminHostSeederContributer.HostAdminSeedAsync();
 
             // seed data:
-            await _categorySeeder.Seed();
+            //await _categorySeeder.Seed();
 
             // seed licenses:
-            await _licenseSeeder.Seed();
+            //await _licenseSeeder.Seed();
+
+            // seed countryCode:
+            //await _countryCodesSeeder.Seed();
         }
     }
 }

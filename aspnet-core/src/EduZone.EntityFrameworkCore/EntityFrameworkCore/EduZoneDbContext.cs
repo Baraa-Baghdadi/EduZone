@@ -26,6 +26,7 @@ using EduZone.Notifications;
 using EduZone.Ratings;
 using EduZone.Certificates;
 using EduZone.Licenses;
+using EduZone.CountryCodes;
 
 namespace EduZone.EntityFrameworkCore;
 
@@ -79,6 +80,7 @@ public class EduZoneDbContext :
     public DbSet<Rate> Ratings { get; set; }
     public DbSet<Certificate> Certificates { get; set; }
     public DbSet<License> Licenses { get; set; }
+    public DbSet<CountryCode> CountryCodes { get; set; }
 
 
     public EduZoneDbContext(DbContextOptions<EduZoneDbContext> options)
@@ -184,6 +186,13 @@ public class EduZoneDbContext :
             b.ToTable(EduZoneConsts.DbTablePrefix + "Licenses", EduZoneConsts.DbSchema);
             b.ConfigureByConvention();
         });
+
+        builder.Entity<CountryCode>(b =>
+        {
+            b.ToTable(EduZoneConsts.DbTablePrefix + "CountryCodes", EduZoneConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
+
 
     }
 }
