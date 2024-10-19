@@ -75,7 +75,7 @@
                       </div>
                     </div>
                   </div>
-                  <input class="form-control" id="mobileNumber" type="tel" [placeholder]="selectedOption.exampleNumber || 'Mobile Number'" formControlName="mobileNumber">
+                  <input class="form-control" id="mobileNumber" type="tel" [placeholder]="selectedOption.exampleNumber || ('::fullMobileNumber' | abpLocalization)" formControlName="mobileNumber">
                 </div>
               </div>
 

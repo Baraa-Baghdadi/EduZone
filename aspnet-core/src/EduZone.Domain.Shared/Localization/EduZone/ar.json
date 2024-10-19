@@ -13,6 +13,7 @@
     "Menu:coursesRating": "تقييمات الدورات التدريبية",
     "Menu:studentsCertificates": "شهادات الطلاب",
     "Menu:myStudentsCertificates": "شهادات طلابي",
+    "Menu:lisense": "إدارة التراخيص",
     "Welcome": "مرحباً",
     "SignUp": "التسجيل",
     "Permission:EduZoneApp": "منطقة التعليم",
@@ -123,7 +124,13 @@
     "resend": "إعادة الإرسال",
     "passwordsNotMatch": "كلمات المرور غير متطابقة",
     "license": "الترخيص",
-    "InvalidLicense": "مفتاح الترخيص غير صحيح, تأكد من أنك قد أدخلت مفتاح الترخيص الصحيح"
+    "InvalidLicense": "مفتاح الترخيص غير صحيح, تأكد من أنك قد أدخلت مفتاح الترخيص الصحيح",
+    "newLicense": "إضافة ترخيص",
+    "key": "المفتاح",
+    "expirationDate": "تاريخ الإنتهاء",
+    "isUsed": "الاستخدام",
+    "isUsed:true": "نعم",
+    "isUsed:false": "لا"
 
   }
 }

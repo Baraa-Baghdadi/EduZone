@@ -21,6 +21,7 @@ using EduZone.Courses;
 using EduZone.Notifications;
 using EduZone.Ratings;
 using EduZone.Certificates;
+using EduZone.Licenses;
 
 namespace EduZone.EntityFrameworkCore;
 
@@ -59,6 +60,7 @@ namespace EduZone.EntityFrameworkCore;
             options.AddRepository<Notification, EfCoreNotificationRepository>();
             options.AddRepository<Rate, EfCoreRateRepository>();
             options.AddRepository<Certificate, EfCoreCertificateRepository>();
+            options.AddRepository<License, EfCoreLicenseRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>

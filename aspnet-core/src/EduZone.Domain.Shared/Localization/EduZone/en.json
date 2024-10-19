@@ -13,6 +13,7 @@
     "Menu:studentsCertificates": "Students Certificates",
     "Menu:certificates": "Certificates",
     "Menu:coursesRating": "Courses Rating",
+    "Menu:lisense": "License Managment",
     "Welcome": "Welcome",
     "SignUp": "Sign Up",
     "Permission:EduZoneApp": "EduZoneApp",
@@ -121,6 +122,12 @@
     "resend": "Resend",
     "passwordsNotMatch": "Passwords do not match.",
     "license": "License",
-    "InvalidLicense": "Incorrect License Key,Ensure that you've entered the correct license key"
+    "InvalidLicense": "Incorrect License Key,Ensure that you've entered the correct license key",
+    "newLicense": "New License",
+    "key": "Key",
+    "expirationDate": "Expiration Date",
+    "isUsed": "Is Used",
+    "isUsed:true": "Yes",
+    "isUsed:false": "No"
   }
 }
