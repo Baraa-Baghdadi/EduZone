@@ -3054,6 +3054,304 @@
             }
           }
         },
+        "EduZone.Licenses.LicenseAppService": {
+          "controllerName": "License",
+          "controllerGroupName": "License",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "EduZone.Licenses.LicenseAppService",
+          "interfaces": [
+            {
+              "type": "EduZone.Licenses.ILicenseAppService",
+              "name": "ILicenseAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "EduZone.Licenses.GetLicenseInput, EduZone.Application.Contracts",
+                      "type": "EduZone.Licenses.GetLicenseInput",
+                      "typeSimple": "EduZone.Licenses.GetLicenseInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Licenses.LicenseDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Licenses.LicenseDto>"
+                  }
+                },
+                {
+                  "name": "GetById",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "EduZone.Licenses.LicenseDto",
+                    "typeSimple": "EduZone.Licenses.LicenseDto"
+                  }
+                },
+                {
+                  "name": "CreateLicanse",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "EduZone.Licenses.CreateLicenseInput, EduZone.Application.Contracts",
+                      "type": "EduZone.Licenses.CreateLicenseInput",
+                      "typeSimple": "EduZone.Licenses.CreateLicenseInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
+                },
+                {
+                  "name": "UpdateLicanse",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "EduZone.Licenses.CreateLicenseInput, EduZone.Application.Contracts",
+                      "type": "EduZone.Licenses.CreateLicenseInput",
+                      "typeSimple": "EduZone.Licenses.CreateLicenseInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetByIdById": {
+              "uniqueName": "GetByIdById",
+              "name": "GetById",
+              "httpMethod": "GET",
+              "url": "api/app/license/{id}/by-id",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "EduZone.Licenses.LicenseDto",
+                "typeSimple": "EduZone.Licenses.LicenseDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.Licenses.ILicenseAppService"
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/app/license",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "EduZone.Licenses.GetLicenseInput, EduZone.Application.Contracts",
+                  "type": "EduZone.Licenses.GetLicenseInput",
+                  "typeSimple": "EduZone.Licenses.GetLicenseInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "FilterText",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Licenses.LicenseDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<EduZone.Licenses.LicenseDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.Licenses.ILicenseAppService"
+            },
+            "CreateLicanseByInput": {
+              "uniqueName": "CreateLicanseByInput",
+              "name": "CreateLicanse",
+              "httpMethod": "POST",
+              "url": "api/app/license/licanse",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "EduZone.Licenses.CreateLicenseInput, EduZone.Application.Contracts",
+                  "type": "EduZone.Licenses.CreateLicenseInput",
+                  "typeSimple": "EduZone.Licenses.CreateLicenseInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "EduZone.Licenses.CreateLicenseInput",
+                  "typeSimple": "EduZone.Licenses.CreateLicenseInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.Licenses.ILicenseAppService"
+            },
+            "UpdateLicanseByIdAndInput": {
+              "uniqueName": "UpdateLicanseByIdAndInput",
+              "name": "UpdateLicanse",
+              "httpMethod": "PUT",
+              "url": "api/app/license/{id}/licanse",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "EduZone.Licenses.CreateLicenseInput, EduZone.Application.Contracts",
+                  "type": "EduZone.Licenses.CreateLicenseInput",
+                  "typeSimple": "EduZone.Licenses.CreateLicenseInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "EduZone.Licenses.CreateLicenseInput",
+                  "typeSimple": "EduZone.Licenses.CreateLicenseInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "EduZone.Licenses.ILicenseAppService"
+            }
+          }
+        },
         "EduZone.Notifications.NotificationInstructorAppService": {
           "controllerName": "NotificationInstructor",
           "controllerGroupName": "NotificationInstructor",
@@ -7920,6 +8218,105 @@
           "jsonName": null,
           "type": "System.Int32",
           "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "EduZone.Licenses.CreateLicenseInput": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Key",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ExpirationDate",
+          "jsonName": null,
+          "type": "System.DateTime",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "EduZone.Licenses.GetLicenseInput": {
+      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FilterText",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "EduZone.Licenses.LicenseDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Key",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ExpirationDate",
+          "jsonName": null,
+          "type": "System.DateTime",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "IsUsed",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,

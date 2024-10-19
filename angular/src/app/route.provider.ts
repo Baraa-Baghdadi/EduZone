@@ -102,6 +102,14 @@ function configureRoutes(routesService: RoutesService) {
         requiredPolicy: 'EduZone.Dashboard.Tenant',
         layout: eLayoutType.application,
       },
+      {
+        path: '/license-managment',
+        name: '::Menu:lisense',
+        iconClass: 'fa fa-id-card-o',
+        order: 12,
+        requiredPolicy: 'EduZone.Dashboard.Host',
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }

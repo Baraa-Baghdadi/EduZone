@@ -62,6 +62,11 @@ const routes: Routes = [
     canActivate:[authGuard,permissionGuard]
   },
   {
+    path: 'license-managment',
+    loadChildren: () => import('./admin/license/license.module').then(m => m.LicenseModule),
+    canActivate:[authGuard,permissionGuard]
+  },
+  {
     path: 'account',
     loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),
   },

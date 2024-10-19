@@ -6,6 +6,7 @@ using EduZone.Courses;
 using EduZone.Enrollments;
 using EduZone.Instructors;
 using EduZone.Lessons;
+using EduZone.Licenses;
 using EduZone.Localization;
 using EduZone.Notifications;
 using EduZone.Ratings;
@@ -56,5 +57,6 @@ public class EduZoneApplicationAutoMapperProfile : Profile,ISingletonDependency
 
 
         CreateMap<CountryCode, CountryCodeDto>();
+        CreateMap<License, LicenseDto>();
     }
 }

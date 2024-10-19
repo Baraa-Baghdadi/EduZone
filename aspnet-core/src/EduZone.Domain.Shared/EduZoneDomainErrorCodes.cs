@@ -14,4 +14,5 @@ public static class EduZoneDomainErrorCodes
     public const string CourseShouldContainLesson = "CourseShouldContainLesson";
     public const string alreadyEnrolled = "alreadyEnrolled";
     public const string ratingValidationValue = "ratingValidationValue";
+    public const string LicenseExist = "License is already Exist";
 }

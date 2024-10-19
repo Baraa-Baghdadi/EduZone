@@ -82,14 +82,14 @@ export class RegisterComponent implements OnInit {
 
   buildForm(){
     this.form = this.fb.group({
-      license : [null,Validators.required],
-      firstName : [null ,Validators.required],
-      lastName : [ null ,Validators.required],
+      license : [null,Validators.required,Validators.maxLength(6)],
+      firstName : [null ,Validators.required,Validators.maxLength(10)],
+      lastName : [ null ,Validators.required,Validators.maxLength(15)],
       gender : [null, Validators.required],
       email : [null , Validators.required],
-      password : [null , Validators.required],
-      confirmPassword : [null ,Validators.required],
-      about : [null ,Validators.required],
+      password : [null , Validators.required,Validators.minLength(6)],
+      confirmPassword : [null ,Validators.required,Validators.minLength(6)],
+      about : [null],
       countryCode : [this.defaultCode,Validators.required],
       mobileNumber : [null,Validators.required]
     },{ validator: this.passwordMatchValidator});

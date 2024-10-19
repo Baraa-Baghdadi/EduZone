@@ -1,0 +1,109 @@
+<div class="row" style="align-items: center">
+    <div class="col col-md-6">
+      <h5 class="card-title">
+        {{ '::Menu:lisense' | abpLocalization }}
+      </h5>
+    </div>
+    <div class="text-end col col-md-6">
+      <div class="text-lg-end pt-2">
+        <button  id="create" class="btn btn-primary" type="button" (click)="openModal()">
+          <i class="fa fa-plus me-1"></i>
+          <span>{{ '::newLicense' | abpLocalization }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-2">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control bg-white"
+        [placeholder]="'::Search' | abpLocalization"
+        [(ngModel)]="licenseFilter.filterText"
+        #search
+      />
+      <div class="input-group-append mainBackground">
+        <button class="btn" type="button">
+          <i class="fa fa-search text-white"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-2">
+    <div class="card-body">
+      <ngx-datatable [rows]="licenses.items" [count]="licenses.totalCount" [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
+        <ngx-datatable-column
+          [name]="'::Actions' | abpLocalization"
+          
+          [sortable]="false"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div ngbDropdown container="body" class="d-inline-block">
+              <button
+                class="btn btn-primary btn-sm dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                ngbDropdownToggle
+              >
+                <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+              </button>
+              <div ngbDropdownMenu>
+                <button ngbDropdownItem (click)="showDetailsOfLicense(row.id)">
+                  {{ '::View' | abpLocalization }}
+                </button>
+                <button ngbDropdownItem (click)="openModal(row.id)">
+                  {{ '::Edit' | abpLocalization }}
+                </button>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column  [name]="'::key' | abpLocalization" prop="key"></ngx-datatable-column>
+        <ngx-datatable-column  [name]="'::expirationDate' | abpLocalization" prop="expirationDate">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.expirationDate | date: 'MM/dd/yyyy' }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column  [name]="'::isUsed' | abpLocalization" prop="isUsed">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ "::isUsed:" + row.isUsed | abpLocalization }}
+              </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+  
+  <!-- End Table -->
+     <!-- Modal -->
+  <abp-modal [(visible)]="isModalOpen" (disappear)="resetForm()">
+    <ng-template #abpHeader>
+      <h3>{{ (selected ? '::Edit' : '::newLicense') | abpLocalization }}</h3>
+    </ng-template>
+    <ng-template #abpBody>
+      <form [formGroup]="form">
+        <div>
+          <label for="key">{{'::key' | abpLocalization}}</label><span>*</span>
+          <input type="text" id="key" class="form-control" formControlName="key">
+        </div>
+
+        <div class="mt-2">
+          <label for="expirationDate">{{'::expirationDate' | abpLocalization}}</label><span>*</span>
+          <input type="date" id="expirationDate" class="form-control" formControlName="expirationDate" >
+        </div>
+
+      </form>
+    </ng-template>
+  
+    <ng-template #abpFooter>
+      <button type="button" (click)="close()" class="btn btn-secondary cancel-btn" abpClose>
+        {{ '::Close' | abpLocalization }}
+      </button>
+  
+      <button class="btn btn-primary" (click)="save()"  [disabled]="form.invalid">
+        <i class="fa fa-check mr-1"></i>
+        {{ '::Save' | abpLocalization }}
+      </button>
+    </ng-template>
+  </abp-modal>
+
+  
