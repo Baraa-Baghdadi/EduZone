@@ -31,10 +31,10 @@
   </div>
   <div class="card mt-2">
     <div class="card-body">
-      <ngx-datatable [rows]="licenses.items" [count]="licenses.totalCount" [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
+      <ngx-datatable [rows]="licenses.items" [count]="licenses.totalCount" [limit]="page.size" (page)="setPage($event)"
+        [offset]="page.pageNumber" [externalPaging]="true"  [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
         <ngx-datatable-column
-          [name]="'::Actions' | abpLocalization"
-          
+          [name]="'::Actions' | abpLocalization"     
           [sortable]="false"
         >
           <ng-template let-row="row" ngx-datatable-cell-template>

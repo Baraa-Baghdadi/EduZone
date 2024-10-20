@@ -17,9 +17,13 @@ export class AllStudentsComponent {
 
   isModalOpen =false;
 
+  // paggination:
+  page = {pageNumber:0,size:10};
+
   constructor(private service : StudentService){}
 
   ngOnInit() {
+    this.setPagginationDefault();
     this.getAllStudent();
   }
 
@@ -41,9 +45,11 @@ export class AllStudentsComponent {
         if (value.length == 0) {
          this.state =false ;
          this.students = { items: [], totalCount: 0 };
+         this.goToFirstPage();
          this.getAllStudent();
          return [];
         }
+        this.goToFirstPage();
         return this.service.getAllStudentByInput(this.studentsFilter);
       }),
       tap(()=>this.state =false)
@@ -51,5 +57,22 @@ export class AllStudentsComponent {
   }
 
   showDetailsOfInstructor(rowId){
+  }
+
+  // For Paggination:
+  setPagginationDefault(){
+    this.page.pageNumber = 0;
+    this.page.size = 10;
+    this.setPage({offset:0});
+  }
+  setPage(pageInfo){
+    this.page.pageNumber = pageInfo.offset;
+    this.studentsFilter.skipCount = this.page.pageNumber * this.page.size;
+    this.getAllStudent();
+  }
+
+  goToFirstPage(){
+    this.studentsFilter.skipCount = 0;
+    this.page.pageNumber = 0;
   }
 }

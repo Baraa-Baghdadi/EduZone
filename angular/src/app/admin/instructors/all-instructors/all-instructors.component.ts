@@ -17,9 +17,13 @@ export class AllInstructorsComponent {
 
   isModalOpen =false;
 
+    // paggination:
+    page = {pageNumber:0,size:10};
+
   constructor(private service : InstructorService){}
 
   ngOnInit() {
+    this.setPagginationDefault();
     this.getAllInstructors();
   }
 
@@ -41,9 +45,11 @@ export class AllInstructorsComponent {
         if (value.length == 0) {
          this.state =false ;
          this.instructors = { items: [], totalCount: 0 };
+         this.goToFirstPage();
          this.getAllInstructors();
          return [];
         }
+        this.goToFirstPage();
         return this.service.getAllInstructorByInput(this.instructorFilter);
       }),
       tap(()=>this.state =false)
@@ -52,5 +58,22 @@ export class AllInstructorsComponent {
 
   showDetailsOfInstructor(rowId){
   }
+
+    // For Paggination:
+    setPagginationDefault(){
+      this.page.pageNumber = 0;
+      this.page.size = 10;
+      this.setPage({offset:0});
+    }
+    setPage(pageInfo){
+      this.page.pageNumber = pageInfo.offset;
+      this.instructorFilter.skipCount = this.page.pageNumber * this.page.size;
+      this.getAllInstructors();
+    }
+  
+    goToFirstPage(){
+      this.instructorFilter.skipCount = 0;
+      this.page.pageNumber = 0;
+    }
 
 }

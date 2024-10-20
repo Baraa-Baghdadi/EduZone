@@ -6,6 +6,7 @@ import { NgxValidateCoreModule } from '@ngx-validate/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [],
@@ -17,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgxValidateCoreModule,
     NgSelectModule,
     FormsModule,
-    
+    NgxDatatableModule
   ],
   exports: [
     CoreModule,
@@ -26,7 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgxValidateCoreModule,
     NgSelectModule,
     FormsModule,
-    
+    NgxDatatableModule
   ],
   providers: []
 })
