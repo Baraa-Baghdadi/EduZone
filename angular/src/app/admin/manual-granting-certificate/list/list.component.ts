@@ -21,6 +21,8 @@ export class ListComponent implements OnInit {
   certificates = { items: [], totalCount: 0 } as PagedResultDto<CertificateDto>;
   state = false ;
 
+  // paggination:
+  page = {pageNumber:0,size:10};
     /**
    *
    */
@@ -28,6 +30,7 @@ export class ListComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.setPagginationDefault();
       this.getAllCertificates()
     }
   
@@ -47,9 +50,11 @@ export class ListComponent implements OnInit {
           if (value.length == 0) {
            this.state =false ;
            this.certificates = { items: [], totalCount: 0 };
+           this.goToFirstPage();
            this.getAllCertificates();
            return [];
           }
+          this.goToFirstPage();
           return this.service.getAllCertificatesByInput(this.certificateFilter);
         }),
         tap(()=>this.state =false)
@@ -65,5 +70,22 @@ export class ListComponent implements OnInit {
         link.click();
       }
     )
+  }
+
+   // For Paggination:
+   setPagginationDefault(){
+    this.page.pageNumber = 0;
+    this.page.size = 10;
+    this.setPage({offset:0});
+  }
+  setPage(pageInfo){
+    this.page.pageNumber = pageInfo.offset;
+    this.certificateFilter.skipCount = this.page.pageNumber * this.page.size;
+    this.getAllCertificates();
+  }
+
+  goToFirstPage(){
+    this.certificateFilter.skipCount = 0;
+    this.page.pageNumber = 0;
   }
 }

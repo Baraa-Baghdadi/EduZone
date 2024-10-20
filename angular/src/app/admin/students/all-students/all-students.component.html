@@ -31,7 +31,9 @@
   </div>
   <div class="card mt-2">
     <div class="card-body">
-      <ngx-datatable [rows]="students.items" [count]="students.totalCount" [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
+      <ngx-datatable [rows]="students.items" [count]="students.totalCount" [limit]="10" (page)="setPage($event)"
+      [offset]="page.pageNumber" [externalPaging]="true" 
+      [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
         <ngx-datatable-column
           [name]="'::Actions' | abpLocalization"
           [sortable]="false"

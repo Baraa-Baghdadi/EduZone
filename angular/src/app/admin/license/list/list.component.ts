@@ -22,11 +22,15 @@ export class ListComponent implements OnInit {
   form:FormGroup;
   selected?: any;
 
+  // paggination:
+  page = {pageNumber:0,size:10};
+
   constructor(private service : LicenseService,private fb:FormBuilder,
     private toaster : ToasterService
   ){}
 
   ngOnInit() {
+    this.setPagginationDefault();
     this.getAllLicenses();
   }
 
@@ -48,9 +52,11 @@ export class ListComponent implements OnInit {
         if (value.length == 0) {
          this.state =false ;
          this.licenses = { items: [], totalCount: 0 };
+         this.goToFirstPage();
          this.getAllLicenses();
          return [];
         }
+        this.goToFirstPage();
         return this.service.getList(this.licenseFilter);
       }),
       tap(()=>this.state =false)
@@ -139,6 +145,24 @@ export class ListComponent implements OnInit {
   //#endregion
 
 
+
+
+  // For Paggination:
+  setPagginationDefault(){
+    this.page.pageNumber = 0;
+    this.page.size = 10;
+    this.setPage({offset:0});
+  }
+  setPage(pageInfo){
+    this.page.pageNumber = pageInfo.offset;
+    this.licenseFilter.skipCount = this.page.pageNumber * this.page.size;
+    this.getAllLicenses();
+  }
+
+  goToFirstPage(){
+    this.licenseFilter.skipCount = 0;
+    this.page.pageNumber = 0;
+  }
 
 
 
