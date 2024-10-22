@@ -7,9 +7,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
+import { HeaderComponent } from '../student-side/header/header.component';
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CoreModule,
     ThemeSharedModule,
@@ -18,7 +19,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgxValidateCoreModule,
     NgSelectModule,
     FormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    HeaderComponent
   ],
   exports: [
     CoreModule,
@@ -27,7 +29,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgxValidateCoreModule,
     NgSelectModule,
     FormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    HeaderComponent
   ],
   providers: []
 })

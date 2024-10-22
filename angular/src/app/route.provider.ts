@@ -110,6 +110,14 @@ function configureRoutes(routesService: RoutesService) {
         requiredPolicy: 'EduZone.Dashboard.Host',
         layout: eLayoutType.application,
       },
+      // student side:
+      {
+        path: '/student-home',
+        name: 'student-home',
+        order: 13,
+        layout: eLayoutType.empty,
+        invisible : true
+      },
     ]);
   };
 }

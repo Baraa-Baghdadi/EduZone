@@ -67,6 +67,10 @@ const routes: Routes = [
     canActivate:[authGuard,permissionGuard]
   },
   {
+    path: 'student-home',
+    loadChildren: () => import('./student-side/student-home/student-home.module').then(m => m.StudentHomeModule)
+  },
+  {
     path: 'account',
     loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),
   },
