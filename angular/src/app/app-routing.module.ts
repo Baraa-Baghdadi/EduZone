@@ -37,6 +37,11 @@ const routes: Routes = [
     canActivate:[authGuard,permissionGuard]
   },
   {
+    path: 'shared',
+    loadChildren: () => import('./shared-component/shared-component.module').then(m => m.SharedComponentModule),
+    canActivate:[authGuard,permissionGuard]
+  },
+  {
     path: 'my-courses',
     loadChildren: () => import('./instructor/my-courses/my-courses.module').then(m => m.MyCoursesModule),
     canActivate:[authGuard,permissionGuard]
@@ -65,10 +70,6 @@ const routes: Routes = [
     path: 'license-managment',
     loadChildren: () => import('./admin/license/license.module').then(m => m.LicenseModule),
     canActivate:[authGuard,permissionGuard]
-  },
-  {
-    path: 'student-home',
-    loadChildren: () => import('./student-side/student-home/student-home.module').then(m => m.StudentHomeModule)
   },
   {
     path: 'account',

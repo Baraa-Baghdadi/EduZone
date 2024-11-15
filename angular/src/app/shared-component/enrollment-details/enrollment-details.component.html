@@ -1,0 +1,34 @@
+<div class="card" @fade>
+    <div class="card-header fs-4">
+        <i class="fa fa-info" aria-hidden="true"></i>
+        {{"::enrollmentDetails" | abpLocalization}}:
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 d-flex">
+                <div>{{"::firstName" | abpLocalization}}:</div>
+                <div class="ms-1">{{enrollment.firstName}}</div>
+            </div>
+            <div class="col-6 d-flex">
+                <div>{{"::lastName" | abpLocalization}}:</div>
+                <div class="ms-1">{{enrollment.lastName}}</div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6 d-flex">
+                <div>{{"::courseTitle" | abpLocalization}}:</div>
+                <div class="ms-1">{{enrollment.courseTitle}}</div>
+            </div>
+            <div class="col-6 d-flex">
+                <div>{{"::categoryName" | abpLocalization}}:</div>
+                <div class="ms-1">{{enrollment.categoryName}}</div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6 d-flex">
+                <div>{{"::enrollmentDate" | abpLocalization}}:</div>
+                <div class="ms-1">{{enrollment.enrollmentDate | date: 'dd/MM/yyyy'}}</div>
+            </div>
+        </div>
+    </div>
+</div>

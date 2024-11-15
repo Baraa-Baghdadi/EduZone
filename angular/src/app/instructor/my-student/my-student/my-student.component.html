@@ -33,15 +33,36 @@
     <div class="card mt-2">
       <div class="card-body">
         <ngx-datatable [rows]="enrollments.items" [count]="enrollments.totalCount" [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
+          <ngx-datatable-column
+          [name]="'::Actions' | abpLocalization"
+          
+          [sortable]="false"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div ngbDropdown container="body" class="d-inline-block">
+              <button
+                class="btn btn-primary btn-sm dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                ngbDropdownToggle
+              >
+                <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+              </button>
+              <div ngbDropdownMenu>
+                <button ngbDropdownItem [routerLink]="'/shared/enrollment-details/'+row.id">
+                  {{ '::view' | abpLocalization }}
+                </button>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
           <ngx-datatable-column [width]="150"  [name]="'::firstName' | abpLocalization" prop="firstName"></ngx-datatable-column>
           <ngx-datatable-column [width]="150"  [name]="'::lastName' | abpLocalization" prop="lastName"></ngx-datatable-column>
-          <ngx-datatable-column [width]="200"  [name]="'::courseTitle' | abpLocalization" prop="courseTitle"></ngx-datatable-column>
-          <ngx-datatable-column [width]="200"  [name]="'::categoryName' | abpLocalization" prop="categoryName"></ngx-datatable-column>
+          <ngx-datatable-column [width]="270"  [name]="'::courseTitle' | abpLocalization" prop="courseTitle"></ngx-datatable-column>
+          <!-- <ngx-datatable-column [width]="200"  [name]="'::categoryName' | abpLocalization" prop="categoryName"></ngx-datatable-column> -->
           <ngx-datatable-column  [name]="'::enrollmentDate' | abpLocalization" prop="enrollmentDate">
             <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ row.enrollmentDate*1000 | date: 'dd/MM/yyyy' }} 
-
-              
+              {{ row.enrollmentDate*1000 | date: 'dd/MM/yyyy' }}              
             </ng-template>
           </ngx-datatable-column>
         </ngx-datatable>
@@ -51,3 +72,5 @@
     <!-- End Table -->
 
 </div>
+
+<!-- Modal for details of student -->

@@ -130,6 +130,8 @@
     "expirationDate": "تاريخ الإنتهاء",
     "isUsed": "الاستخدام",
     "isUsed:true": "نعم",
-    "isUsed:false": "لا"
+    "isUsed:false": "لا",
+    "enrollmentDetails": "تفاصيل الاشتراك",
+    "view": "عرض"
   }
 }

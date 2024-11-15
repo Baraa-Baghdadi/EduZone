@@ -66,7 +66,7 @@
     "Upldaod": "Upload",
     "name": "Name",
     "ViewLessons": "View Lessons",
-    "enrollmentDate": "enrollment Date",
+    "enrollmentDate": "Enrollment Date",
     "courseTitle": "Course Title",
     "myStudentDesc": "Click here to check current enrollments in your courses, track your progress, and stay up to date with your students. Keep everything in one place",
     "myCoursesDesc": "Click here to view and manage the courses you’ve created. Access course details, edit content, and keep track of your progress all in one place",
@@ -128,6 +128,8 @@
     "expirationDate": "Expiration Date",
     "isUsed": "Is Used",
     "isUsed:true": "Yes",
-    "isUsed:false": "No"
+    "isUsed:false": "No",
+    "enrollmentDetails": "Enrollment Details",
+    "view": "View"
   }
 }
