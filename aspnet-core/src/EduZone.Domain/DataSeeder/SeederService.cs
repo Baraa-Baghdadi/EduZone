@@ -38,13 +38,13 @@ namespace EduZone.DataSeeder
             await _adminHostSeederContributer.HostAdminSeedAsync();
 
             // seed data:
-            await _categorySeeder.Seed();
+            //await _categorySeeder.Seed();
 
             // seed licenses:
-            await _licenseSeeder.Seed();
+            //await _licenseSeeder.Seed();
 
             // seed countryCode:
-            await _countryCodesSeeder.Seed();
+            //await _countryCodesSeeder.Seed();
         }
     }
 }
