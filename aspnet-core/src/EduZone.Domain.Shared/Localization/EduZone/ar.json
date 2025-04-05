@@ -132,6 +132,9 @@
     "isUsed:true": "نعم",
     "isUsed:false": "لا",
     "enrollmentDetails": "تفاصيل الاشتراك",
-    "view": "عرض"
+    "view": "عرض",
+    "studentDetails": "تفاصيل الطالب",
+    "Enum:currentLanguage:0": "الانكليزية",
+    "Enum:currentLanguage:1": "العربية"
   }
 }

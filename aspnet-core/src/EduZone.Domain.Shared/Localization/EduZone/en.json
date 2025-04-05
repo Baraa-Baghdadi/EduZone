@@ -130,6 +130,9 @@
     "isUsed:true": "Yes",
     "isUsed:false": "No",
     "enrollmentDetails": "Enrollment Details",
-    "view": "View"
+    "view": "View",
+    "studentDetails": "Student Details",
+    "Enum:currentLanguage:0": "English",
+    "Enum:currentLanguage:1": "Arabic"
   }
 }

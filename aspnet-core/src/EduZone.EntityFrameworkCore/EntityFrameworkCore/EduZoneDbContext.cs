@@ -4,7 +4,6 @@ using EduZone.Courses;
 using EduZone.Enrollments;
 using EduZone.Instructors;
 using EduZone.Lessons;
-using EduZone.Reviewies;
 using EduZone.Students;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -75,7 +74,6 @@ public class EduZoneDbContext :
     public DbSet<Enrollment> Enrollments { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<Lesson> Lessons { get; set; }
-    public DbSet<Review> Reviews { get; set; }
     public DbSet<Notification> Notifications { get; set; }
     public DbSet<Rate> Ratings { get; set; }
     public DbSet<Certificate> Certificates { get; set; }
@@ -155,11 +153,6 @@ public class EduZoneDbContext :
             b.ToTable(EduZoneConsts.DbTablePrefix + "Lessons", EduZoneConsts.DbSchema);
             b.ConfigureByConvention();
             b.HasOne<Course>().WithMany(x => x.Lessons).HasForeignKey(x => x.CourseId).IsRequired().OnDelete(DeleteBehavior.NoAction);
-        });
-        builder.Entity<Review>(b =>
-        {
-            b.ToTable(EduZoneConsts.DbTablePrefix + "Reviews", EduZoneConsts.DbSchema);
-            b.ConfigureByConvention();
         });
 
         builder.Entity<Notification>(b =>

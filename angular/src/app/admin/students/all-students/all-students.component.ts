@@ -16,6 +16,7 @@ export class AllStudentsComponent {
   state = false ;
 
   isModalOpen =false;
+  selectedStudent: StudentDto;
 
   // paggination:
   page = {pageNumber:0,size:10};
@@ -29,7 +30,7 @@ export class AllStudentsComponent {
 
   getAllStudent(){
     this.service.getAllStudentByInput(this.studentsFilter).subscribe({
-      next : (data:any) => {this.students = data;console.log(data);
+      next : (data:any) => {this.students = data;console.log('data',data);
       }
     });
 
@@ -56,7 +57,11 @@ export class AllStudentsComponent {
     ).subscribe((data:any)=> this.students = data)
   }
 
-  showDetailsOfInstructor(rowId){
+  getStudentDetails(rowId){
+    this.isModalOpen = true;
+    this.service.getStudentByIdById(rowId).subscribe((data:any) => {
+      this.selectedStudent = data;
+    })
   }
 
   // For Paggination:
@@ -75,4 +80,6 @@ export class AllStudentsComponent {
     this.studentsFilter.skipCount = 0;
     this.page.pageNumber = 0;
   }
+
+  
 }

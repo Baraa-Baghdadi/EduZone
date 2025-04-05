@@ -4,14 +4,6 @@
         {{ '::Menu:Students' | abpLocalization }}
       </h5>
     </div>
-    <!-- <div class="text-end col col-md-6">
-      <div class="text-lg-end pt-2">
-        <button  id="create" class="btn btn-primary" type="button" >
-          <i class="fa fa-plus me-1"></i>
-          <span>{{ '::NewPatient' | abpLocalization }}</span>
-        </button>
-      </div>
-    </div> -->
   </div>
   <div class="card mt-2">
     <div class="input-group">
@@ -49,7 +41,7 @@
                 <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
               </button>
               <div ngbDropdownMenu>
-                <button ngbDropdownItem (click)="showDetailsOfPatient(row.id)">
+                <button ngbDropdownItem (click)="getStudentDetails(row.id)">
                   {{ '::View' | abpLocalization }}
                 </button>
               </div>
@@ -82,4 +74,25 @@
   </div>
   
   <!-- End Table -->
+
+  <abp-modal [(visible)]="isModalOpen">
+    <ng-template #abpHeader>
+      <h3>{{ '::studentDetails' | abpLocalization }}:</h3>
+    </ng-template>
+    <ng-template #abpBody>
+      <ul *ngIf="selectedStudent" class="list-group">
+        <li class="list-group-item"><strong>First Name:</strong> {{selectedStudent.firstName}}</li>
+        <li class="list-group-item"><strong>Last Name:</strong> {{selectedStudent.lastName}}</li>
+        <li class="list-group-item"><strong>Gender:</strong> {{ '::Enum:gender:' + selectedStudent.gender | abpLocalization }}</li>
+        <li class="list-group-item"><strong>Email:</strong> {{selectedStudent.email}}</li>
+        <li class="list-group-item"><strong>Date of Birth:</strong> {{selectedStudent.dob | date}}</li>
+        <li class="list-group-item"><strong>Current Language:</strong> {{ '::Enum:currentLanguage:' + selectedStudent.currentLanguage | abpLocalization }}</li>
+    </ul>
+    </ng-template>
+    <ng-template #abpFooter>
+      <button type="button" class="btn btn-secondary cancel-btn" abpClose>
+        {{ '::Close' | abpLocalization }}
+      </button>
+    </ng-template>
+  </abp-modal>
   

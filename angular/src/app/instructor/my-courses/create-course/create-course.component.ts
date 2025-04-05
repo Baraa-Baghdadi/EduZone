@@ -362,6 +362,7 @@ export class CreateCourseComponent implements OnInit {
           // https://firebase.google.com/docs/storage/web/handle-errors
           switch (error.code) {
             case 'storage/unauthorized':
+              console.log("unauthorized")
               // User doesn't have permission to access the object
               break;
             case 'storage/canceled':
